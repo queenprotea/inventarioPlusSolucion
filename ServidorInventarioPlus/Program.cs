@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Se
+using System.ServiceModel;
 
 namespace ServidorInventarioPlus
 {
