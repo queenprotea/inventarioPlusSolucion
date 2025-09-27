@@ -1,38 +1,62 @@
 ﻿using System.Collections.Generic;
 using BibliotecaClasesNetframework.ModelosODT;
 using BibliotecaClasesNetframework.Contratos;
+using ServidorInventarioPlus.Modelos;
+
 namespace ServidorInventarioPlus.Servicios
 {
-    public class ProveedorService : IProveedorService
+    public class ProveedorService
     {
-        private static List<ProveedorDTO> _proveedores = new List<ProveedorDTO>();
+        private readonly InventarioPlusContext _context;
 
-        public void AgregarProveedor(ProveedorDTO proveedor)
+        public ProveedorService()
         {
-            proveedor.ProveedorID = _proveedores.Count + 1;
-            _proveedores.Add(proveedor);
+            _context = new InventarioPlusContext();
         }
 
-        public List<ProveedorDTO> ListarProveedores()
+        // Listar todos los proveedores
+        public List<Proveedor> ObtenerProveedores()
         {
-            return _proveedores;
+            return _context.Proveedores.ToList();
         }
 
-        public ProveedorDTO ObtenerProveedor(int id)
+        // Obtener proveedor por ID
+        public Proveedor ObtenerProveedor(int id)
         {
-            return _proveedores.Find(p => p.ProveedorID == id);
+            return _context.Proveedores.Find(id);
         }
 
-        public void ActualizarProveedor(ProveedorDTO proveedor)
+        // Agregar nuevo proveedor
+        public void AgregarProveedor(Proveedor proveedor)
         {
-            var index = _proveedores.FindIndex(p => p.ProveedorID == proveedor.ProveedorID);
-            if (index != -1)
-                _proveedores[index] = proveedor;
+            _context.Proveedores.Add(proveedor);
+            _context.SaveChanges();
         }
 
+        // Actualizar proveedor
+        public void ActualizarProveedor(Proveedor proveedor)
+        {
+            var existente = _context.Proveedores.Find(proveedor.ProveedorID);
+            if (existente != null)
+            {
+                existente.Nombre = proveedor.Nombre;
+                existente.Telefono = proveedor.Telefono;
+                existente.Correo = proveedor.Correo;
+                existente.Direccion = proveedor.Direccion;
+                existente.Categoria = proveedor.Categoria;
+                _context.SaveChanges();
+            }
+        }
+
+        // Eliminar proveedor
         public void EliminarProveedor(int id)
         {
-            _proveedores.RemoveAll(p => p.ProveedorID == id);
+            var proveedor = _context.Proveedores.Find(id);
+            if (proveedor != null)
+            {
+                _context.Proveedores.Remove(proveedor);
+                _context.SaveChanges();
+            }
         }
     }
 }
