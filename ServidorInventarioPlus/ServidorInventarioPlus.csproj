@@ -65,6 +65,12 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Modelos\Moviento.cs" />
+        <Compile Include="Modelos\Producto.cs" />
+        <Compile Include="Modelos\ProductoAtributo.cs" />
+        <Compile Include="Modelos\Proveedor.cs" />
+        <Compile Include="Modelos\Reserva.cs" />
+        <Compile Include="Modelos\Usuario.cs" />
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>
