@@ -78,7 +78,15 @@ namespace ClienteInventarioPlus.Vistas
                     if (usuarioActual != null)
                     {
                         MessageBox.Show($"¡Bienvenido {usuarioActual.Nombre}!");
-                        _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual));
+                        
+                        if (usuarioActual.Rol == "Administrador")
+                        {
+                            _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual));
+                        }
+                        else if (usuarioActual.Rol == "Empleado")
+                        {
+                            _mainWindow.CambiarVista(new MenuPrincipalEmpleado(_mainWindow, usuarioActual));
+                        }
                     }
                     else
                     {
@@ -102,21 +110,13 @@ namespace ClienteInventarioPlus.Vistas
         private bool EntradasValidas()
         {
             bool valido = true;
-            string correo = ValidacionesEntrada.ValidarNombreUsuario(tbUserName);
+            string usname = ValidacionesEntrada.ValidarNombreUsuario(tbUserName);
             string pass = ValidacionesEntrada.ValidarPassword(pbPassword);
+            
+            tblockErrorUserName.Text = usname ?? "";
+            tblockErrorPassword.Text = pass ?? "";
 
-            string ErrorCorreo = !string.IsNullOrEmpty(correo)
-                ? Application.Current.TryFindResource(correo) as string
-                : null;
-
-            string ErrorPassword = !string.IsNullOrEmpty(pass)
-                ? Application.Current.TryFindResource(pass) as string
-                : null;
-
-            tblockErrorUserName.Text = ErrorCorreo ?? "";
-            tblockErrorPassword.Text = ErrorPassword ?? "";
-
-            if (correo != null || pass != null)
+            if (usname != null || pass != null)
                 valido = false;
 
             return valido;

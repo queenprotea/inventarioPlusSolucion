@@ -85,6 +85,9 @@
         <Compile Include="Vistas\MenuPrincipalAdministrador.xaml.cs">
           <DependentUpon>MenuPrincipalAdministrador.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Vistas\MenuPrincipalEmpleado.xaml.cs">
+          <DependentUpon>MenuPrincipalEmpleado.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
           <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
         </Compile>
@@ -103,6 +106,7 @@
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
         <Page Include="Vistas\IniciarSesion.xaml" />
         <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
+        <Page Include="Vistas\MenuPrincipalEmpleado.xaml" />
         <Page Include="Vistas\UsuarioPrincipal.xaml" />
     </ItemGroup>
     <ItemGroup>
@@ -131,6 +135,21 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="Imagenes\CerrarSesionLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ProveedorNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ReporteNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ReservaNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\MovimientoNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\UsuarioNegroLogo.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Resource Include="Imagenes\MovimientoBlancoLogo.jpg" />
