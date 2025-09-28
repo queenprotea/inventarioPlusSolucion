@@ -27,7 +27,8 @@ namespace ServidorInventarioPlus.Servicios
                         return new UsuarioDTO
                         {
                             UsuarioID = usuario.UsuarioID,
-                            Nombre = usuario.NombreUsuario
+                            Nombre = usuario.NombreUsuario,
+                            Rol = usuario.Rol
                         };
                     }
                 }
@@ -36,7 +37,7 @@ namespace ServidorInventarioPlus.Servicios
                     Console.WriteLine(e);
                     throw;
                 }
-Console.WriteLine("qu tal aqui");
+                Console.WriteLine("qu tal aqui");
                
                 return null;
             }
