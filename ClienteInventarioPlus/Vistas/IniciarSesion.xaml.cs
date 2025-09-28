@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
 using ClienteInventarioPlus.Utilidades;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
@@ -12,9 +14,12 @@ namespace ClienteInventarioPlus.Vistas
     public partial class IniciarSesion : UserControl
     {
         private MainWindow _mainWindow;
+
         private bool mostrandoPassword = false;
+
         //IAhorcadoService proxy;
         UsuarioDTO usuarioActual;
+        private IUsuarioService proxy;
 
 
 
@@ -32,77 +37,81 @@ namespace ClienteInventarioPlus.Vistas
                 MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }*/
-        
         public IniciarSesion(MainWindow mainWindow)
         {
+            InitializeComponent();
+            _mainWindow = mainWindow;
+
             try
             {
-                InitializeComponent();
-                _mainWindow = mainWindow;
-                //this.proxy = proxy;
-
+                // Crear el proxy usando App.config
+                var factory = new ChannelFactory<IUsuarioService>("UsuarioServiceEndpoint");
+                proxy = factory.CreateChannel();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error al conectar con el servicio: {ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        /*private void btnIniciarSesion_Click(object sender, RoutedEventArgs e)
+
+        private void btnIniciarSesion_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("Entro aqui");
             if (EntradasValidas())
             {
-                var correo = tbUserName.Text;
-                string pass;
+                Console.WriteLine("Entradas");
+                string nombreUsuario = tbUserName.Text.Trim();
+                string contrasena = mostrandoPassword ? tbPasswordVisible.Text : pbPassword.Password;
 
-                if (mostrandoPassword)
-                    pass = tbPasswordVisible.Text;
-                else
-                    pass = pbPassword.Password;
-
-                pass = EncriptarContraseña(pass.Trim());
+                // Encriptar la contraseña antes de enviarla
+                //string passEncriptada = EncriptarContraseña(pass);
 
                 try
                 {
-                    //usuarioActual = proxy.IniciarSesion(correo, pass);
-
+                    Console.WriteLine(nombreUsuario);
+                    // Llamada al servicio WCF para verificar usuario
+                    usuarioActual = proxy.IniciarSesion(nombreUsuario, contrasena);
+                  
+                    Console.WriteLine(usuarioActual);
                     if (usuarioActual != null)
                     {
-                        string mensajeBienvenida = Application.Current.TryFindResource("Msg_Titulo_Bienvenida") as string ?? "¡Bienvenido!";
-
-                        MessageBox.Show(mensajeBienvenida);
-                        MostrarMenuPrincipal(usuarioActual);
+                        MessageBox.Show($"¡Bienvenido {usuarioActual.Nombre}!");
+                        _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual));
                     }
                     else
                     {
-                        string mensajeErrorSesion = Application.Current.TryFindResource("Msg_Error_InicioSesion") as string;
-
-                        MessageBox.Show(mensajeErrorSesion);
+                        MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al iniciar sesión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Error al iniciar sesión: {ex.Message}", "Error", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
-        }*/
-
-        private void btnIniciarSesion_Click(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow));
         }
+
+
+
+      
 
         private bool EntradasValidas()
         {
             bool valido = true;
-            string correo = ValidacionesEntrada.ValidarCorreo(tbUserName);
+            string correo = ValidacionesEntrada.ValidarNombreUsuario(tbUserName);
             string pass = ValidacionesEntrada.ValidarPassword(pbPassword);
 
             string ErrorCorreo = !string.IsNullOrEmpty(correo)
-                ? Application.Current.TryFindResource(correo) as string : null;
+                ? Application.Current.TryFindResource(correo) as string
+                : null;
 
             string ErrorPassword = !string.IsNullOrEmpty(pass)
-                ? Application.Current.TryFindResource(pass) as string : null;
+                ? Application.Current.TryFindResource(pass) as string
+                : null;
 
             tblockErrorUserName.Text = ErrorCorreo ?? "";
             tblockErrorPassword.Text = ErrorPassword ?? "";
@@ -113,12 +122,7 @@ namespace ClienteInventarioPlus.Vistas
             return valido;
         }
 
-        // ¡IMPORTANTE! Aquí pasas el proxy a la siguiente ventana
-        /*private void MostrarMenuPrincipal(UsuarioDTO usuario)
-        {
-            _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuario));//, proxy));
-        }*/
-        
+
 
         private void btnVerPassword_Click(object sender, RoutedEventArgs e)
         {
@@ -150,7 +154,7 @@ namespace ClienteInventarioPlus.Vistas
             if (mostrandoPassword)
                 pbPassword.Password = tbPasswordVisible.Text;
         }
-        
+
         public static string EncriptarContraseña(string contraseña)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -161,8 +165,10 @@ namespace ClienteInventarioPlus.Vistas
                 {
                     builder.Append(byteValue.ToString("x2"));
                 }
+
                 return builder.ToString();
             }
         }
     }
 }
+

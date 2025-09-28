@@ -29,7 +29,7 @@ namespace ClienteInventarioPlus.Vistas
             }
         }*/
         
-        public MenuPrincipalAdministrador(MainWindow mainWindow)
+        public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuarioActual)
         {
             try
             {

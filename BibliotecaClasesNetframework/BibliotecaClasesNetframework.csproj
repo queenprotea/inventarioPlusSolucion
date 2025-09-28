@@ -34,6 +34,7 @@
     </PropertyGroup>
     <ItemGroup>
       <Compile Include="Contratos\IProveedorService.cs" />
+      <Compile Include="Contratos\IUsuarioService.cs" />
       <Compile Include="ModelosODT\MovimientoDTO.cs" />
       <Compile Include="ModelosODT\ProductoAtributoDTO.cs" />
       <Compile Include="ModelosODT\ProductoDTO.cs" />

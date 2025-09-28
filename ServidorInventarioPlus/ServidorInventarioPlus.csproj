@@ -74,8 +74,10 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Context\DBContext.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Servicios\ProveedorServicio.cs" />
+        <Compile Include="Servicios\UsuarioServicio.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
