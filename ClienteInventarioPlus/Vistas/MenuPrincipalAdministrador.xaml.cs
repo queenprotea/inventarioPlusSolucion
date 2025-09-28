@@ -12,22 +12,7 @@ namespace ClienteInventarioPlus.Vistas
         //private IAhorcadoService proxy;
         private UsuarioDTO usuarioSesion;
 
-        /*public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario, IAhorcadoService proxy)
-        {
-            try
-            {
-                InitializeComponent();
-                _mainWindow = mainWindow;
-                
-                usuarioSesion = usuario;
-                this.proxy = proxy;
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }*/
+     
         
         public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuarioActual)
         {
@@ -66,8 +51,10 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnProveedores_Click(object sender, RoutedEventArgs e)
         {
-            //_mainWindow.CambiarVista(new MarcadoresUserControl(_mainWindow, jugadorSesion, proxy));
+            // Solo actualizamos la sección de contenido
+            MainFrame.Content = new MenuProveedoresAdministrador(MainFrame);
         }
+
         
         private void BtnUsuarios_Click(object sender, RoutedEventArgs e)
         {

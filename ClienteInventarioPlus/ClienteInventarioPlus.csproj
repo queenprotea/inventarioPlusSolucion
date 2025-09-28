@@ -85,6 +85,9 @@
         <Compile Include="Vistas\MenuPrincipalAdministrador.xaml.cs">
           <DependentUpon>MenuPrincipalAdministrador.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Vistas\MenuProveedoresAdministrador.xaml.cs">
+          <DependentUpon>MenuProveedoresAdministrador.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
           <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
         </Compile>
@@ -103,6 +106,7 @@
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
         <Page Include="Vistas\IniciarSesion.xaml" />
         <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
+        <Page Include="Vistas\MenuProveedoresAdministrador.xaml" />
         <Page Include="Vistas\UsuarioPrincipal.xaml" />
     </ItemGroup>
     <ItemGroup>
