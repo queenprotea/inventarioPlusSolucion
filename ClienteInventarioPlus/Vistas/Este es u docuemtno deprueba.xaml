@@ -1,5 +1,5 @@
 ﻿<Page
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="White"
     mc:Ignorable="d"
     x:Class="ClienteInventarioPlus.Vistas.Este_es_u_docuemtno_deprueba"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,5 +8,5 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid />
+    
 </Page>

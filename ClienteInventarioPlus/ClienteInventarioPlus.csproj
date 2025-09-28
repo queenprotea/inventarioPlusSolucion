@@ -73,8 +73,19 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Utilidades\Animaciones.cs" />
+        <Compile Include="Utilidades\ValidacionesEntrada.cs" />
         <Compile Include="Vistas\Este es u docuemtno deprueba.xaml.cs">
           <DependentUpon>Este es u docuemtno deprueba.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Vistas\IniciarSesion.xaml.cs">
+          <DependentUpon>IniciarSesion.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Vistas\MenuPrincipalAdministrador.xaml.cs">
+          <DependentUpon>MenuPrincipalAdministrador.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
+          <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
         </Compile>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -89,6 +100,9 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
+        <Page Include="Vistas\IniciarSesion.xaml" />
+        <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
+        <Page Include="Vistas\UsuarioPrincipal.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">
@@ -107,6 +121,24 @@
     <ItemGroup>
         <None Include="App.config"/>
         <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\BibliotecaClasesNetframework\BibliotecaClasesNetframework.csproj">
+        <Project>{86853bae-3479-47f3-9af7-35f9194700f1}</Project>
+        <Name>BibliotecaClasesNetframework</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Imagenes\CerrarSesionLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Resource Include="Imagenes\MovimientoBlancoLogo.jpg" />
+      <Resource Include="Imagenes\ProductoBlancoLogo.jpg" />
+      <Resource Include="Imagenes\ProductoNegroLogo.jpg" />
+      <Resource Include="Imagenes\ProveedorBlancoLogo.jpg" />
+      <Resource Include="Imagenes\ReporteBlancoLogo.jpg" />
+      <Resource Include="Imagenes\ReservasBlancoLogo.jpg" />
+      <Resource Include="Imagenes\UsuarioBlancoLogo.jpg" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
