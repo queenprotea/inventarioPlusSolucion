@@ -1,9 +1,9 @@
-<Application x:Class="ClienteInventarioPlus.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ClienteInventarioPlus"
-             StartupUri="MainWindow.xaml">
+<Application
+    StartupUri="MainWindow.xaml"
+    x:Class="ClienteInventarioPlus.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
-         
+        <!--  Recursos globales  -->
     </Application.Resources>
 </Application>
