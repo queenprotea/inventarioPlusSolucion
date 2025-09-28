@@ -105,6 +105,24 @@ namespace ClienteInventarioPlus.Utilidades
             }
             return null;
         }
+        public static string ValidarNombreUsuario(TextBox textBox)
+        {
+            string nombreUsuario = textBox.Text;
+
+            if (string.IsNullOrWhiteSpace(nombreUsuario))
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "Mensaje_Validacion_NombreUsuarioVacio";
+            }
+            if (nombreUsuario.Length < 3)
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "Mensaje_Validacion_NombreUsuarioCorto";
+            }
+
+            return null;
+        }
+
 
         public static void ValidarEntrada(TextBox textBox, string patron, int longitudMaxima)
         {
