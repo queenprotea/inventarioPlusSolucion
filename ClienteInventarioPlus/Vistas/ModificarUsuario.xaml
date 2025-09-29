@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ClienteInventarioPlus.Vistas.ModificarUsuario"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="1200">
+    <Grid Background="White">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Encabezado -->
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,50,0,10" HorizontalAlignment="Center">
+            <TextBlock Foreground="Black" Text="Modificar Usuario" FontSize="34" FontWeight="Bold"  TextAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Columna de campos -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="80,0,80,30">
+            <TextBlock Text="Nombre" FontWeight="SemiBold" Margin="0,20,0,5" FontSize="18" HorizontalAlignment="Center"/>
+            <TextBox x:Name="tbNombre" Padding="10,20,10,10" FontSize="20"/> 
+            <TextBlock x:Name="tblockErrorNombre" Text="" FontWeight="SemiBold" Margin="0,0,0,10" FontSize="12" Foreground="Red"/>
+
+            <TextBlock Text="Nombre de Usuario" FontWeight="SemiBold" FontSize="18" HorizontalAlignment="Center"/>
+            <TextBox x:Name="tbUsername" Padding="10,20,10,10" FontSize="20" />
+            <TextBlock x:Name="tblockErrorUserName" Text="" FontWeight="SemiBold" FontSize="12" Foreground="Red"/>
+
+            <TextBlock Text="Contraseña" FontWeight="SemiBold" FontSize="18" HorizontalAlignment="Center"/>
+            <TextBox x:Name="tbPassword" Padding="10,20,10,10"  FontSize="20"/>
+            <TextBlock x:Name="tblockErrorPassword" Text="" FontWeight="SemiBold" FontSize="12" Foreground="Red"/>
+
+            <TextBlock Text="Rol" FontWeight="SemiBold" FontSize="18" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <RadioButton x:Name="rbAdministrador" Content="Administrador" GroupName="Roles" HorizontalAlignment="Left" Margin="0,0,80,0" FontSize="18" />
+                <RadioButton x:Name="rbEmpleado" Content="Empleado" GroupName="Roles" HorizontalAlignment="Right" FontSize="18"/>
+            </StackPanel>
+            <TextBlock x:Name="tblockErrorRol" Text="" FontWeight="SemiBold" FontSize="12" Foreground="Red" HorizontalAlignment="Center"/>
+
+        </StackPanel>
+        <!-- Botones -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,20">
+            <Button Content="Cancelar" Height="70" Width="250" Margin="10,0" Background="#FFC3C3C3" FontSize="30" Click="btnCancelar_Click"/>
+            <Button Content="Modificar Usuario" Width="250" Margin="10,0" Background="Black" BorderBrush="Black" Foreground="White" FontSize="30" Click="btnModificarUsuario_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

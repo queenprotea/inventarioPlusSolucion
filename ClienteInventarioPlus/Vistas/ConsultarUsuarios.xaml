@@ -3,10 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid>
+
+    <Grid Margin="20">
+        <!-- Definimos 3 filas -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Buscador + combo -->
+            <RowDefinition Height="*"/>    <!-- DataGrid -->
+            <RowDefinition Height="Auto"/> <!-- Botón regresar -->
+        </Grid.RowDefinitions>
+
+        <!-- Fila 0: Buscador y ComboBox -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Margin="0,0,0,10">
+            <Button Width="40" Height="40" FontSize="16" Click="btnBuscar_Click" BorderThickness="0">
+                <Image Source="/Imagenes/busquedaLogo.jpg" Stretch="Uniform"/>
+            </Button>
+            <TextBox x:Name="txtBuscar" Width="300" Height="40" FontSize="23" Foreground="Gray" Margin="0,0,10,0" />
+            <TextBlock Text="Ordenar por:" FontWeight="SemiBold" FontSize="18" Margin="150,0,0,0"/>
+            <ComboBox x:Name="cmbOrdenar" Width="200" Height="40" FontSize="16" Margin="10,0,0,0"  SelectionChanged="cmbOrdenar_SelectionChanged">
+                <ComboBoxItem Content="ID"/>
+                <ComboBoxItem Content="Nombre"/>
+                <ComboBoxItem Content="Usuario"/>
+                <ComboBoxItem Content="Rol"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Fila 1: DataGrid -->
+        <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Margin="20"
+                  ItemsSource="{Binding Usuarios}"
+                  Grid.Row="1" BorderBrush="White" GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="LightGray"
+                  RowBackground="White"
+                  AlternatingRowBackground="White"
+                  HeadersVisibility="Column"
+                  FontSize="15">
+            
+            <DataGrid.Columns>
+                <!-- Columnas de texto -->
+                <DataGridTextColumn Header="ID" Binding="{Binding UsuarioID}" Width="0.25*" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
+                <DataGridTextColumn Header="Usuario" Binding="{Binding NombreUsuario}" Width="*"/>
+                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*"/>
+                
+                <!-- Columna de acciones -->
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button  Margin="5,0" Padding="0" Click="BtnModificar_Click" BorderThickness="0">
+                                    <Image Source="/Imagenes/modificarLogo.jpg" Stretch="Uniform"/>
+                                </Button>
+                                <Button  Margin="5,0" Padding="0" Click="BtnEliminar_Click" BorderThickness="0">
+                                    <Image Source="/Imagenes/eliminarLogo.jpg" Stretch="Uniform"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Fila 2: Botón Regresar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Content="Regresar" Width="150" Height="50" FontSize="20" Click="btnRegresar_Click"/>
+        </StackPanel>
         
     </Grid>
 </UserControl>
