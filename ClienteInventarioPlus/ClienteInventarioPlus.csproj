@@ -77,6 +77,9 @@
         <Compile Include="Utilidades\Animaciones.cs" />
         <Compile Include="Utilidades\ValidacionesEntrada.cs" />
         <Compile Include="Vistas\AgregarProveedor.xaml.cs" />
+        <Compile Include="Vistas\ConsultarProveedor.xaml.cs">
+          <DependentUpon>ConsultarProveedor.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Vistas\ConsultarUsuarios.xaml.cs">
           <DependentUpon>ConsultarUsuarios.xaml</DependentUpon>
         </Compile>
@@ -115,6 +118,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Vistas\AgregarProveedor.xaml" />
+        <Page Include="Vistas\ConsultarProveedor.xaml" />
         <Page Include="Vistas\ConsultarUsuarios.xaml" />
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
         <Page Include="Vistas\IniciarSesion.xaml" />

@@ -21,11 +21,11 @@ namespace ClienteInventarioPlus.Vistas
         
         private Frame _mainFrame;
         private IUsuarioService usuarioService;
-        public MenuProveedoresAdministrador(Frame mainFrame, IUsuarioService proveedorService)
+        public MenuProveedoresAdministrador(Frame mainFrame)
         {
             InitializeComponent();
             _mainFrame = mainFrame;
-            usuarioService = proveedorService;
+            
         }
         
         private void Frame_Navigated(object sender, NavigationEventArgs e)
