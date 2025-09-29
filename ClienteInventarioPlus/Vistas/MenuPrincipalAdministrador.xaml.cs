@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
+using System.ServiceModel;
 
 namespace ClienteInventarioPlus.Vistas
 {
@@ -11,16 +13,17 @@ namespace ClienteInventarioPlus.Vistas
         private MainWindow _mainWindow;
         //private IAhorcadoService proxy;
         private UsuarioDTO usuarioSesion;
+        private IUsuarioService _proveedorService;
 
      
         
-        public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuarioActual)
+        public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuarioActual, IUsuarioService proxy)
         {
             try
             {
                 InitializeComponent();
                 _mainWindow = mainWindow;
-                
+                _proveedorService = proxy;
             }
             catch (Exception ex)
             {
@@ -52,7 +55,7 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnProveedores_Click(object sender, RoutedEventArgs e)
         {
             // Solo actualizamos la sección de contenido
-            MainFrame.Content = new MenuProveedoresAdministrador(MainFrame);
+            MainFrame.Content = new MenuProveedoresAdministrador(MainFrame,_proveedorService);
         }
 
         

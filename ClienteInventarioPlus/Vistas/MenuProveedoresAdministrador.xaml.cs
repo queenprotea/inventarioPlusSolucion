@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BibliotecaClasesNetframework.Contratos;
 
 namespace ClienteInventarioPlus.Vistas
 {
@@ -19,10 +20,12 @@ namespace ClienteInventarioPlus.Vistas
     {
         
         private Frame _mainFrame;
-        public MenuProveedoresAdministrador(Frame mainFrame)
+        private IUsuarioService usuarioService;
+        public MenuProveedoresAdministrador(Frame mainFrame, IUsuarioService proveedorService)
         {
             InitializeComponent();
             _mainFrame = mainFrame;
+            usuarioService = proveedorService;
         }
         
         private void Frame_Navigated(object sender, NavigationEventArgs e)

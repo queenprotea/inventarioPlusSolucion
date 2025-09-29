@@ -78,7 +78,7 @@ namespace ClienteInventarioPlus.Vistas
                     if (usuarioActual != null)
                     {
                         MessageBox.Show($"¡Bienvenido {usuarioActual.Nombre}!");
-                        _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual));
+                        _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual,proxy));
                     }
                     else
                     {

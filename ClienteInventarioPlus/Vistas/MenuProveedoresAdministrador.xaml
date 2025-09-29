@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -17,33 +18,99 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!--  Botón Registrar  -->
         <Button
             Click="BtnRegistrar_Click"
-            Content="Registrar Proveedor"
-            FontSize="20"
             Grid.Column="0"
             Grid.Row="0"
-            Margin="20" />
+            Margin="10">
+            <Grid>
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Text="Registrar"
+                    VerticalAlignment="Center" />
+                <Image
+                    Height="75"
+                    HorizontalAlignment="Right"
+                    Margin="0,116,-159,0"
+                    Source="/ClienteInventarioPlus;component/Imagenes/ProveedorAgregarLogo.jpg"
+                    VerticalAlignment="Top"
+                    Width="75" />
+            </Grid>
+        </Button>
+
+        <!--  Botón Consultar  -->
         <Button
             Click="BtnConsultar_Click"
-            Content="Consultar Proveedor"
-            FontSize="20"
             Grid.Column="1"
             Grid.Row="0"
-            Margin="20" />
+            Margin="10">
+            <Grid>
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Text="Consultar"
+                    VerticalAlignment="Center" />
+                <Image
+                    Height="75"
+                    HorizontalAlignment="Right"
+                    Margin="0,121,-160,0"
+                    Source="/ClienteInventarioPlus;component/Imagenes/ProveedorBlancoLogo.jpg.jpg"
+                    VerticalAlignment="Top"
+                    Width="75" />
+            </Grid>
+        </Button>
+
+        <!--  Botón Modificar  -->
         <Button
             Click="BtnModificar_Click"
-            Content="Modificar Proveedor"
-            FontSize="20"
             Grid.Column="0"
             Grid.Row="1"
-            Margin="20" />
+            Margin="10">
+            <Grid>
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Height="46"
+                    HorizontalAlignment="Center"
+                    Text="Modificar"
+                    VerticalAlignment="Center" />
+                <Image
+                    Height="75"
+                    HorizontalAlignment="Right"
+                    Margin="0,116,-157,0"
+                    RenderTransformOrigin="2.695,-0.933"
+                    Source="/ClienteInventarioPlus;component/Imagenes/ProveedorModificarLogo.jpg"
+                    VerticalAlignment="Top"
+                    Width="75" />
+            </Grid>
+        </Button>
+
+        <!--  Botón Eliminar  -->
         <Button
             Click="BtnEliminar_Click"
-            Content="Eliminar Proveedor"
-            FontSize="20"
             Grid.Column="1"
             Grid.Row="1"
-            Margin="20" />
+            Margin="10">
+            <Grid>
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Text="Eliminar"
+                    VerticalAlignment="Center" />
+                <Image
+                    Height="75"
+                    HorizontalAlignment="Right"
+                    Margin="0,84,-163,0"
+                    Source="/ClienteInventarioPlus;component/Imagenes/ProveedorEliminarLogo.jpg"
+                    VerticalAlignment="Top"
+                    Width="75" />
+            </Grid>
+        </Button>
+
     </Grid>
 </UserControl>

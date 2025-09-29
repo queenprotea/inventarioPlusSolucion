@@ -76,6 +76,7 @@
         </ApplicationDefinition>
         <Compile Include="Context\DBContext.cs" />
         <Compile Include="Program.cs" />
+        <Compile Include="Servicios\InventarioPlusServicio.cs" />
         <Compile Include="Servicios\ProveedorServicio.cs" />
         <Compile Include="Servicios\UsuarioServicio.cs" />
         <Page Include="MainWindow.xaml">
