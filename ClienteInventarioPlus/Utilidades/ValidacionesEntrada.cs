@@ -122,6 +122,17 @@ namespace ClienteInventarioPlus.Utilidades
 
             return null;
         }
+        
+        public static string ValidarRadioButtons(RadioButton rb1, RadioButton rb2)
+        {
+            if (rb1.IsChecked != true && rb2.IsChecked != true)
+            {
+                return "Debe seleccionar una opción.";
+            }
+
+            return null;
+        }
+
 
 
         public static void ValidarEntrada(TextBox textBox, string patron, int longitudMaxima)

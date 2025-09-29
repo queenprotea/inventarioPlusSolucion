@@ -76,6 +76,9 @@
         </ApplicationDefinition>
         <Compile Include="Utilidades\Animaciones.cs" />
         <Compile Include="Utilidades\ValidacionesEntrada.cs" />
+        <Compile Include="Vistas\ConsultarUsuarios.xaml.cs">
+          <DependentUpon>ConsultarUsuarios.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Vistas\Este es u docuemtno deprueba.xaml.cs">
           <DependentUpon>Este es u docuemtno deprueba.xaml</DependentUpon>
         </Compile>
@@ -87,6 +90,9 @@
         </Compile>
         <Compile Include="Vistas\MenuPrincipalEmpleado.xaml.cs">
           <DependentUpon>MenuPrincipalEmpleado.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Vistas\RegistrarUsuario.xaml.cs">
+          <DependentUpon>RegistrarUsuario.xaml</DependentUpon>
         </Compile>
         <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
           <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
@@ -103,10 +109,12 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Vistas\ConsultarUsuarios.xaml" />
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
         <Page Include="Vistas\IniciarSesion.xaml" />
         <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
         <Page Include="Vistas\MenuPrincipalEmpleado.xaml" />
+        <Page Include="Vistas\RegistrarUsuario.xaml" />
         <Page Include="Vistas\UsuarioPrincipal.xaml" />
     </ItemGroup>
     <ItemGroup>
@@ -137,7 +145,13 @@
       <Content Include="Imagenes\CerrarSesionLogo.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Imagenes\ConsultarUsuariosLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Imagenes\ProveedorNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\RegistrarUsuarioLogo.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Imagenes\ReporteNegroLogo.jpg">
