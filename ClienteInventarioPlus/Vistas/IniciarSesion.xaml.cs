@@ -81,7 +81,7 @@ namespace ClienteInventarioPlus.Vistas
                         
                         if (usuarioActual.Rol == "Administrador")
                         {
-                            _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual));
+                            _mainWindow.CambiarVista(new MenuPrincipalAdministrador(_mainWindow, usuarioActual,proxy));
                         }
                         else if (usuarioActual.Rol == "Empleado")
                         {

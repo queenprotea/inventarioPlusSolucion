@@ -10,9 +10,11 @@ namespace ClienteInventarioPlus.Vistas
     public partial class AgregarProveedor : UserControl
     
     {
-        public AgregarProveedor()
+        private Frame _mainFrame;
+        public AgregarProveedor(Frame mainFrame)
         {
             InitializeComponent();
+            _mainFrame = mainFrame;
         }
         
 
@@ -51,14 +53,7 @@ namespace ClienteInventarioPlus.Vistas
         
                 
 
-                if (resultado)
-                {
-                    MessageBox.Show($"Proveedor {nombre} registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Error al registrar proveedor.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+              
             }
             catch (Exception ex)
             {

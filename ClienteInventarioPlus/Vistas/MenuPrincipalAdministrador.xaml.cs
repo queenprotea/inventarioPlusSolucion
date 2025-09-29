@@ -31,6 +31,8 @@ namespace ClienteInventarioPlus.Vistas
             }
         }
 
+        
+
         //menu lateral
         private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {

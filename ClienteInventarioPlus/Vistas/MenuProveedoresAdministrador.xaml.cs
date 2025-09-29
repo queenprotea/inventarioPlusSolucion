@@ -35,7 +35,7 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnRegistrar_Click(object sender, RoutedEventArgs e)
         {
-           // _mainFrame.Content = new RegistrarProveedor(); 
+            _mainFrame.Content = new AgregarProveedor(_mainFrame);
         }
 
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
