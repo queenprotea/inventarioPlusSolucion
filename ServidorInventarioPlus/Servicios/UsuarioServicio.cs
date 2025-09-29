@@ -27,7 +27,8 @@ namespace ServidorInventarioPlus.Servicios
                         return new UsuarioDTO
                         {
                             UsuarioID = usuario.UsuarioID,
-                            Nombre = usuario.NombreUsuario
+                            Nombre = usuario.NombreUsuario,
+                            Rol = usuario.Rol
                         };
                     }
                 }
@@ -36,10 +37,44 @@ namespace ServidorInventarioPlus.Servicios
                     Console.WriteLine(e);
                     throw;
                 }
-Console.WriteLine("qu tal aqui");
+                Console.WriteLine("qu tal aqui");
                
                 return null;
             }
         }
+        
+        public bool RegistrarUsuario(UsuarioDTO usuario)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    // Validar si ya existe un usuario con el mismo NombreUsuario
+                    if (db.Usuarios.Any(u => u.NombreUsuario == usuario.NombreUsuario))
+                        return false;
+
+                    db.Usuarios.Add(new Usuario
+                    {
+                        Nombre = usuario.Nombre,
+                        NombreUsuario = usuario.NombreUsuario,
+                        Contrasena = usuario.Contrasena,
+                        Rol = usuario.Rol
+                    });
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al registrar usuario: {ex.Message}");
+                    return false;
+                }
+            }
+        }
+
+        
+        
+        
+        
     }
 }

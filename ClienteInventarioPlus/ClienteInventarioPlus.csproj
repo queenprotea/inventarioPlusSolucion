@@ -76,8 +76,8 @@
         </ApplicationDefinition>
         <Compile Include="Utilidades\Animaciones.cs" />
         <Compile Include="Utilidades\ValidacionesEntrada.cs" />
-        <Compile Include="Vistas\AgregarProveedor.xaml.cs">
-          <DependentUpon>AgregarProveedor.xaml</DependentUpon>
+        <Compile Include="Vistas\ConsultarUsuarios.xaml.cs">
+          <DependentUpon>ConsultarUsuarios.xaml</DependentUpon>
         </Compile>
         <Compile Include="Vistas\Este es u docuemtno deprueba.xaml.cs">
           <DependentUpon>Este es u docuemtno deprueba.xaml</DependentUpon>
@@ -88,8 +88,11 @@
         <Compile Include="Vistas\MenuPrincipalAdministrador.xaml.cs">
           <DependentUpon>MenuPrincipalAdministrador.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Vistas\MenuProveedoresAdministrador.xaml.cs">
-          <DependentUpon>MenuProveedoresAdministrador.xaml</DependentUpon>
+        <Compile Include="Vistas\MenuPrincipalEmpleado.xaml.cs">
+          <DependentUpon>MenuPrincipalEmpleado.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Vistas\RegistrarUsuario.xaml.cs">
+          <DependentUpon>RegistrarUsuario.xaml</DependentUpon>
         </Compile>
         <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
           <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
@@ -106,11 +109,12 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="Vistas\AgregarProveedor.xaml" />
+        <Page Include="Vistas\ConsultarUsuarios.xaml" />
         <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
         <Page Include="Vistas\IniciarSesion.xaml" />
         <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
-        <Page Include="Vistas\MenuProveedoresAdministrador.xaml" />
+        <Page Include="Vistas\MenuPrincipalEmpleado.xaml" />
+        <Page Include="Vistas\RegistrarUsuario.xaml" />
         <Page Include="Vistas\UsuarioPrincipal.xaml" />
     </ItemGroup>
     <ItemGroup>
@@ -138,12 +142,30 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Imagenes\ProveedorAgregarLogo.jpg" />
       <Content Include="Imagenes\CerrarSesionLogo.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Include="Imagenes\ProveedorEliminarLogo.jpg" />
-      <Content Include="Imagenes\ProveedorModificarLogo.jpg" />
+      <Content Include="Imagenes\ConsultarUsuariosLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ProveedorNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\RegistrarUsuarioLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ReporteNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\ReservaNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\MovimientoNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Imagenes\UsuarioNegroLogo.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Resource Include="Imagenes\MovimientoBlancoLogo.jpg" />
       <Resource Include="Imagenes\ProductoBlancoLogo.jpg" />
       <Resource Include="Imagenes\ProductoNegroLogo.jpg" />

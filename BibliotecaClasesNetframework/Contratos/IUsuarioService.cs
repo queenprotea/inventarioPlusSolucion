@@ -8,5 +8,8 @@ namespace BibliotecaClasesNetframework.Contratos
     {
         [OperationContract]
         UsuarioDTO IniciarSesion(string NombreUsuario, string Contrasena);
+        
+        [OperationContract]
+        bool RegistrarUsuario(UsuarioDTO usuario);
     }
 }
