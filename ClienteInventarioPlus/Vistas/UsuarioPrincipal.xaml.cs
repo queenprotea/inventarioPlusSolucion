@@ -26,7 +26,7 @@ namespace ClienteInventarioPlus.Vistas
 
         private void btnConsultarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            
+            _mainFrame.Content = new ConsultarUsuarios(_mainFrame, _usuarioSesion, proxy);
         }
     }
 }
