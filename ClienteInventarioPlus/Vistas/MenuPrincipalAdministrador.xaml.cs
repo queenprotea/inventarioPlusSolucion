@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
@@ -13,6 +15,7 @@ namespace ClienteInventarioPlus.Vistas
         private MainWindow _mainWindow;
         //private IAhorcadoService proxy;
         private UsuarioDTO usuarioSesion;
+        private IUsuarioService proxy;
 
         /*public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario, IAhorcadoService proxy)
         {
@@ -38,6 +41,9 @@ namespace ClienteInventarioPlus.Vistas
                 InitializeComponent();
                 _mainWindow = mainWindow;
                 
+                // Crear el proxy usando App.config
+                var factory = new ChannelFactory<IUsuarioService>("UsuarioServiceEndpoint");
+                proxy = factory.CreateChannel();
             }
             catch (Exception ex)
             {
@@ -78,7 +84,7 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnUsuarios_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnUsuarios);
-            //_mainWindow.CambiarVista(new MarcadoresUserControl(_mainWindow, jugadorSesion, proxy));
+            MainFrame.Content = new UsuarioPrincipal(MainFrame ,usuarioSesion, proxy);
         }
         
         private void BtnCerrarSesion_Click(object sender, RoutedEventArgs e)

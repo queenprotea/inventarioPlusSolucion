@@ -6,7 +6,21 @@
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid>
-        
+    <Grid Background="White">
+        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left"  Margin="39,37,650,365" Click="btnRegistrarUsuario_Click">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
+                <TextBlock Text="Registrar Usuario" VerticalAlignment="Top" Margin="15,0,110,0" FontSize="30"/>
+                <Image Source="/Imagenes/RegistrarUsuarioLogo.jpg" Width="80" Height="80" Margin="10,50,90,0"/>
+            </StackPanel>
+        </Button>
+        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left"  Margin="650,37,39,365" Click="btnConsultarUsuarios_Click">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
+                <TextBlock Text="Consultar Usuarios" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="30"/>
+                <Image Source="/Imagenes/ConsultarUsuariosLogo.jpg" Width="80" Height="80" Margin="90,50,10,0"/>
+            </StackPanel>
+        </Button>
     </Grid>
+
+
+
 </UserControl>
