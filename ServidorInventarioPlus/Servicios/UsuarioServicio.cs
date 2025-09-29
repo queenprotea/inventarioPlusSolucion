@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
 using ServidorInventarioPlus.Context;
@@ -72,8 +73,117 @@ namespace ServidorInventarioPlus.Servicios
             }
         }
 
+        public List<UsuarioDTO> ObtenerUsuarios()
+        {
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    var usuarios = context.Usuarios
+                        .Select(u => new UsuarioDTO
+                        {
+                            UsuarioID = u.UsuarioID,
+                            Nombre = u.Nombre,
+                            NombreUsuario = u.NombreUsuario,
+                            Rol = u.Rol,
+                            Contrasena = u.Contrasena
+                        })
+                        .ToList();
+
+                    return usuarios;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al consultar usuarios: {ex.Message}");
+                    return new List<UsuarioDTO>();
+                }
+            }
+        }
         
         
+        public List<UsuarioDTO> BuscarUsuarios(string valorBusqueda)
+        {
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(valorBusqueda))
+                    {
+                        // Si no hay texto de búsqueda, devuelve todos
+                        return ObtenerUsuarios();
+                    }
+
+                    var usuariosFiltrados = context.Usuarios
+                        .Where(u => u.Nombre.Contains(valorBusqueda) || u.NombreUsuario.Contains(valorBusqueda))
+                        .Select(u => new UsuarioDTO
+                        {
+                            UsuarioID = u.UsuarioID,
+                            Nombre = u.Nombre,
+                            NombreUsuario = u.NombreUsuario,
+                            Rol = u.Rol,
+                            Contrasena = u.Contrasena
+                        })
+                        .ToList();
+
+                    return usuariosFiltrados;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al buscar usuarios: {ex.Message}");
+                    return new List<UsuarioDTO>();
+                }
+            }
+        }
+
+        public bool EliminarUsuario(int usuarioId)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var usuario = db.Usuarios.FirstOrDefault(u => u.UsuarioID == usuarioId);
+                    if (usuario == null)
+                        return false;
+
+                    db.Usuarios.Remove(usuario);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al eliminar usuario: {ex.Message}");
+                    return false;
+                }
+            }
+        }
+
+        public bool ModificarUsuario(UsuarioDTO usuarioDto)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var usuario = db.Usuarios.FirstOrDefault(u => u.UsuarioID == usuarioDto.UsuarioID);
+                    if (usuario == null)
+                        return false;
+
+                    // Actualizamos campos
+                    usuario.Nombre = usuarioDto.Nombre;
+                    usuario.NombreUsuario = usuarioDto.NombreUsuario;
+                    usuario.Contrasena = usuarioDto.Contrasena;
+                    usuario.Rol = usuarioDto.Rol;
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al modificar usuario: {ex.Message}");
+                    return false;
+                }
+            }
+        }
+
         
         
     }
