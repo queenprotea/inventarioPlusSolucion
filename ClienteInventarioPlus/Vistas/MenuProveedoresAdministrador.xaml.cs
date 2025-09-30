@@ -20,12 +20,12 @@ namespace ClienteInventarioPlus.Vistas
     {
         
         private Frame _mainFrame;
-        private IUsuarioService usuarioService;
-        public MenuProveedoresAdministrador(Frame mainFrame)
+        private IProveedorService proxy;
+        public MenuProveedoresAdministrador(Frame mainFrame, IProveedorService proxy)
         {
             InitializeComponent();
             _mainFrame = mainFrame;
-            
+            this.proxy = proxy;
         }
         
         private void Frame_Navigated(object sender, NavigationEventArgs e)
@@ -40,17 +40,17 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainFrame.Content = new ConsultarProveedor(_mainFrame,proxy,"modificar");
         }
 
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainFrame.Content = new ConsultarProveedor(_mainFrame,proxy,"consultar");
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainFrame.Content = new ConsultarProveedor(_mainFrame,proxy,"eliminar");
         }
     }
 }

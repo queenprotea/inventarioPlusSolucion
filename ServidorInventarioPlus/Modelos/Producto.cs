@@ -11,7 +11,7 @@ namespace ServidorInventarioPlus.Modelos
         public int Stock { get; set; }
         public int StockApartado { get; set; }
         public int StockMinimo { get; set; }
-
+        public int ProveedorID { get; set; }
         public ICollection<ProductoAtributo> Atributos { get; set; }
         public ICollection<Moviento> Movimientos { get; set; }
         public ICollection<Reserva> Reservas { get; set; }

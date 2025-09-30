@@ -17,11 +17,15 @@ namespace BibliotecaClasesNetframework.Contratos
         ProveedorDTO ObtenerProveedor(int id);
 
         [OperationContract]
-        void ActualizarProveedor(ProveedorDTO proveedor);
+        bool ActualizarProveedor(ProveedorDTO proveedor);
 
         [OperationContract]
-        void EliminarProveedor(int id);
+        bool EliminarProveedor(int id);
+        
         [OperationContract]
         List<ProveedorDTO> BuscarProveedores(string valorBusqueda);
+
+        [OperationContract]
+        List<ProveedorDTO> ObtenerProveedores();
     }
 }

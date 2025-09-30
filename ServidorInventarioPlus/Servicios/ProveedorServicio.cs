@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using BibliotecaClasesNetframework.ModelosODT;
 using BibliotecaClasesNetframework.Contratos;
+using ServidorInventarioPlus.Context;
+using ServidorInventarioPlus.Modelos;
+
 namespace ServidorInventarioPlus.Servicios
 {
-    public class ProveedorService : IProveedorService
+    public class ProveedorServicio : IProveedorService
     {
         private static List<ProveedorDTO> _proveedores = new List<ProveedorDTO>();
 
@@ -20,7 +26,37 @@ namespace ServidorInventarioPlus.Servicios
         
         public List<ProveedorDTO> BuscarProveedores(string valorBusqueda)
         {
-            return _proveedores;
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(valorBusqueda))
+                    {
+                        // Si no hay texto de búsqueda, devuelve todos
+                        return ObtenerProveedores();
+                    }
+                    
+                    var proveedoresFiltrador = context.Proveedores
+                        .Where(u => u.Nombre.Contains(valorBusqueda) || u.Direccion.Contains(valorBusqueda) || u.Telefono.Contains(valorBusqueda) || u.Correo.Contains(valorBusqueda))
+                        .Select(u => new ProveedorDTO()
+                        {
+                            ProveedorID = u.ProveedorID,
+                            Nombre = u.Nombre,
+                            Direccion = u.Direccion,
+                            Telefono = u.Telefono,
+                            Correo = u.Correo,
+                            
+                        })
+                        .ToList();
+
+                    return proveedoresFiltrador;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al buscar proveedores: {ex.Message}");
+                    return new List<ProveedorDTO>();
+                }
+            }
         }
 
         public ProveedorDTO ObtenerProveedor(int id)
@@ -28,16 +64,108 @@ namespace ServidorInventarioPlus.Servicios
             return _proveedores.Find(p => p.ProveedorID == id);
         }
 
-        public void ActualizarProveedor(ProveedorDTO proveedor)
+        public bool ActualizarProveedor(ProveedorDTO proveedorDto)
         {
-            var index = _proveedores.FindIndex(p => p.ProveedorID == proveedor.ProveedorID);
-            if (index != -1)
-                _proveedores[index] = proveedor;
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var proveedor  = db.Proveedores.FirstOrDefault(p => p.ProveedorID == proveedorDto.ProveedorID);
+                    if (proveedor == null)
+                        return false;
+
+                    // Actualizamos campos
+                    proveedor.Nombre = proveedorDto.Nombre;
+                    proveedor.Correo = proveedorDto.Correo;
+                    proveedor.Direccion = proveedorDto.Direccion;
+                    proveedor.Telefono = proveedorDto.Telefono;
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al modificar usuario: {ex.Message}");
+                    return false;
+                }
+            }
         }
 
-        public void EliminarProveedor(int id)
+        public bool EliminarProveedor(int id)
         {
-            _proveedores.RemoveAll(p => p.ProveedorID == id);
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    // No permitir eliminar el proveedor por defecto
+                    if (id == 1)
+                        throw new InvalidOperationException("No se puede eliminar el proveedor por defecto.");
+
+                    var proveedor = db.Proveedores
+                        .Include(p => p.Productos)
+                        .FirstOrDefault(p => p.ProveedorID == id);
+
+                    if (proveedor == null)
+                        return false;
+
+                    // Obtener proveedor por defecto
+                    var proveedorDefault = db.Proveedores.FirstOrDefault(p => p.ProveedorID == 1);
+                    if (proveedorDefault == null)
+                        throw new InvalidOperationException("No existe un proveedor por defecto en la base de datos.");
+
+                    // Reasignar productos al proveedor por defecto
+                    foreach (var producto in proveedor.Productos)
+                    {
+                        producto.ProveedorID = proveedorDefault.ProveedorID;
+                    }
+
+                    // Guardar cambios de productos
+                    db.SaveChanges();
+
+                    // Ahora eliminar el proveedor
+                    db.Proveedores.Remove(proveedor);
+                    db.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al eliminar proveedor: {ex.Message}");
+                    return false;
+                }
+            }
         }
+
+        
+        public List<ProveedorDTO> ObtenerProveedores()
+        {
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    var proveedores = context.Proveedores
+                        .Select(u => new ProveedorDTO
+                        {
+                            ProveedorID = u.ProveedorID,
+                            Nombre = u.Nombre,
+                            Correo = u.Correo,
+                            Direccion = u.Direccion,
+                            Telefono = u.Telefono,
+                            
+                        })
+                        .ToList();
+
+                    return proveedores;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al consultar Proveedores: {ex.Message}");
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.InnerException);
+                    return new List<ProveedorDTO>();
+                }
+            }
+        }
+        
     }
 }

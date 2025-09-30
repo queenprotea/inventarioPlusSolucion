@@ -72,11 +72,11 @@
             GridLinesVisibility="Horizontal"
             HeadersVisibility="Column"
             HorizontalGridLinesBrush="LightGray"
-            ItemsSource="{Binding Usuarios}"
+            ItemsSource="{Binding Proveedores}"
             Margin="20,40,20,0"
             RowBackground="White"
             SelectionChanged="dgUsuarios_SelectionChanged"
-            x:Name="dgUsuarios">
+            x:Name="dgProveedores">
 
             <DataGrid.Columns>
                 <!--  Columnas de texto  -->
@@ -86,12 +86,16 @@
                     Header="Nombre"
                     Width="3*" />
                 <DataGridTextColumn
-                    Binding="{Binding NombreUsuario}"
+                    Binding="{Binding Telefono}"
                     Header="Telefono"
                     Width="1.5*" />
                 <DataGridTextColumn
-                    Binding="{Binding Rol}"
+                    Binding="{Binding Correo}"
                     Header="Correo"
+                    Width="1.5*" />
+                <DataGridTextColumn
+                    Binding="{Binding Direccion}"
+                    Header="Direccion"
                     Width="1.5*" />
 
                 <!--  Columna de acciones  -->
@@ -130,7 +134,8 @@
                 Content="Seleccionar"
                 FontSize="20"
                 Height="50"
-                Width="150" />
+                Width="150"
+                x:Name="btnSeleccionar" />
         </StackPanel>
 
     </Grid>

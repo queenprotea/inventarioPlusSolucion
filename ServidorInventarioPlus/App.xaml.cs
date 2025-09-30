@@ -16,7 +16,7 @@ namespace ServidorInventarioPlus
         {
             try
             {
-                // 🚀 Aquí levantas tu servicio
+                
                 _host = new ServiceHost(typeof(Servicios.UsuarioServicio));
                 _host.Open();
                 Console.WriteLine("UsuarioServicio levantado y escuchando...");
@@ -30,8 +30,27 @@ namespace ServidorInventarioPlus
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al levantar servicio: {ex.Message}");
+                Console.WriteLine($"Error al levantar servicio este: {ex.Message}");
                 Shutdown();
+            }
+            
+            
+            try
+            {
+                // Crear ServiceHost solo con el tipo del servicio
+                _host = new ServiceHost(typeof(ProveedorServicio));
+
+                // Abrir el servicio, tomará la configuración del App.config
+                _host.Open();
+
+                Console.WriteLine("Servicio UsuarioService levantado en:");
+                foreach (var endpoint in _host.Description.Endpoints)
+                    Console.WriteLine(endpoint.Address);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
             }
         }
 

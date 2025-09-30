@@ -170,5 +170,20 @@ namespace ClienteInventarioPlus.Utilidades
                 }
             };
         }
+        
+        public static string ValidarDireccion(TextBox textBox)
+        {
+            string direccion = textBox.Text;
+
+            if (string.IsNullOrWhiteSpace(direccion))
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "La dirección no puede estar vacía.";
+            }
+
+            return null; // ✅ válido
+        }
+
+        
     }
 }

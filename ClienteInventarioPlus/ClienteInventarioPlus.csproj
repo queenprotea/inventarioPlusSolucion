@@ -95,6 +95,9 @@
         <Compile Include="Vistas\MenuPrincipalEmpleado.xaml.cs">
           <DependentUpon>MenuPrincipalEmpleado.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Vistas\ModificarProveedor.xaml.cs">
+          <DependentUpon>ModificarProveedor.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Vistas\ModificarUsuario.xaml.cs">
           <DependentUpon>ModificarUsuario.xaml</DependentUpon>
         </Compile>
@@ -124,6 +127,7 @@
         <Page Include="Vistas\IniciarSesion.xaml" />
         <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
         <Page Include="Vistas\MenuPrincipalEmpleado.xaml" />
+        <Page Include="Vistas\ModificarProveedor.xaml" />
         <Page Include="Vistas\ModificarUsuario.xaml" />
         <Page Include="Vistas\MenuProveedoresAdministrador.xaml" />
         <Page Include="Vistas\RegistrarUsuario.xaml" />
