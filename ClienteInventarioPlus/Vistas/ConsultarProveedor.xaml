@@ -75,7 +75,6 @@
             ItemsSource="{Binding Proveedores}"
             Margin="20,40,20,0"
             RowBackground="White"
-            SelectionChanged="dgUsuarios_SelectionChanged"
             x:Name="dgProveedores">
 
             <DataGrid.Columns>
@@ -102,22 +101,7 @@
                 <DataGridTemplateColumn Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <Button
-                                    BorderThickness="0"
-                                    Click="BtnModificar_Click"
-                                    Margin="5,0"
-                                    Padding="0">
-                                    <Image Source="/Imagenes/modificarLogo.jpg" Stretch="Uniform" />
-                                </Button>
-                                <Button
-                                    BorderThickness="0"
-                                    Click="BtnEliminar_Click"
-                                    Margin="5,0"
-                                    Padding="0">
-                                    <Image Source="/Imagenes/eliminarLogo.jpg" Stretch="Uniform" />
-                                </Button>
-                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

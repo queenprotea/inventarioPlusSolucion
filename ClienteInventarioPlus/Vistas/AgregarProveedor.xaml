@@ -31,11 +31,19 @@
             Height="37"
             HorizontalAlignment="Left"
             Margin="42,258,0,0"
-            Text="Ingrese nombre"
+            Text=""
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="410"
             x:Name="nombre" />
+        <TextBlock
+            FontSize="12"
+            FontWeight="SemiBold"
+            Foreground="Red"
+            Margin="42,209,45,-20"
+            Text=""
+            VerticalAlignment="Bottom"
+            x:Name="tblockErrorNombre" />
         <Label
             Content="Nombre del proveedor:"
             FontSize="20"
@@ -49,11 +57,18 @@
             Height="121"
             HorizontalAlignment="Left"
             Margin="42,78,0,0"
-            Text="ingrese direccion"
+            Text=""
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="410"
             x:Name="direccion" />
+        <TextBlock
+            FontSize="12"
+            FontWeight="SemiBold"
+            Foreground="Red"
+            Margin="45,510,55,2"
+            Text=""
+            x:Name="tblockErrorDireccion" />
         <Label
             Content="Direccion"
             FontSize="20"
@@ -68,11 +83,18 @@
             Height="37"
             HorizontalAlignment="Left"
             Margin="50,258,0,0"
-            Text="ingrese telefono a 10 digitos"
+            Text=""
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="412"
             x:Name="telefono" />
+        <TextBlock
+            FontSize="12"
+            FontWeight="SemiBold"
+            Foreground="Red"
+            Margin="550,300,-450,-20"
+            Text=""
+            x:Name="tblockErrorTelefono" />
         <Label
             Content="Telefono"
             FontSize="20"
@@ -88,11 +110,18 @@
             Height="41"
             HorizontalAlignment="Left"
             Margin="50,74,0,0"
-            Text="ingrese correo"
+            Text=""
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="412"
             x:Name="correo" />
+        <TextBlock
+            FontSize="12"
+            FontWeight="SemiBold"
+            Foreground="Red"
+            Margin="550,425,-450,-150"
+            Text=""
+            x:Name="tblockErrorCorreo" />
         <Label
             Content="Correo"
             FontSize="20"

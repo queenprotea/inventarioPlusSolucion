@@ -25,13 +25,14 @@ namespace ClienteInventarioPlus.Vistas
             tbCorreo.Text = proveedorModifcar.Correo;
             tbDireccion.Text = proveedorModifcar.Direccion;
             tbNombre.Text = proveedorModifcar.Nombre;
+            tbTelefono.Text = proveedorModifcar.Telefono;
             
         }
 
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            
+            _mainFrame.Content = new MenuProveedoresAdministrador(_mainFrame, proxy);
         }
 
         private void btnModificarUsuario_Click(object sender, RoutedEventArgs e)

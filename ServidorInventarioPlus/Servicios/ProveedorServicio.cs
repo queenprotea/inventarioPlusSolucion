@@ -13,10 +13,31 @@ namespace ServidorInventarioPlus.Servicios
     {
         private static List<ProveedorDTO> _proveedores = new List<ProveedorDTO>();
 
-        public void AgregarProveedor(ProveedorDTO proveedor)
+        public bool AgregarProveedor(ProveedorDTO proveedor)
         {
-            proveedor.ProveedorID = _proveedores.Count + 1;
-            _proveedores.Add(proveedor);
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    // Validar si ya existe un usuario con el mismo NombreUsuario
+                    db.Proveedores.Add(new Proveedor
+                    {
+                        Nombre = proveedor.Nombre,
+                        Telefono = proveedor.Telefono,
+                        Direccion = proveedor.Direccion,
+                        Correo = proveedor.Correo,
+                        
+                    });
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al registrar usuario: {ex.Message}");
+                    return false;
+                }
+            }
         }
 
         public List<ProveedorDTO> ListarProveedores()
@@ -131,6 +152,8 @@ namespace ServidorInventarioPlus.Servicios
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error al eliminar proveedor: {ex.Message}");
+                    Console.WriteLine(ex.InnerException);
+                    Console.WriteLine(ex.StackTrace);
                     return false;
                 }
             }

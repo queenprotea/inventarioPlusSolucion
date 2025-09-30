@@ -72,11 +72,7 @@ namespace ClienteInventarioPlus.Vistas
                 }
             }
         }
-
-        private void dgUsuarios_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
         {

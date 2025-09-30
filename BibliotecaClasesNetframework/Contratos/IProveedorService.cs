@@ -8,7 +8,7 @@ namespace BibliotecaClasesNetframework.Contratos
     public interface IProveedorService
     {
         [OperationContract]
-        void AgregarProveedor(ProveedorDTO proveedor);
+        bool AgregarProveedor(ProveedorDTO proveedor);
 
         [OperationContract]
         List<ProveedorDTO> ListarProveedores();
@@ -20,7 +20,7 @@ namespace BibliotecaClasesNetframework.Contratos
         bool ActualizarProveedor(ProveedorDTO proveedor);
 
         [OperationContract]
-        bool EliminarProveedor(int id);
+        bool EliminarProveedor(int ProveedorID);
         
         [OperationContract]
         List<ProveedorDTO> BuscarProveedores(string valorBusqueda);

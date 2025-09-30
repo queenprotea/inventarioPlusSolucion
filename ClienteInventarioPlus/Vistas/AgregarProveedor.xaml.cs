@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
+using ClienteInventarioPlus.Utilidades;
 
 namespace ClienteInventarioPlus.Vistas
 {
@@ -11,60 +12,77 @@ namespace ClienteInventarioPlus.Vistas
     
     {
         private Frame _mainFrame;
-        public AgregarProveedor(Frame mainFrame)
+        private IProveedorService proxy;
+        public AgregarProveedor(Frame mainFrame, IProveedorService _proxy)
         {
             InitializeComponent();
             _mainFrame = mainFrame;
+            proxy = _proxy;
         }
         
 
         private void BtnGuardar_OnClickbtnGuardar(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Entró al registro de proveedor");
+            bool registroExitoso = false;
 
-            // Validar que los campos no estén vacíos
-            if (string.IsNullOrWhiteSpace(this.nombre.Text) ||
-                string.IsNullOrWhiteSpace(this.correo.Text) ||
-                string.IsNullOrWhiteSpace(this.direccion.Text)||
-                String.IsNullOrWhiteSpace(this.telefono.Text))
+            if (EntradasValidas())
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Capturar los datos del proveedor
-            string nombre = this.nombre.Text.Trim();
-            string direccion = this.direccion.Text.Trim();
-            string telefono = this.telefono.Text.Trim();
-            string correo = this.correo.Text.Trim();
-
-            // Crear objeto DTO
-            var proveedor = new ProveedorDTO
-            {
-                Nombre = nombre,
-                Direccion = direccion,
-                Telefono = telefono,
-                Correo = correo,
-            };
-
-            try
-            {
-                Console.WriteLine($"Registrando proveedor: {nombre}");
-        
+                if (proxy == null)
+                {
+                    MessageBox.Show("El servicio no está disponible. Inténtelo más tarde.");
+                    return;
+                }
+                
+                string opcionSeleccionada = null;
                 
 
-              
+                ProveedorDTO proveedorRegistro = new ProveedorDTO();
+
+                proveedorRegistro.Nombre = nombre.Text.Trim();
+                proveedorRegistro.Correo = correo.Text.Trim();
+                proveedorRegistro.Telefono = telefono.Text.Trim();
+                proveedorRegistro.Direccion = direccion.Text.Trim();
+                
+                
+
+
+                registroExitoso = proxy.AgregarProveedor(proveedorRegistro);
+
+                if (registroExitoso)
+                {
+                    MessageBox.Show("Registro Exitoso");
+                    _mainFrame.Content = new MenuProveedoresAdministrador(_mainFrame, proxy);
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar");
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al comunicarse con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Console.WriteLine(ex.StackTrace);
-            }
+        }
+        
+        private bool EntradasValidas()
+        {
+            bool valido = true;
+            
+            string errorCorreo = ValidacionesEntrada.ValidarCorreo(correo);
+            string errorNombre = ValidacionesEntrada.ValidarNombre(nombre);
+            string errorTelefono = ValidacionesEntrada.ValidarTelefono(telefono);
+            string errorDireccion = ValidacionesEntrada.ValidarDireccion(direccion);
+            
+            tblockErrorCorreo.Text = errorCorreo ?? "";
+            tblockErrorNombre.Text = errorNombre ?? "";
+            tblockErrorTelefono.Text = errorTelefono ?? "";
+            tblockErrorDireccion.Text = errorDireccion ?? "";
+
+            if ( errorCorreo != null || errorNombre != null || errorTelefono != null || errorDireccion != null)
+                valido = false;
+
+            return valido;
         }
 
         private void clickbtnCancelar(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            _mainFrame.Content = new MenuProveedoresAdministrador(_mainFrame, proxy);
         }
     }
 }
