@@ -21,5 +21,7 @@ namespace BibliotecaClasesNetframework.Contratos
 
         [OperationContract]
         void EliminarProveedor(int id);
+        [OperationContract]
+        List<ProveedorDTO> BuscarProveedores(string valorBusqueda);
     }
 }

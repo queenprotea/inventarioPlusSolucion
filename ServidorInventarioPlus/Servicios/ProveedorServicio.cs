@@ -17,6 +17,11 @@ namespace ServidorInventarioPlus.Servicios
         {
             return _proveedores;
         }
+        
+        public List<ProveedorDTO> BuscarProveedores(string valorBusqueda)
+        {
+            return _proveedores;
+        }
 
         public ProveedorDTO ObtenerProveedor(int id)
         {
