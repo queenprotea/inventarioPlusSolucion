@@ -16,6 +16,7 @@ namespace ClienteInventarioPlus.Vistas
         //private IAhorcadoService proxy;
         private UsuarioDTO usuarioSesion;
         private IUsuarioService proxy;
+        private IProveedorService proxyProveedor;
 
         /*public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario, IAhorcadoService proxy)
         {
@@ -34,7 +35,7 @@ namespace ClienteInventarioPlus.Vistas
             }
         }*/
         
-        public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuarioActual)
+        public MenuPrincipalAdministrador(MainWindow mainWindow)
         {
             try
             {
@@ -77,8 +78,10 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnProveedores_Click(object sender, RoutedEventArgs e)
         {
+            var factory = new ChannelFactory<IProveedorService>("ProveedorServiceEndpoint");
+            proxyProveedor = factory.CreateChannel();
             CambiarSeleccion(BtnProveedores);
-            //_mainWindow.CambiarVista(new MarcadoresUserControl(_mainWindow, jugadorSesion, proxy));
+            MainFrame.Content = new MenuProveedoresAdministrador(MainFrame,proxyProveedor);
         }
         
         private void BtnUsuarios_Click(object sender, RoutedEventArgs e)

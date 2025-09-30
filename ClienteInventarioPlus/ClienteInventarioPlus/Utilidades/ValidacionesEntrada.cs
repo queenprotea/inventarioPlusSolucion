@@ -12,11 +12,11 @@ namespace ClienteInventarioPlus.Utilidades
 
             if (string.IsNullOrWhiteSpace(nombre)) {
                 Animaciones.SacudirTextBox(textBox);
-                return "El nombre no puede estar vacío.";
+                return "Mensaje_Validacion_NombreVacio";
             }
             if (nombre.Length < 2) {
                 Animaciones.SacudirTextBox(textBox);
-                return "El nombre es demasiado corto.";
+                return "Mensaje_Validacion_NombreCorto";
             }
             return null;
         }
@@ -27,11 +27,11 @@ namespace ClienteInventarioPlus.Utilidades
 
             if (string.IsNullOrWhiteSpace(telefono)) {
                 Animaciones.SacudirTextBox(textBox);
-                return "El teléfono no puede estar vacío.";
+                return "Mensaje_Validacion_TelefonoVacio";
             }
             if (!System.Text.RegularExpressions.Regex.IsMatch(telefono, @"^\+?\d{8,13}$")) {
                 Animaciones.SacudirTextBox(textBox);
-                return "El teléfono no tiene un formato válido.";
+                return "Mensaje_Validacion_TelefonoFormatoInvalido";
             }
             return null;
         }
@@ -42,11 +42,11 @@ namespace ClienteInventarioPlus.Utilidades
 
             if (string.IsNullOrWhiteSpace(pass)) {
                 Animaciones.SacudirPasswordBox(passwordBox);
-                return "La contraseña no puede estar vacía.";
+                return "Mensaje_Validacion_PasswordVacio";
             }
             if (pass.Length < 5) {
                 Animaciones.SacudirPasswordBox(passwordBox);
-                return "La contraseña es demasiado corta.";
+                return "Mensaje_Validacion_PasswordCorto";
             }
             return null;
         }
@@ -58,12 +58,12 @@ namespace ClienteInventarioPlus.Utilidades
             if (string.IsNullOrWhiteSpace(pass))
             {
                 Animaciones.SacudirTextBox(textBox);
-                return "La contraseña no puede estar vacía.";
+                return "Mensaje_Validacion_PasswordVacio";
             }
             if (pass.Length < 5)
             {
                 Animaciones.SacudirTextBox(textBox);
-                return "La contraseña es demasiado corta.";
+                return "Mensaje_Validacion_PasswordCorto";
             }
             return null;
         }
@@ -74,11 +74,11 @@ namespace ClienteInventarioPlus.Utilidades
 
             if (fecha == null) {
                 Animaciones.SacudirDatePicker(datePicker);
-                return "Debe seleccionar una fecha de nacimiento.";
+                return "Mensaje_Validacion_FechaSinSeleccionar";
             }
             if (fecha.Value > DateTime.Now) {
                 Animaciones.SacudirDatePicker(datePicker);
-                return "La fecha de nacimiento no puede estar en el futuro.";
+                return "Mensaje_Validacion_FechaFutura";
             }
             if (fecha.Value.Year < 1900) {
                 Animaciones.SacudirDatePicker(datePicker);
@@ -94,46 +94,17 @@ namespace ClienteInventarioPlus.Utilidades
             if (string.IsNullOrWhiteSpace(correo))
             {
                 Animaciones.SacudirTextBox(textBox);
-                return "El correo no puede estar vacío.";
+                return "Mensaje_Validacion_CorreoVacio";
             }
 
             string patron = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             if (!Regex.IsMatch(correo, patron))
             {
                 Animaciones.SacudirTextBox(textBox);
-                return "El correo no tiene un formato válido.";
+                return "Mensaje_Validacion_CorreoFormatoInvalido";
             }
             return null;
         }
-        public static string ValidarNombreUsuario(TextBox textBox)
-        {
-            string nombreUsuario = textBox.Text;
-
-            if (string.IsNullOrWhiteSpace(nombreUsuario))
-            {
-                Animaciones.SacudirTextBox(textBox);
-                return "El nombre de usuario no puede estar vacío.";
-            }
-            if (nombreUsuario.Length < 3)
-            {
-                Animaciones.SacudirTextBox(textBox);
-                return "El nombre de usuario es demasiado corto.";
-            }
-
-            return null;
-        }
-        
-        public static string ValidarRadioButtons(RadioButton rb1, RadioButton rb2)
-        {
-            if (rb1.IsChecked != true && rb2.IsChecked != true)
-            {
-                return "Debe seleccionar una opción.";
-            }
-
-            return null;
-        }
-
-
 
         public static void ValidarEntrada(TextBox textBox, string patron, int longitudMaxima)
         {
@@ -170,20 +141,5 @@ namespace ClienteInventarioPlus.Utilidades
                 }
             };
         }
-        
-        public static string ValidarDireccion(TextBox textBox)
-        {
-            string direccion = textBox.Text;
-
-            if (string.IsNullOrWhiteSpace(direccion))
-            {
-                Animaciones.SacudirTextBox(textBox);
-                return "La dirección no puede estar vacía.";
-            }
-
-            return null; // ✅ válido
-        }
-
-        
     }
 }
