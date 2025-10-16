@@ -11,13 +11,7 @@ namespace BibliotecaClasesNetframework.Contratos
         List<ProductoDTO> ObtenerProductos();
 
         [OperationContract]
-        List<ProductoDTO> BuscarProductosPorNombre(string nombre);
-
-        [OperationContract]
-        List<ProductoDTO> BuscarProductosPorCodigo(string codigo);
-
-        [OperationContract]
-        List<ProductoDTO> BuscarProductosPorCategoria(string categoria);
+        List<ProductoDTO> BuscarProductos(string valorBusqueda);
 
         [OperationContract]
         bool EliminarProducto(int productoID);
