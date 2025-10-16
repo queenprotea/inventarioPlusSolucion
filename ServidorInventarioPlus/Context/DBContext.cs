@@ -13,6 +13,7 @@ namespace ServidorInventarioPlus.Context
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Moviento> Movientos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
         // Agregas más DbSet según tus modelos
     }
 }

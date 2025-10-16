@@ -33,9 +33,6 @@ namespace ClienteInventarioPlus.Vistas
                     return;
                 }
                 
-                string opcionSeleccionada = null;
-                
-
                 ProveedorDTO proveedorRegistro = new ProveedorDTO();
 
                 proveedorRegistro.Nombre = nombre.Text.Trim();
@@ -43,9 +40,6 @@ namespace ClienteInventarioPlus.Vistas
                 proveedorRegistro.Telefono = telefono.Text.Trim();
                 proveedorRegistro.Direccion = direccion.Text.Trim();
                 
-                
-
-
                 registroExitoso = proxy.AgregarProveedor(proveedorRegistro);
 
                 if (registroExitoso)

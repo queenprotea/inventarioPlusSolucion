@@ -7,13 +7,17 @@ using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 namespace ClienteInventarioPlus.Vistas {
     public partial class ProductoAReservarVista : UserControl {
+        private Frame _mainFrame;
         private readonly IReservaService _proxyReserva;
+        private readonly IProductoService _proxyProducto;
         private readonly ProductoDTO _productoAReservar;
 
-        public ProductoAReservarVista(ProductoDTO producto, IReservaService proxyReserva) {
+        public ProductoAReservarVista(ProductoDTO producto, IReservaService proxyReserva, IProductoService proxyproducto, Frame frame ) {
             InitializeComponent();
             _productoAReservar = producto;
             _proxyReserva = proxyReserva;
+            _proxyReserva = proxyReserva;
+            _mainFrame = frame;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -49,8 +53,7 @@ namespace ClienteInventarioPlus.Vistas {
                 if (resultado) {
                     MessageBox.Show("Reserva creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     // Regresar a la pantalla anterior de forma segura
-                    var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
-                    nav?.GoBack();
+                    _mainFrame.Content = new ReservarProductoVista(_proxyReserva, _proxyProducto, _mainFrame);
                 }
                 else {
                     MessageBox.Show("No se pudo crear la reserva.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

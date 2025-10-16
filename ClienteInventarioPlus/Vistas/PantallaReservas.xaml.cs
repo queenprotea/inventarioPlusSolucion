@@ -9,12 +9,14 @@ using BibliotecaClasesNetframework.ModelosODT;
 namespace ClienteInventarioPlus.Vistas {
     public partial class ConsultarReservasVista : UserControl {
         private readonly IReservaService _proxyReserva;
+        private readonly IProductoService _proxyProducto;
         private Frame _mainFrame;
 
-        public ConsultarReservasVista(Frame mainFrame, IReservaService proxyReserva) {
+        public ConsultarReservasVista(Frame mainFrame, IReservaService proxyReserva, IProductoService  proxyProducto ) {
             InitializeComponent();
             _mainFrame = mainFrame;
             _proxyReserva = proxyReserva;
+            _proxyProducto = proxyProducto;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -53,7 +55,7 @@ namespace ClienteInventarioPlus.Vistas {
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e) {
             // Regresa al menú principal de reservas
-            _mainFrame.Content = new ReservaPrincipal(_mainFrame, _proxyReserva);
+            _mainFrame.Content = new ReservaPrincipal(_mainFrame, _proxyReserva, _proxyProducto);
         }
     }
 }
