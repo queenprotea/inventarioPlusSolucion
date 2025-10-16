@@ -76,37 +76,8 @@
         </ApplicationDefinition>
         <Compile Include="Utilidades\Animaciones.cs" />
         <Compile Include="Utilidades\ValidacionesEntrada.cs" />
-        <Compile Include="Vistas\AgregarProveedor.xaml.cs" />
-        <Compile Include="Vistas\ConsultarProveedor.xaml.cs">
-          <DependentUpon>ConsultarProveedor.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\ConsultarUsuarios.xaml.cs">
-          <DependentUpon>ConsultarUsuarios.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\Este es u docuemtno deprueba.xaml.cs">
-          <DependentUpon>Este es u docuemtno deprueba.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\IniciarSesion.xaml.cs">
-          <DependentUpon>IniciarSesion.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\MenuPrincipalAdministrador.xaml.cs">
-          <DependentUpon>MenuPrincipalAdministrador.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\MenuPrincipalEmpleado.xaml.cs">
-          <DependentUpon>MenuPrincipalEmpleado.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\ModificarProveedor.xaml.cs">
-          <DependentUpon>ModificarProveedor.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\ModificarUsuario.xaml.cs">
-          <DependentUpon>ModificarUsuario.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\MenuProveedoresAdministrador.xaml.cs" />
-        <Compile Include="Vistas\RegistrarUsuario.xaml.cs">
-          <DependentUpon>RegistrarUsuario.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Vistas\UsuarioPrincipal.xaml.cs">
-          <DependentUpon>UsuarioPrincipal.xaml</DependentUpon>
+        <Compile Include="Vistas\**\*.xaml.cs">
+          <DependentUpon>%(Filename).xaml</DependentUpon>
         </Compile>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -120,18 +91,7 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="Vistas\AgregarProveedor.xaml" />
-        <Page Include="Vistas\ConsultarProveedor.xaml" />
-        <Page Include="Vistas\ConsultarUsuarios.xaml" />
-        <Page Include="Vistas\Este es u docuemtno deprueba.xaml" />
-        <Page Include="Vistas\IniciarSesion.xaml" />
-        <Page Include="Vistas\MenuPrincipalAdministrador.xaml" />
-        <Page Include="Vistas\MenuPrincipalEmpleado.xaml" />
-        <Page Include="Vistas\ModificarProveedor.xaml" />
-        <Page Include="Vistas\ModificarUsuario.xaml" />
-        <Page Include="Vistas\MenuProveedoresAdministrador.xaml" />
-        <Page Include="Vistas\RegistrarUsuario.xaml" />
-        <Page Include="Vistas\UsuarioPrincipal.xaml" />
+        <Page Include="Vistas\**\*.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

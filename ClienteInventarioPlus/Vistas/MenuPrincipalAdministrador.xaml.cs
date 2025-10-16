@@ -17,6 +17,7 @@ namespace ClienteInventarioPlus.Vistas
         private UsuarioDTO usuarioSesion;
         private IUsuarioService proxy;
         private IProveedorService proxyProveedor;
+        private IReservaService proxyReserva;
 
         /*public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario, IAhorcadoService proxy)
         {
@@ -56,7 +57,7 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnProductos);
-            //_mainWindow.CambiarVista(new ProductoPrincipal(_mainWindow, jugadorSesion, proxy));
+            MainFrame.Content = new ProductoPrincipal();
         }
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
@@ -67,7 +68,9 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnReservas_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnReservas);
-            //_mainWindow.CambiarVista(new ReservaPrincipal(_mainWindow, jugadorSesion, proxy));
+            var factory = new ChannelFactory<IReservaService>("ReservaServiceEndpoint");
+            proxyReserva = factory.CreateChannel();
+            MainFrame.Content = new ReservaPrincipal(MainFrame, proxyReserva);
         }
 
         private void BtnReportes_Click(object sender, RoutedEventArgs e)
@@ -94,8 +97,9 @@ namespace ClienteInventarioPlus.Vistas
         {
             _mainWindow.CambiarVista(new IniciarSesion(_mainWindow));
         }
+
         
-        
+
         private void CambiarSeleccion(Button botonActivo)
         {
             // Resetear todos

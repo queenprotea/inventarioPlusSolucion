@@ -7,51 +7,51 @@
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1440">
     <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="270"/>
-        <!-- Barra lateral -->
-        <ColumnDefinition Width="*"/>
-        <!-- Área de contenido -->
-    </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"/>
+            <!-- Barra lateral -->
+            <ColumnDefinition Width="*"/>
+            <!-- Área de contenido -->
+        </Grid.ColumnDefinitions>
 
-    <!-- Barra lateral -->
-    <StackPanel Grid.Column="0" Background="Black" Orientation="Vertical">
-        <TextBlock Text="InventarioPlus"
+        <!-- Barra lateral -->
+        <StackPanel Grid.Column="0" Background="Black" Orientation="Vertical">
+            <TextBlock Text="InventarioPlus"
                    FontSize="35" FontWeight="Bold"
                    Foreground="White"
                    Margin="10" />
-        <Button x:Name="BtnProductos" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnProductos_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image x:Name="ImgProductos" Source="/Imagenes/ProductoBlancoLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
-                <TextBlock Text="Productos" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button x:Name="BtnMovimientos" Margin="10,10" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnMovimientos_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image x:Name="ImgMovimientos" Source="/Imagenes/MovimientoBlancoLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
-                <TextBlock Text="Movimientos" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button x:Name="BtnReservas" Margin="10,10" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnReservas_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image x:Name="ImgReservas" Source="/Imagenes/ReservasBlancoLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
-                <TextBlock Text="Reservas" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        
-        
-        <Button Margin="10,50" Height="Auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnCerrarSesion_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image Source="/Imagenes/CerrarSesionLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
-                <TextBlock Text="Cerrar Sesión" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
+            <Button x:Name="BtnProductos" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnProductos_Click" Width="231">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image x:Name="ImgProductos" Source="/Imagenes/ProductoBlancoLogo.jpg" Width="50" Height="50"/>
+                    <TextBlock Text="Productos"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnMovimientos" Margin="10,10" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnMovimientos_Click">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image x:Name="ImgMovimientos" Source="/Imagenes/MovimientoBlancoLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
+                    <TextBlock Text="Movimientos" VerticalAlignment="Center" Width="138"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnReservas" Margin="10,10" Height="auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnReservas_Click">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image x:Name="ImgReservas" Source="/Imagenes/ReservasBlancoLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
+                    <TextBlock Text="Reservas" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+
+            <Button Margin="10,50" Height="Auto" Background="Black" Foreground="White" BorderBrush="Black" FontSize="25" HorizontalContentAlignment="Left" Click="BtnCerrarSesion_Click">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image Source="/Imagenes/CerrarSesionLogo.jpg" Width="50" Height="50" Margin="0,0,10,0"/>
+                    <TextBlock Text="Cerrar Sesión" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
-    <!-- Área de contenido -->
-    <Grid Grid.Column="1" Background="White">
-        <!-- Aquí puedes usar un Frame para navegar entre UserControls -->
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-    </Grid>
+        <!-- Área de contenido -->
+        <Grid Grid.Column="1" Background="White">
+            <!-- Aquí puedes usar un Frame para navegar entre UserControls -->
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </UserControl>

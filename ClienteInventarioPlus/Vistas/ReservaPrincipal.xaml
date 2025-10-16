@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="ClienteInventarioPlus.Vistas.ReservaPrincipal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1170"
+             Background="WhiteSmoke">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Gestión de Reservas" 
+                   FontSize="28" FontWeight="Bold" 
+                   Foreground="#333" Margin="0,0,0,20"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Margin="0,0,15,0" 
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                    Click="btnReservar_Click">
+                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
+                    <Grid>
+                        <TextBlock Text="Reservar Producto" FontSize="30" FontWeight="SemiBold"
+                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        <Image Source="/Imagenes/CheckMarkIcon.png" Width="80" Height="80"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
+                    </Grid>
+                </Border>
+            </Button>
+
+            <Button Grid.Column="1" Margin="15,0,0,0"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                    Click="btnLiberar_Click">
+                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
+                    <Grid>
+                        <TextBlock Text="Liberar Reserva" FontSize="30" FontWeight="SemiBold"
+                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        <Image Source="/Imagenes/EditIcon.png" Width="80" Height="80"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
+                    </Grid>
+                </Border>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
