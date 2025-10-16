@@ -19,22 +19,6 @@ namespace ClienteInventarioPlus.Vistas
         private IProveedorService proxyProveedor;
         private IReservaService proxyReserva;
 
-        /*public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario, IAhorcadoService proxy)
-        {
-            try
-            {
-                InitializeComponent();
-                _mainWindow = mainWindow;
-                
-                usuarioSesion = usuario;
-                this.proxy = proxy;
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }*/
         
         public MenuPrincipalAdministrador(MainWindow mainWindow)
         {
@@ -62,7 +46,7 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
         {
-            CambiarSeleccion(BtnMovimientos);
+            CambiarSeleccion(BtnMovimientos); 
         }
 
         private void BtnReservas_Click(object sender, RoutedEventArgs e)

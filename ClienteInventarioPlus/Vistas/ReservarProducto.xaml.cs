@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,13 +11,17 @@ using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 namespace ClienteInventarioPlus.Vistas {
     public partial class ReservarProductoVista : UserControl {
+        private Frame _mainFrame;
         private readonly IReservaService _proxyReserva;
         private readonly IProductoService _proxyProducto;
+        public ObservableCollection<ProductoDTO>  Productos { get; set; } = new ObservableCollection<ProductoDTO>();
 
-        public ReservarProductoVista(IReservaService proxyReserva, IProductoService proxyProducto) {
+        public ReservarProductoVista(IReservaService proxyReserva, IProductoService proxyProducto, Frame frame) {
             InitializeComponent();
             _proxyReserva = proxyReserva;
             _proxyProducto = proxyProducto;
+           
+            _mainFrame = frame;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -51,14 +56,13 @@ namespace ClienteInventarioPlus.Vistas {
             if (productoSeleccionado == null) return;
 
             // Navega a la vista de detalles, pasando el producto seleccionado y el proxy
-            var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
-            nav?.Navigate(new ProductoAReservarVista(productoSeleccionado, _proxyReserva));
+            _mainFrame.Content = new ProductoAReservarVista(productoSeleccionado, _proxyReserva, _proxyProducto,_mainFrame);
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e) {
             // Regresa a la pantalla principal de reservas
-            var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
-            nav?.GoBack();
+            _mainFrame.Content = new ReservaPrincipal(_mainFrame,_proxyReserva, _proxyProducto);
         }
+        
     }
 }
