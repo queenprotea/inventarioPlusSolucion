@@ -21,5 +21,15 @@ namespace BibliotecaClasesNetframework.Contratos
 
         [OperationContract]
         bool ActualizarProducto(ProductoDTO producto);
+
+        [OperationContract]
+        List<ProductoDTO> BuscarProductosPorNombre(string textoBusqueda);
+        
+        [OperationContract]
+        List<ProductoDTO> BuscarProductosPorCodigo(string textoBusqueda);
+        
+        [OperationContract]
+        List<ProductoDTO> BuscarProductosPorCategoria(string textoBusqueda);
+        
     }
 }

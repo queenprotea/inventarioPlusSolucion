@@ -17,6 +17,7 @@ namespace ClienteInventarioPlus.Vistas
         private UsuarioDTO usuarioSesion;
         private IUsuarioService proxy;
         private IProveedorService proxyProveedor;
+        private IProductoService proxyProducto;
         private IReservaService proxyReserva;
 
         
@@ -54,7 +55,7 @@ namespace ClienteInventarioPlus.Vistas
             CambiarSeleccion(BtnReservas);
             var factory = new ChannelFactory<IReservaService>("ReservaServiceEndpoint");
             proxyReserva = factory.CreateChannel();
-            MainFrame.Content = new ReservaPrincipal(MainFrame, proxyReserva);
+            MainFrame.Content = new ReservaPrincipal(MainFrame, proxyReserva, proxyProducto);
         }
 
         private void BtnReportes_Click(object sender, RoutedEventArgs e)

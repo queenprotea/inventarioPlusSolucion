@@ -43,7 +43,7 @@ namespace ServidorInventarioPlus.Servicios
 
         public List<ProductoDTO> BuscarProductos(string valorBusqueda)
         {
-            
+            throw new NotImplementedException();
         }
 
         public bool EliminarProducto(int productoID)
@@ -70,12 +70,27 @@ namespace ServidorInventarioPlus.Servicios
         
         public bool RegistrarProducto(ProductoDTO producto)
         {
-            
+            return false;
         }
         
         public bool ActualizarProducto(ProductoDTO producto)
         {
-            
+            return false;
+        }
+
+        public List<ProductoDTO> BuscarProductosPorNombre(string textoBusqueda)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProductoDTO> BuscarProductosPorCodigo(string textoBusqueda)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProductoDTO> BuscarProductosPorCategoria(string textoBusqueda)
+        {
+            throw new NotImplementedException();
         }
     }
 }
