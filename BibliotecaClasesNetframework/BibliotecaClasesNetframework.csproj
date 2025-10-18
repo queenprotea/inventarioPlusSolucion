@@ -38,9 +38,11 @@
       <Compile Include="Contratos\IReporteService.cs" />
       <Compile Include="Contratos\IReservaService.cs" />
       <Compile Include="Contratos\IUsuarioService.cs" />
+      <Compile Include="ModelosODT\CategoriasDTO.cs" />
       <Compile Include="ModelosODT\MovimientoDTO.cs" />
       <Compile Include="ModelosODT\ProductoAtributoDTO.cs" />
       <Compile Include="ModelosODT\ProductoDTO.cs" />
+      <Compile Include="ModelosODT\ProductoProveedoresDTO.cs" />
       <Compile Include="ModelosODT\ProveedorDTO.cs" />
       <Compile Include="ModelosODT\ReservaDTO.cs" />
       <Compile Include="ModelosODT\UsuarioDTO.cs" />

@@ -31,18 +31,27 @@ namespace ClienteInventarioPlus.Vistas
                 // Crear el proxy usando App.config
                 var factory = new ChannelFactory<IUsuarioService>("UsuarioServiceEndpoint");
                 proxy = factory.CreateChannel();
+                
+                var factoryProdcuto = new ChannelFactory<IProductoService>("ProductoServiceEndpoint");
+                proxyProducto = factoryProdcuto.CreateChannel();
+                
+                var factoryProveeedor = new ChannelFactory<IProveedorService>("ProveedorServiceEndpoint");
+                proxyProveedor = factoryProveeedor.CreateChannel();
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
+            
         }
 
         //menu lateral
         private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnProductos);
-            MainFrame.Content = new ProductoPrincipal();
+            MainFrame.Content = new ProductoPrincipal(MainFrame, proxyProducto, proxyProveedor);
         }
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)

@@ -136,9 +136,7 @@ namespace ServidorInventarioPlus.Servicios
 
                     // Reasignar productos al proveedor por defecto
                     foreach (var producto in proveedor.Productos)
-                    {
-                        producto.ProveedorID = proveedorDefault.ProveedorID;
-                    }
+                    
 
                     // Guardar cambios de productos
                     db.SaveChanges();
