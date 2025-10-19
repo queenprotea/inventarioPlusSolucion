@@ -77,6 +77,7 @@
         <Compile Include="Context\DBContext.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Servicios\InventarioPlusServicio.cs" />
+        <Compile Include="Servicios\MovimientoServicio.cs" />
         <Compile Include="Servicios\ProductoServicio.cs" />
         <Compile Include="Servicios\ProveedorServicio.cs" />
         <Compile Include="Servicios\ReservaServicio.cs" />

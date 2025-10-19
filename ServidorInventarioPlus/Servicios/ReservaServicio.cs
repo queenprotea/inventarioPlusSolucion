@@ -101,14 +101,11 @@ namespace ServidorInventarioPlus.Servicios
                     if (produto == null)
                         return false;
                     
-                    produto.Codigo = produto.Codigo;
-                    produto.Nombre = produto.Nombre;
                     produto.StockApartado = (produto.StockApartado - reservaCancelar.CantidadReservada);
                     produto.Stock = (produto.Stock +  reservaCancelar.CantidadReservada);
-                    produto.Descripcion = produto.Descripcion;
-                    produto.StockMinimo = produto.StockMinimo;
                     
                     db.Reservas.Remove(reservaCancelar);
+                    db.SaveChanges();
                     return true;
                 }
                 catch (Exception e)

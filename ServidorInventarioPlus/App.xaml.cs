@@ -43,7 +43,43 @@ namespace ServidorInventarioPlus
                 // Abrir el servicio, tomará la configuración del App.config
                 _host.Open();
 
-                Console.WriteLine("Servicio UsuarioService levantado en:");
+                Console.WriteLine("Servicio ProveedorService levantado en:");
+                foreach (var endpoint in _host.Description.Endpoints)
+                    Console.WriteLine(endpoint.Address);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
+            }
+            
+            try
+            {
+                // Crear ServiceHost solo con el tipo del servicio
+                _host = new ServiceHost(typeof(MovimientoServicio));
+
+                // Abrir el servicio, tomará la configuración del App.config
+                _host.Open();
+
+                Console.WriteLine("Servicio MovimientoService levantado en:");
+                foreach (var endpoint in _host.Description.Endpoints)
+                    Console.WriteLine(endpoint.Address);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
+            }
+            
+            try
+            {
+                // Crear ServiceHost solo con el tipo del servicio
+                _host = new ServiceHost(typeof(ReservaServicio));
+
+                // Abrir el servicio, tomará la configuración del App.config
+                _host.Open();
+
+                Console.WriteLine("Servicio ReservaService levantado en:");
                 foreach (var endpoint in _host.Description.Endpoints)
                     Console.WriteLine(endpoint.Address);
             }

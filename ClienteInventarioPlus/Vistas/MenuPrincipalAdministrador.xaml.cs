@@ -19,14 +19,16 @@ namespace ClienteInventarioPlus.Vistas
         private IProveedorService proxyProveedor;
         private IProductoService proxyProducto;
         private IReservaService proxyReserva;
+        private IMovimientoService proxyMovimiento;
 
         
-        public MenuPrincipalAdministrador(MainWindow mainWindow)
+        public MenuPrincipalAdministrador(MainWindow mainWindow, UsuarioDTO usuario)
         {
             try
             {
                 InitializeComponent();
                 _mainWindow = mainWindow;
+                usuarioSesion = usuario;
                 
                 // Crear el proxy usando App.config
                 var factory = new ChannelFactory<IUsuarioService>("UsuarioServiceEndpoint");
@@ -47,7 +49,10 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
         {
+            var factory = new ChannelFactory<IMovimientoService>("MovimientoServiceEndpoint");
+            proxyMovimiento = factory.CreateChannel();
             CambiarSeleccion(BtnMovimientos); 
+            MainFrame.Content = new MovimientoPrincipal(MainFrame ,usuarioSesion, proxyMovimiento);
         }
 
         private void BtnReservas_Click(object sender, RoutedEventArgs e)

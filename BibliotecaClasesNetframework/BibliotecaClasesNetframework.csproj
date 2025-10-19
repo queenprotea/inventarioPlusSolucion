@@ -33,6 +33,7 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Include="Contratos\IMovimientoService.cs" />
       <Compile Include="Contratos\IProductoService.cs" />
       <Compile Include="Contratos\IProveedorService.cs" />
       <Compile Include="Contratos\IReporteService.cs" />

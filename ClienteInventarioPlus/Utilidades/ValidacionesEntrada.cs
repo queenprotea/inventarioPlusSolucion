@@ -134,6 +134,34 @@ namespace ClienteInventarioPlus.Utilidades
         }
 
 
+        public static string ValidarNumero(TextBox textBox)
+        {
+            string texto = textBox.Text;
+
+            // Validar que no esté vacío
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "Ingresa un numero.";
+            }
+
+            // Validar que sea un número entero
+            if (!int.TryParse(texto, out int numero))
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "Debe ser un número entero.";
+            }
+
+            // Validar que sea positivo
+            if (numero <= 0)
+            {
+                Animaciones.SacudirTextBox(textBox);
+                return "Debe ser mayor que cero.";
+            }
+
+            return null; // ✅ Sin errores
+        }
+
 
         public static void ValidarEntrada(TextBox textBox, string patron, int longitudMaxima)
         {
