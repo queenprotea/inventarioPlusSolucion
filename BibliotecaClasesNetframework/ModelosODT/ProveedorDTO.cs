@@ -1,8 +1,10 @@
-﻿namespace BibliotecaClasesNetframework.ModelosODT
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BibliotecaClasesNetframework.ModelosODT
 {
     public class ProveedorDTO
     {
-        
+        [Key]
         public int ProveedorID { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Telefono { get; set; }

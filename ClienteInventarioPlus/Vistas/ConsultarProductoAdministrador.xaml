@@ -1,62 +1,126 @@
-﻿<UserControl x:Class="ClienteInventarioPlus.Vistas.ConsultarProductoAdmin"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke"
-             Loaded="UserControl_Loaded">
+﻿<UserControl
+    Background="WhiteSmoke"
+    Loaded="UserControl_Loaded"
+    d:DesignHeight="700"
+    d:DesignWidth="1170"
+    mc:Ignorable="d"
+    x:Class="ClienteInventarioPlus.Vistas.ConsultarProductoAdmin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Gestión de Productos" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,15"/>
+        <TextBlock
+            FontSize="28"
+            FontWeight="Bold"
+            Foreground="#333"
+            Grid.Row="0"
+            Margin="0,0,0,15"
+            Text="Gestión de Productos" />
 
         <Grid Grid.Row="1" Margin="0,0,0,15">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TxtBusqueda" Grid.Column="0" Padding="5" FontSize="14" VerticalContentAlignment="Center" ToolTip="Escriba aquí para buscar..."/>
-            <ComboBox x:Name="CmbFiltro" Grid.Column="1" Margin="10,0" Padding="5" VerticalContentAlignment="Center" MinWidth="150">
-                <ComboBoxItem Content="Buscar por Nombre"/>
-                <ComboBoxItem Content="Buscar por Código"/>
-                <ComboBoxItem Content="Buscar por Categoría"/>
+            <TextBox
+                FontSize="14"
+                Grid.Column="0"
+                Padding="5"
+                ToolTip="Escriba aquí para buscar..."
+                VerticalContentAlignment="Center"
+                x:Name="TxtBusqueda" />
+            <ComboBox
+                Grid.Column="1"
+                Margin="10,0"
+                MinWidth="150"
+                Padding="5"
+                VerticalContentAlignment="Center"
+                x:Name="CmbFiltro">
+                <ComboBoxItem Content="Buscar por Nombre" />
+                <ComboBoxItem Content="Buscar por Código" />
+                <ComboBoxItem Content="Buscar por Categoría" />
             </ComboBox>
-            <Button x:Name="BtnBuscar" Grid.Column="2" Content="Buscar" Padding="20,5" Click="BtnBuscar_Click"/>
+            <Button
+                Click="BtnBuscar_Click"
+                Content="Buscar"
+                Grid.Column="2"
+                Padding="20,5"
+                x:Name="BtnBuscar" />
         </Grid>
 
-        <DataGrid Grid.Row="2" x:Name="DgProductos" AutoGenerateColumns="False" 
-                  CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="LightGray"
-                  SelectionChanged="DgProductos_SelectionChanged">
+        <DataGrid
+            AlternatingRowBackground="LightGray"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            Grid.Row="2"
+            IsReadOnly="True"
+            SelectionChanged="DgProductos_SelectionChanged"
+            x:Name="DgProductos">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
-                <DataGridTextColumn Header="Categoría" Binding="{Binding Categoria.Nombre}" Width="1*"/>
-                <DataGridTextColumn Header="Precio Compra" Binding="{Binding PrecioCompra, StringFormat={}{0:C}}" Width="Auto"/>
-                <DataGridTextColumn Header="Precio Venta" Binding="{Binding PrecioVenta, StringFormat={}{0:C}}" Width="Auto"/>
-                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="Auto"/>
-                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="3*"/>
-                <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor.Nombre}" Width="1*"/>
+                <DataGridTextColumn
+                    Binding="{Binding Nombre}"
+                    Header="Nombre"
+                    Width="2*" />
+                <DataGridTextColumn
+                    Binding="{Binding NombreCategoria}"
+                    Header="Categoría"
+                    Width="1*" />
+                <DataGridTextColumn
+                    Binding="{Binding PrecioCompra, StringFormat={}{0:C}}"
+                    Header="Precio Compra"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Binding="{Binding PrecioVenta, StringFormat={}{0:C}}"
+                    Header="Precio Venta"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Binding="{Binding Stock}"
+                    Header="Stock"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Binding="{Binding Descripcion}"
+                    Header="Descripción"
+                    Width="3*" />
+                <DataGridTextColumn
+                    Binding="{Binding FirstProveedor}"
+                    Header="Proveedor"
+                    Width="1*" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="BtnModificar" Content="Modificar" Padding="20,8" Margin="0,0,10,0" 
-                    IsEnabled="False" Click="BtnModificar_Click"
-                    ToolTip="Seleccione un producto de la lista para modificarlo"/>
-            <Button x:Name="BtnEliminar" Content="Eliminar" Padding="20,8" 
-                    Background="#D32F2F" Foreground="White" BorderThickness="0"
-                    IsEnabled="False" Click="BtnEliminar_Click"
-                    ToolTip="Seleccione un producto de la lista para eliminarlo"/>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            Margin="0,15,0,0"
+            Orientation="Horizontal">
+            <Button
+                Click="BtnModificar_Click"
+                Content="Modificar"
+                IsEnabled="False"
+                Margin="0,0,10,0"
+                Padding="20,8"
+                ToolTip="Seleccione un producto de la lista para modificarlo"
+                x:Name="BtnModificar" />
+            <Button
+                Background="#D32F2F"
+                BorderThickness="0"
+                Click="BtnEliminar_Click"
+                Content="Eliminar"
+                Foreground="White"
+                IsEnabled="False"
+                Padding="20,8"
+                ToolTip="Seleccione un producto de la lista para eliminarlo"
+                x:Name="BtnEliminar" />
         </StackPanel>
     </Grid>
 </UserControl>

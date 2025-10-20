@@ -31,5 +31,7 @@ namespace BibliotecaClasesNetframework.Contratos
         [OperationContract]
         List<ProductoDTO> BuscarProductosPorCategoria(string textoBusqueda);
         
+        [OperationContract]
+        List<CategoriasDTO> ObtenerCategorias();
     }
 }

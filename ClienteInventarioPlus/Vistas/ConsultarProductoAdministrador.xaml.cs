@@ -9,10 +9,14 @@ using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 namespace ClienteInventarioPlus.Vistas {
     public partial class ConsultarProductoAdmin : UserControl {
         private readonly IProductoService _proxyProducto;
+        private readonly IProveedorService _proxyProveedor;
+        private Frame _mainFrame;
 
-        public ConsultarProductoAdmin(IProductoService proxyProducto) {
+        public ConsultarProductoAdmin(IProductoService proxyProducto,  IProveedorService proxyProveedor, Frame mainFrame) {
             InitializeComponent();
             _proxyProducto = proxyProducto;
+            _proxyProveedor = proxyProveedor;
+            _mainFrame = mainFrame;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -48,8 +52,7 @@ namespace ClienteInventarioPlus.Vistas {
             if (productoSeleccionado == null) return;
 
             // Navega a la nueva vista de modificación, pasándole el producto y el proxy de forma segura
-            var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
-            nav?.Navigate(new ModificarProductoVista(productoSeleccionado, _proxyProducto));
+            _mainFrame.Content = new ModificarProductoVista(productoSeleccionado, _proxyProducto, _proxyProveedor);
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e) {
