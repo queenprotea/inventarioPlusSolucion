@@ -108,14 +108,13 @@ namespace ServidorInventarioPlus.Servicios
                         StockMinimo = producto.StockMinimo,
                         Codigo = producto.Codigo,
                         IDCategoria = producto.IDCategoria,
+                        PrecioCompra = producto.PrecioCompra,
+                        PrecioVenta = producto.PrecioVenta
                     };
-
-// 1️⃣ Agregamos el producto y guardamos para obtener el ID generado
+                    // Agregamos el producto y guardamos para obtener el ID generado
                     db.Productos.Add(nuevoProducto);
                     db.SaveChanges();
-//
-// 2️⃣ Ahora usamos el ProductoID real generado
-
+                    // Ahora usamos el ProductoID real generado
                     foreach (var proveedor in producto.proveedores)
                     {
                         var relacion = new ProductoProveedores
@@ -142,7 +141,59 @@ namespace ServidorInventarioPlus.Servicios
         
         public bool ActualizarProducto(ProductoDTO producto)
         {
-            return false;
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    // 1️⃣ Buscar el producto existente
+                    var productoExistente = db.Productos
+                        .FirstOrDefault(p => p.ProductoID == producto.ProductoID);
+
+                    if (productoExistente == null)
+                        throw new Exception("El producto no existe en la base de datos.");
+
+                    // 2️⃣ Actualizar los campos básicos
+                    productoExistente.Nombre = producto.Nombre;
+                    productoExistente.Descripcion = producto.Descripcion;
+                    productoExistente.Stock = producto.Stock;
+                    productoExistente.StockApartado = producto.StockApartado;
+                    productoExistente.StockMinimo = producto.StockMinimo;
+                    productoExistente.Codigo = producto.Codigo;
+                    productoExistente.IDCategoria = producto.IDCategoria;
+                    productoExistente.PrecioCompra = producto.PrecioCompra;
+                    productoExistente.PrecioVenta = producto.PrecioVenta;
+
+                    // 3️⃣ Actualizar las relaciones con proveedores
+                    // Eliminar relaciones anteriores
+                    var relacionesAnteriores = db.ProductoProveedores
+                        .Where(pp => pp.ProductoID == producto.ProductoID)
+                        .ToList();
+
+                    db.ProductoProveedores.RemoveRange(relacionesAnteriores);
+
+                    // Agregar las nuevas relaciones
+                    foreach (var proveedor in producto.proveedores)
+                    {
+                        var nuevaRelacion = new ProductoProveedores
+                        {
+                            ProductoID = producto.ProductoID,
+                            ProveedorID = proveedor.ProveedorID
+                        };
+                        db.ProductoProveedores.Add(nuevaRelacion);
+                    }
+
+                    // 4️⃣ Guardar los cambios
+                    db.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al modificar producto: {ex.Message}");
+                    Console.WriteLine(ex.InnerException?.Message);
+                    return false;
+                }
+            }
         }
 
         public List<ProductoDTO> BuscarProductosPorNombre(string textoBusqueda)

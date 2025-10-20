@@ -126,7 +126,7 @@
             Grid.Row="3"
             Margin="240,25,800,20"
             Padding="10,5"
-            x:Name="BtnElimnar" />
+            x:Name="BtnEliminar" />
         <ComboBox
             FontSize="14"
             Grid.Row="3"

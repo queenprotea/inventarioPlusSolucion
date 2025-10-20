@@ -52,7 +52,7 @@ namespace ClienteInventarioPlus.Vistas {
             if (productoSeleccionado == null) return;
 
             // Navega a la nueva vista de modificación, pasándole el producto y el proxy de forma segura
-            _mainFrame.Content = new ModificarProductoVista(productoSeleccionado, _proxyProducto, _proxyProveedor);
+            _mainFrame.Content = new ModificarProductoVista(productoSeleccionado, _proxyProducto, _proxyProveedor, "modificar");
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e) {
