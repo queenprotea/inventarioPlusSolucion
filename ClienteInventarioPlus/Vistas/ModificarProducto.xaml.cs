@@ -22,6 +22,8 @@ namespace ClienteInventarioPlus.Vistas {
             _proxyProveedor = proxyProveedor;
             proveedoresProducto = new ObservableCollection<ProveedorDTO>(producto.proveedores);
             _modo = modo;
+            if (_modo == "consultar")
+                ConfigurarModoConsulta();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -30,8 +32,7 @@ namespace ClienteInventarioPlus.Vistas {
             CargarProveedores();
             CmbProveedores.ItemsSource = _proxyProveedor.ObtenerProveedores();
             CmbProveedores.DisplayMemberPath  = "Nombre";
-            if (_modo == "Consultar")
-                ConfigurarModoConsulta();
+            
         }
 
         private void CargarDatosDelProducto() {
