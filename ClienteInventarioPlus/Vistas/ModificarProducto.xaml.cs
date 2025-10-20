@@ -13,13 +13,17 @@ namespace ClienteInventarioPlus.Vistas {
         private readonly ProductoDTO _productoAModificar; // Almacena el producto que estamos editando
         private ObservableCollection<ProveedorDTO> proveedoresProducto;
         private readonly IProveedorService _proxyProveedor;
+        private readonly string _modo;
 
-        public ModificarProductoVista(ProductoDTO producto, IProductoService proxyProducto, IProveedorService proxyProveedor) {
+        public ModificarProductoVista(ProductoDTO producto, IProductoService proxyProducto, IProveedorService proxyProveedor, string modo) {
             InitializeComponent();
             _productoAModificar = producto;
             _proxyProducto = proxyProducto;
             _proxyProveedor = proxyProveedor;
             proveedoresProducto = new ObservableCollection<ProveedorDTO>(producto.proveedores);
+            _modo = modo;
+            if (_modo == "consultar")
+                ConfigurarModoConsulta();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -27,6 +31,8 @@ namespace ClienteInventarioPlus.Vistas {
             CargarCategorias();
             CargarProveedores();
             CmbProveedores.ItemsSource = _proxyProveedor.ObtenerProveedores();
+            CmbProveedores.DisplayMemberPath  = "Nombre";
+            
         }
 
         private void CargarDatosDelProducto() {
@@ -75,7 +81,6 @@ namespace ClienteInventarioPlus.Vistas {
                 MessageBox.Show("El nombre del producto no puede estar vacío.", "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
             // --- 2. Actualizar el Objeto DTO con los nuevos valores ---
             try {
                 _productoAModificar.Nombre = TxtNombreProducto.Text;
@@ -83,8 +88,8 @@ namespace ClienteInventarioPlus.Vistas {
                 _productoAModificar.Descripcion = TxtDescripcion.Text;
                 _productoAModificar.Stock = int.Parse(TxtStockActual.Text);
                 _productoAModificar.StockMinimo = int.Parse(TxtStockMinimo.Text);
-                _productoAModificar.PrecioCompra = int.Parse(TxtPrecioCompra.Text);
-                _productoAModificar.PrecioVenta = int.Parse(TxtPrecioVenta.Text);
+                _productoAModificar.PrecioCompra = decimal.Parse(TxtPrecioCompra.Text);
+                _productoAModificar.PrecioVenta = decimal.Parse(TxtPrecioVenta.Text);
 
                 var proveedoresNuevos = DgProveedores.Items.OfType<ProveedorDTO>().ToList();
                 _productoAModificar.proveedores = proveedoresNuevos;
@@ -93,7 +98,6 @@ namespace ClienteInventarioPlus.Vistas {
                 MessageBox.Show("Por favor, asegúrese de que los campos numéricos (stock) sean correctos.", "Error de Formato", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             // --- 3. Llamar al Servicio para Actualizar ---
             try {
                 bool resultado = _proxyProducto.ActualizarProducto(_productoAModificar);
@@ -142,7 +146,7 @@ namespace ClienteInventarioPlus.Vistas {
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            ProveedorDTO seleccionado = DgProveedores.SelectedItem as ProveedorDTO;
+            ProveedorDTO seleccionado = CmbProveedores.SelectedItem as ProveedorDTO;
 
             if (seleccionado != null)
             {
@@ -160,6 +164,26 @@ namespace ClienteInventarioPlus.Vistas {
             {
                 MessageBox.Show("Selecciona un proveedor antes de agregar.");
             }
+        }
+        
+        private void ConfigurarModoConsulta() {
+            // Deshabilitar campos de texto
+            TxtNombreProducto.IsReadOnly = true;
+            TxtCodigo.IsReadOnly = true;
+            TxtDescripcion.IsReadOnly = true;
+            TxtStockActual.IsReadOnly = true;
+            TxtStockMinimo.IsReadOnly = true;
+            TxtPrecioCompra.IsReadOnly = true;
+            TxtPrecioVenta.IsReadOnly = true;
+
+            // Deshabilitar combobox
+            CmbCategoria.IsEnabled = false;
+            CmbProveedores.Visibility = Visibility.Collapsed;
+
+            // Ocultar botones
+            BtnAgregar.Visibility = Visibility.Collapsed;
+            BtnEliminar.Visibility = Visibility.Collapsed;
+            BtnGuardar.Visibility = Visibility.Collapsed;
         }
         
     }
