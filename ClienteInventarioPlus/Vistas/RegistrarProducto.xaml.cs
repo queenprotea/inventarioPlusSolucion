@@ -99,7 +99,6 @@ namespace ClienteInventarioPlus.Vistas {
                 nuevoProducto.StockMinimo = Convert.ToInt32(TxtStockMinimo.Text);
                 nuevoProducto.IDCategoria = Convert.ToInt32(CmbCategoria.SelectedValue.ToString());
                 
-                Console.WriteLine("Llego hasta este punto ?");
                 var proveedoresids = DgProveedores.Items.OfType<ProveedorDTO>().ToList();
                 nuevoProducto.proveedores = proveedoresids;
             }
@@ -158,6 +157,28 @@ namespace ClienteInventarioPlus.Vistas {
             else
             {
                 MessageBox.Show("Selecciona un proveedor antes de agregar.");
+            }
+        }
+
+        private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            var proveedorSeleccionado = DgProveedores.SelectedItem as ProveedorDTO;
+
+            if (proveedorSeleccionado == null)
+            {
+                MessageBox.Show("Selecciona un proveedor para eliminar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // Confirmación opcional
+            var confirmar = MessageBox.Show($"¿Eliminar al proveedor '{proveedorSeleccionado.Nombre}'?",
+                "Confirmar eliminación",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (confirmar == MessageBoxResult.Yes)
+            {
+                proveedoresAgregados.Remove(proveedorSeleccionado);
             }
         }
     }

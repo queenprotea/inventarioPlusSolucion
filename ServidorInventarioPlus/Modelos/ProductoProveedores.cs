@@ -8,11 +8,9 @@ namespace ServidorInventarioPlus.Modelos
     {
         [Key, Column(Order = 0)]
         public int ProductoID { get; set; }
-        
+        public virtual Producto Producto { get; set; }
         [Key, Column(Order = 1)]
         public int ProveedorID { get; set; }
-        
-        public virtual Producto Producto { get; set; }
         public virtual Proveedor Proveedor { get; set; }
     }
 }

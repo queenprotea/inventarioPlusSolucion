@@ -26,7 +26,7 @@ namespace ClienteInventarioPlus.Vistas {
         private void btnConsultarProductos_Click(object sender, RoutedEventArgs e) {
             // TODO: Aquí debes crear y navegar a tu vista para consultar productos.
             // Por ahora, se muestra un mensaje informativo.
-            MessageBox.Show("La vista de consulta de productos aún no ha sido implementada.");
+            _mainFrame.Content = new ConsultarProductoAdmin(_proxyProducto, _proxyProveedor,_mainFrame);
         }
     }
 }

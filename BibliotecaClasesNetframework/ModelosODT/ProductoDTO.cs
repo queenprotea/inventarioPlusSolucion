@@ -13,10 +13,13 @@ namespace BibliotecaClasesNetframework.ModelosODT
         public int StockApartado { get; set; }
         public int StockMinimo { get; set; }
         
-        public int IDCategoria  { get; set; }
+        public int? IDCategoria  { get; set; }
         public int PrecioCompra { get; set; }
         public int PrecioVenta { get; set; }
-        public List<ProveedorDTO> proveedores { get; set; } 
+         public string NombreCategoria { get; set; }
+         public string FirstProveedor { get; set; }
+        public List<ProveedorDTO> proveedores { get; set; }
+     
     }
 
     public class CrearProductoDTO

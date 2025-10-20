@@ -146,7 +146,7 @@
             <Button
                 Background="LightGray"
                 BorderThickness="0"
-                Click="BtnCancelar_Click"
+                Click="BtnEliminar_Click"
                 Content="Eliminar"
                 Padding="20,10"
                 x:Name="BtnEliminar" />
