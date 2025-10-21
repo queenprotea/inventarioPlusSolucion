@@ -42,6 +42,7 @@
                 <DataGridTextColumn Header="ProductoID" Binding="{Binding ProductoID}" Width="*"/>
                 <DataGridTextColumn Header="Cantidad Reservada" Binding="{Binding CantidadReservada}" Width="*"/>
                 <DataGridTextColumn Header="FechaHora" Binding="{Binding FechaHora}" Width="*"/>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
