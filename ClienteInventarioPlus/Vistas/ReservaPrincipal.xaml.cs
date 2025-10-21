@@ -22,7 +22,7 @@ namespace ClienteInventarioPlus.Vistas {
 
         private void btnLiberar_Click(object sender, RoutedEventArgs e) {
             // Pendiente de implementación (la vista LiberarReservaVista no existe aún).
-            MessageBox.Show("La funcionalidad de liberar/cancelar reservas estará disponible próximamente.");
+            _mainFrame.Content = new LiberarReserva(_mainFrame, _proxyReserva, _proxyProducto);
         }
     }
 }

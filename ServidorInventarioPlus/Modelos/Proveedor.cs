@@ -8,6 +8,7 @@ namespace ServidorInventarioPlus.Modelos
     [Table("Proveedores")] 
     public class Proveedor
     {
+        [Key]
         public int ProveedorID { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Telefono { get; set; }
@@ -15,5 +16,6 @@ namespace ServidorInventarioPlus.Modelos
         public string Direccion { get; set; }
         public string Categoria { get; set; }
         public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
+        public virtual ICollection<ProductoProveedores> ProductoProveedores { get; set; }
     }
 }

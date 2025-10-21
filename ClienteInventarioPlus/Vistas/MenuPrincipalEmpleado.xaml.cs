@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using BibliotecaClasesNetframework.Contratos;
 using BibliotecaClasesNetframework.ModelosODT;
 
 namespace ClienteInventarioPlus.Vistas
@@ -11,6 +13,9 @@ namespace ClienteInventarioPlus.Vistas
     {
         private MainWindow _mainWindow;
         private UsuarioDTO usuarioSesion;
+        private IMovimientoService proxyMovimiento;
+        private IReservaService proxyReserva;
+        private IProductoService proxyProducto;
         
         public MenuPrincipalEmpleado(MainWindow mainWindow, UsuarioDTO usuarioActual)
         {
@@ -18,7 +23,7 @@ namespace ClienteInventarioPlus.Vistas
             {
                 InitializeComponent();
                 _mainWindow = mainWindow;
-                
+                usuarioSesion = usuarioActual;
             }
             catch (Exception ex)
             {
@@ -34,11 +39,17 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnReservas_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnReservas);
+            var factory = new ChannelFactory<IReservaService>("ReservaServiceEndpoint");
+            proxyReserva = factory.CreateChannel();
+            MainFrame.Content = new ReservaPrincipal(MainFrame, proxyReserva, proxyProducto);
         }
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
         {
-            CambiarSeleccion(BtnMovimientos);
+            var factory = new ChannelFactory<IMovimientoService>("MovimientoServiceEndpoint");
+            proxyMovimiento = factory.CreateChannel();
+            CambiarSeleccion(BtnMovimientos); 
+            MainFrame.Content = new MovimientoPrincipal(MainFrame ,usuarioSesion, proxyMovimiento);
         }
 
         private void BtnProductos_Click(object sender, RoutedEventArgs e)

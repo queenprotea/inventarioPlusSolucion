@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServidorInventarioPlus.Modelos
 {
+    [Table("Reservas")]
     public class Reserva
     {
         public int ReservaID { get; set; }

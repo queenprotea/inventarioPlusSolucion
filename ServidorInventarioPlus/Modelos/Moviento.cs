@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServidorInventarioPlus.Modelos
 {
+    [Table("Movimientos")]
     public class Moviento
     {
         [Key]
