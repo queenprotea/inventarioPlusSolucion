@@ -32,8 +32,8 @@ namespace ClienteInventarioPlus.Vistas {
         private void CargarProductosDisponibles() {
             try {
                 // Idealmente, tu servicio tendría un método que solo devuelve productos con stock > 0
-                //var productos = _proxyProducto.ObtenerProductos().Where(p => p.Stock > 0).ToList();
-                //DgProductos.ItemsSource = productos;
+                var productos = _proxyProducto.ObtenerProductos().Where(p => p.Stock > 0).ToList();
+                DgProductos.ItemsSource = productos;
             }
             catch (Exception ex) {
                 MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error de Servicio", MessageBoxButton.OK, MessageBoxImage.Error);

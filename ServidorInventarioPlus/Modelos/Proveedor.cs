@@ -16,6 +16,8 @@ namespace ServidorInventarioPlus.Modelos
         public string Direccion { get; set; }
         public string Categoria { get; set; }
         public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
-        public virtual ICollection<ProductoProveedores> ProductoProveedores { get; set; }
+
+        public virtual ICollection<ProductoProveedores> ProductoProveedores { get; set; } =
+            new List<ProductoProveedores>();
     }
 }
