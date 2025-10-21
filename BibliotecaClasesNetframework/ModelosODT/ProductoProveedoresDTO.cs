@@ -5,9 +5,7 @@ namespace BibliotecaClasesNetframework.ModelosODT
 {
     public class ProductoProveedoresDTO
     {
-     
         public int ProductoID { get; set; }
-      
         public int ProveedorID { get; set; }
         
         public virtual ProductoDTO Producto { get; set; }

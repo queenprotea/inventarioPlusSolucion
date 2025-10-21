@@ -13,5 +13,6 @@ namespace ServidorInventarioPlus.Modelos
         public DateTime FechaHora { get; set; }
 
         public Producto Producto { get; set; }
+        public string Cliente { get; set; }
     }
 }

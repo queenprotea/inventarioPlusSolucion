@@ -24,6 +24,5 @@ namespace BibliotecaClasesNetframework.Contratos
 
         [OperationContract]
         List<ProductoDTO> BuscarProductosParaMovimiento(string valorBusqueda);
-        
     }
 }

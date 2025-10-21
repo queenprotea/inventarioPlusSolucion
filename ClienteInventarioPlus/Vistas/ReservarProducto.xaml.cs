@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -20,7 +21,6 @@ namespace ClienteInventarioPlus.Vistas {
             InitializeComponent();
             _proxyReserva = proxyReserva;
             _proxyProducto = proxyProducto;
-           
             _mainFrame = frame;
         }
 
@@ -40,8 +40,52 @@ namespace ClienteInventarioPlus.Vistas {
             }
         }
 
-        private void BtnBuscar_Click(object sender, RoutedEventArgs e) {
-            // Lógica de búsqueda (similar a las otras vistas de consulta)
+        private void BtnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string busqueda = TxtBusqueda.Text?.Trim() ?? string.Empty;
+
+                // Cargar todos los productos desde el servicio
+                var todosLosProductos = _proxyProducto.ObtenerProductos() ?? new List<ProductoDTO>();
+
+                if (string.IsNullOrEmpty(busqueda))
+                {
+                    // Si no hay texto, mostrar todos los productos
+                    Productos = new ObservableCollection<ProductoDTO>(todosLosProductos);
+                }
+                else
+                {
+                    IEnumerable<ProductoDTO> filtrados = todosLosProductos;
+
+                    switch (CmbFiltro.Text)
+                    {
+                        case "Buscar por Nombre":
+                            filtrados = todosLosProductos.Where(p =>
+                                !string.IsNullOrEmpty(p.Nombre) &&
+                                p.Nombre.IndexOf(busqueda, StringComparison.OrdinalIgnoreCase) >= 0);
+                            break;
+
+                        case "Buscar por Categoría":
+                            filtrados = todosLosProductos.Where(p =>
+                                !string.IsNullOrEmpty(p.NombreCategoria) &&
+                                p.NombreCategoria.IndexOf(busqueda, StringComparison.OrdinalIgnoreCase) >= 0);
+                            break;
+
+                        default:
+                            filtrados = todosLosProductos;
+                            break;
+                    }
+
+                    Productos = new ObservableCollection<ProductoDTO>(filtrados);
+                }
+
+                DgProductos.ItemsSource = Productos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar productos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DgProductos_SelectionChanged(object sender, SelectionChangedEventArgs e) {

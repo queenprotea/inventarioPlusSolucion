@@ -44,14 +44,11 @@ namespace ServidorInventarioPlus.Servicios
                         FechaHora = reserva.FechaHora == default(DateTime)
                             ? DateTime.Now  // 👈 asigna la fecha actual si viene vacía
                             : reserva.FechaHora,
-                        ProductoID = reserva.ProductoID
+                        ProductoID = reserva.ProductoID,
+                        Cliente = reserva.Cliente
                     };
 
                     db.Reservas.Add(nuevaReserva);
-
-                    // 4️⃣ Actualizar los valores del producto
-                    producto.Stock -= reserva.CantidadReservada;           // Descontar del stock disponible
-                    producto.StockApartado += reserva.CantidadReservada;   // Sumar al stock reservado
 
                     // 5️⃣ Guardar los cambios
                     db.SaveChanges();
