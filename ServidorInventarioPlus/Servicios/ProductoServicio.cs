@@ -145,14 +145,14 @@ namespace ServidorInventarioPlus.Servicios
             {
                 try
                 {
-                    // 1️⃣ Buscar el producto existente
+                    //  Buscar el producto existente
                     var productoExistente = db.Productos
                         .FirstOrDefault(p => p.ProductoID == producto.ProductoID);
 
                     if (productoExistente == null)
                         throw new Exception("El producto no existe en la base de datos.");
 
-                    // 2️⃣ Actualizar los campos básicos
+                    //  Actualizar los campos básicos
                     productoExistente.Nombre = producto.Nombre;
                     productoExistente.Descripcion = producto.Descripcion;
                     productoExistente.Stock = producto.Stock;
@@ -163,7 +163,7 @@ namespace ServidorInventarioPlus.Servicios
                     productoExistente.PrecioCompra = producto.PrecioCompra;
                     productoExistente.PrecioVenta = producto.PrecioVenta;
 
-                    // 3️⃣ Actualizar las relaciones con proveedores
+                    // Actualizar las relaciones con proveedores
                     // Eliminar relaciones anteriores
                     var relacionesAnteriores = db.ProductoProveedores
                         .Where(pp => pp.ProductoID == producto.ProductoID)
@@ -182,7 +182,7 @@ namespace ServidorInventarioPlus.Servicios
                         db.ProductoProveedores.Add(nuevaRelacion);
                     }
 
-                    // 4️⃣ Guardar los cambios
+                    //Guardar los cambios
                     db.SaveChanges();
 
                     return true;
@@ -234,5 +234,6 @@ namespace ServidorInventarioPlus.Servicios
                 }
             }
         }
+        
     }
 }

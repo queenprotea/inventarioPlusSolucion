@@ -9,12 +9,6 @@ namespace BibliotecaClasesNetframework.ModelosODT
         public int CantidadReservada { get; set; }
         public DateTime FechaHora { get; set; }
         public int ProductoID { get; set; }
-    }
-
-    public class CrearReservaDTO
-    {
-        public string NumeroReserva { get; set; } = string.Empty;
-        public int ProductoID { get; set; }
-        public int CantidadReservada { get; set; }
+        public string Cliente {get; set;} = string.Empty;
     }
 }

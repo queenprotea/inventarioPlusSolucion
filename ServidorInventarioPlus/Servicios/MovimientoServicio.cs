@@ -42,8 +42,6 @@ namespace ServidorInventarioPlus.Servicios
             }
         }
 
-
-
         public List<MovimientoDTO> ObtenerMovimientos()
         {
             using (var context = new DBContext())
@@ -106,8 +104,7 @@ namespace ServidorInventarioPlus.Servicios
                     }
 
                     valorBusqueda = valorBusqueda.ToLower();
-
-                    // Usamos Include para traer relaciones (solo si usas EF6, agrega: using System.Data.Entity;)
+                    
                     var movimientosFiltrados = context.Movientos
                         .Include("Usuario")
                         .Include("Producto")
@@ -279,9 +276,6 @@ namespace ServidorInventarioPlus.Servicios
                 }
             }
         }
-
-        
-        
         
     }
 }

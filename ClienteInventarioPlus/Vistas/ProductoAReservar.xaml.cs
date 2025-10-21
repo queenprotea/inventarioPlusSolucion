@@ -48,7 +48,8 @@ namespace ClienteInventarioPlus.Vistas {
                 var nuevaReserva = new ReservaDTO {
                     ProductoID = _productoAReservar.ProductoID,
                     CantidadReservada = cantidad,
-                    NumeroReserva = $"RSV-{DateTime.Now:yyyyMMddHHmmss}"
+                    NumeroReserva = $"RSV-{DateTime.Now:yyyyMMddHHmmss}",
+                    Cliente = TxtNombreCliente.Text
                 };
 
                 bool resultado = _proxyReserva.CrearReserva(nuevaReserva);
