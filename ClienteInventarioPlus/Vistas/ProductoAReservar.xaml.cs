@@ -17,6 +17,7 @@ namespace ClienteInventarioPlus.Vistas {
             _productoAReservar = producto;
             _proxyReserva = proxyReserva;
             _proxyReserva = proxyReserva;
+            _proxyProducto = proxyproducto;
             _mainFrame = frame;
         }
 
@@ -26,6 +27,8 @@ namespace ClienteInventarioPlus.Vistas {
             TbCodigo.Text = _productoAReservar.Codigo;
             TbDescripcion.Text = _productoAReservar.Descripcion;
             TbStock.Text = _productoAReservar.Stock.ToString();
+            TbPrecio.Text = _productoAReservar.PrecioVenta.ToString();
+            TbCategoria.Text = _productoAReservar.NombreCategoria;
         }
 
         private void BtnReservar_Click(object sender, RoutedEventArgs e) {

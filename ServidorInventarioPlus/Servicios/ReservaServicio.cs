@@ -21,43 +21,57 @@ namespace ServidorInventarioPlus.Servicios
             {
                 try
                 {
-                    var produto = db.Productos.FirstOrDefault(producto => reserva.ProductoID == producto.ProductoID);
-                    if (produto == null)
-                        return false;
-                    if (produto.Stock < reserva.CantidadReservada)
+                    // 1️⃣ Buscar el producto asociado a la reserva
+                    var producto = db.Productos.FirstOrDefault(p => p.ProductoID == reserva.ProductoID);
+                    if (producto == null)
                     {
-                        MessageBox.Show("La cantidad a reservar excede el stock actual");
+                        MessageBox.Show("El producto seleccionado no existe.");
                         return false;
                     }
 
-                    db.Reservas.Add(new Reserva
+                    // 2️⃣ Verificar stock disponible
+                    if (producto.Stock < reserva.CantidadReservada)
+                    {
+                        MessageBox.Show("La cantidad a reservar excede el stock actual.");
+                        return false;
+                    }
+
+                    // 3️⃣ Crear la reserva
+                    var nuevaReserva = new Reserva
                     {
                         NumeroReserva = reserva.NumeroReserva,
                         CantidadReservada = reserva.CantidadReservada,
-                        FechaHora = reserva.FechaHora,
-                        ProductoID = reserva.ProductoID,
-                    });
-                    
-                    produto.Codigo = produto.Codigo;
-                    produto.Nombre = produto.Nombre;
-                    produto.StockApartado = (produto.StockApartado + reserva.CantidadReservada);
-                    produto.Stock = (produto.Stock -  reserva.CantidadReservada);
-                    produto.Descripcion = produto.Descripcion;
-                    produto.StockMinimo = produto.StockMinimo;
-                    
+                        FechaHora = reserva.FechaHora == default(DateTime)
+                            ? DateTime.Now  // 👈 asigna la fecha actual si viene vacía
+                            : reserva.FechaHora,
+                        ProductoID = reserva.ProductoID
+                    };
+
+                    db.Reservas.Add(nuevaReserva);
+
+                    // 4️⃣ Actualizar los valores del producto
+                    producto.Stock -= reserva.CantidadReservada;           // Descontar del stock disponible
+                    producto.StockApartado += reserva.CantidadReservada;   // Sumar al stock reservado
+
+                    // 5️⃣ Guardar los cambios
                     db.SaveChanges();
-                    
+
                     return true;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error al registrar usuario: {e.Message}");
+                    Console.WriteLine($"Error al crear la reserva: {e.Message}");
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Source);
+                    Console.WriteLine(e.StackTrace);
+                    Console.WriteLine(e.InnerException);
+                    if (e.InnerException != null)
+                        Console.WriteLine($"Detalles: {e.InnerException.Message}");
                     return false;
                 }
-                
-                
             }
         }
+
 
         public List<ReservaDTO> ObtenerReservas()
         {

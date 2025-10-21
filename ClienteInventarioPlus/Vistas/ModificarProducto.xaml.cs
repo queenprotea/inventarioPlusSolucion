@@ -11,7 +11,7 @@ namespace ClienteInventarioPlus.Vistas {
     public partial class ModificarProductoVista : UserControl {
         private readonly IProductoService _proxyProducto;
         private readonly ProductoDTO _productoAModificar; // Almacena el producto que estamos editando
-        private ObservableCollection<ProveedorDTO> proveedoresProducto;
+        private ObservableCollection<ProveedorDTO> _proveedoresProducto;
         private readonly IProveedorService _proxyProveedor;
         private readonly string _modo;
 
@@ -20,7 +20,7 @@ namespace ClienteInventarioPlus.Vistas {
             _productoAModificar = producto;
             _proxyProducto = proxyProducto;
             _proxyProveedor = proxyProveedor;
-            proveedoresProducto = new ObservableCollection<ProveedorDTO>(producto.proveedores);
+            _proveedoresProducto = new ObservableCollection<ProveedorDTO>(producto.proveedores);
             _modo = modo;
             if (_modo == "consultar")
                 ConfigurarModoConsulta();
@@ -38,7 +38,7 @@ namespace ClienteInventarioPlus.Vistas {
         private void CargarDatosDelProducto() {
             // Rellena cada campo con la información del producto recibido
             TxtNombreProducto.Text = _productoAModificar.Nombre;
-            TxtCodigo.Text = _productoAModificar.Codigo; // Ajustado al DTO real
+            TxtCodigo.Text = _productoAModificar.Codigo; 
             TxtDescripcion.Text = _productoAModificar.Descripcion;
             TxtStockActual.Text = _productoAModificar.Stock.ToString();
             TxtStockMinimo.Text = _productoAModificar.StockMinimo.ToString();
@@ -50,7 +50,7 @@ namespace ClienteInventarioPlus.Vistas {
         {
             try {
                 // Llama al servicio para obtener la lista de todos los proveedores
-                DgProveedores.ItemsSource = proveedoresProducto;
+                DgProveedores.ItemsSource = _proveedoresProducto;
             }
             catch (Exception ex) {
                 MessageBox.Show($"Error al cargar los proveedores: {ex.Message}", "Error de Servicio", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -65,8 +65,7 @@ namespace ClienteInventarioPlus.Vistas {
                 var categorias = _proxyProducto.ObtenerCategorias();
                 CmbCategoria.ItemsSource = categorias;
                 CmbCategoria.DisplayMemberPath = "Nombre"; // La propiedad del objeto a mostrar
-                CmbCategoria.SelectedValuePath = "IDCategoria"; 
-                // El valor a usar internamente
+                CmbCategoria.SelectedValuePath = "IDCategoria"; // El valor a usar internamente
                 CmbCategoria.SelectedValue = _productoAModificar.IDCategoria;
             }
             catch (Exception ex)
@@ -131,8 +130,6 @@ namespace ClienteInventarioPlus.Vistas {
                 MessageBox.Show("Selecciona un proveedor para eliminar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
-            // Confirmación opcional
             var confirmar = MessageBox.Show($"¿Eliminar al proveedor '{proveedorSeleccionado.Nombre}'?",
                 "Confirmar eliminación",
                 MessageBoxButton.YesNo,
@@ -140,7 +137,7 @@ namespace ClienteInventarioPlus.Vistas {
 
             if (confirmar == MessageBoxResult.Yes)
             {
-                proveedoresProducto.Remove(proveedorSeleccionado);
+                _proveedoresProducto.Remove(proveedorSeleccionado);
             }
         }
 
@@ -153,7 +150,7 @@ namespace ClienteInventarioPlus.Vistas {
                 // Verificamos que no se repita
                 if (!_productoAModificar.proveedores.Contains(seleccionado))
                 {
-                    proveedoresProducto.Add(seleccionado);
+                    _proveedoresProducto.Add(seleccionado);
                 }
                 else
                 {
@@ -175,11 +172,9 @@ namespace ClienteInventarioPlus.Vistas {
             TxtStockMinimo.IsReadOnly = true;
             TxtPrecioCompra.IsReadOnly = true;
             TxtPrecioVenta.IsReadOnly = true;
-
             // Deshabilitar combobox
             CmbCategoria.IsEnabled = false;
             CmbProveedores.Visibility = Visibility.Collapsed;
-
             // Ocultar botones
             BtnAgregar.Visibility = Visibility.Collapsed;
             BtnEliminar.Visibility = Visibility.Collapsed;

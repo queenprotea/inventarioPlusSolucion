@@ -123,7 +123,6 @@ namespace ServidorInventarioPlus.Servicios
                         throw new InvalidOperationException("No se puede eliminar el proveedor por defecto.");
 
                     var proveedor = db.Proveedores
-                        .Include(p => p.Productos)
                         .FirstOrDefault(p => p.ProveedorID == id);
 
                     if (proveedor == null)
@@ -133,14 +132,19 @@ namespace ServidorInventarioPlus.Servicios
                     var proveedorDefault = db.Proveedores.FirstOrDefault(p => p.ProveedorID == 1);
                     if (proveedorDefault == null)
                         throw new InvalidOperationException("No existe un proveedor por defecto en la base de datos.");
-
-                    // Reasignar productos al proveedor por defecto
-                    foreach (var producto in proveedor.Productos)
                     
+                    
+                    var relaciones = db.Set<ProductoProveedores>()
+                        .Where(pp => pp.ProveedorID == id)
+                        .ToList();
 
-                    // Guardar cambios de productos
+                    foreach (var rel in relaciones)
+                    {
+                        rel.ProveedorID = 1; // Asignar al proveedor por defecto
+                        db.Entry(rel).State = EntityState.Modified;
+                    }
+
                     db.SaveChanges();
-
                     // Ahora eliminar el proveedor
                     db.Proveedores.Remove(proveedor);
                     db.SaveChanges();
