@@ -83,6 +83,7 @@ namespace ServidorInventarioPlus.Servicios
                         CantidadReservada = u.CantidadReservada,
                         FechaHora = u.FechaHora,
                         ProductoID = u.ProductoID,
+                        Cliente = u.Cliente
                     })
                         .ToList();
                     

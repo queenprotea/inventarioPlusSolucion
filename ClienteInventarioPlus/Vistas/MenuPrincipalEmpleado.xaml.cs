@@ -16,6 +16,7 @@ namespace ClienteInventarioPlus.Vistas
         private IMovimientoService proxyMovimiento;
         private IReservaService proxyReserva;
         private IProductoService proxyProducto;
+        private IProveedorService proxyProveedor;
         
         public MenuPrincipalEmpleado(MainWindow mainWindow, UsuarioDTO usuarioActual)
         {
@@ -24,6 +25,14 @@ namespace ClienteInventarioPlus.Vistas
                 InitializeComponent();
                 _mainWindow = mainWindow;
                 usuarioSesion = usuarioActual;
+                
+                // Crear el proxy usando App.config
+                
+                var factoryProdcuto = new ChannelFactory<IProductoService>("ProductoServiceEndpoint");
+                proxyProducto = factoryProdcuto.CreateChannel();
+                
+                var factoryProveeedor = new ChannelFactory<IProveedorService>("ProveedorServiceEndpoint");
+                proxyProveedor = factoryProveeedor.CreateChannel();
             }
             catch (Exception ex)
             {
@@ -55,6 +64,7 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnProductos);
+            MainFrame.Content = new ProductoPrincipal(MainFrame, proxyProducto, proxyProveedor);
         }
         
         private void CambiarSeleccion(Button botonActivo)
