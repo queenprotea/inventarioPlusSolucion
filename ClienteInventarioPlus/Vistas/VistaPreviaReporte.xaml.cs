@@ -4,16 +4,19 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32; // Necesario para el SaveFileDialog
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
+using PdfiumViewer;
 
 namespace ClienteInventarioPlus.Vistas {
     public partial class ReportePreviaVista : UserControl {
         private readonly string _rutaPdfTemporal;
         private Frame _mainFrame;
+        private string nombreDoc;
 
-        public ReportePreviaVista(Frame mainFrame, string rutaPdf) {
+        public ReportePreviaVista(Frame mainFrame, string rutaPdf, string nombreArchivo) {
             InitializeComponent();
             _mainFrame = mainFrame;
             _rutaPdfTemporal = rutaPdf;
+            nombreDoc = nombreArchivo;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
@@ -29,11 +32,21 @@ namespace ClienteInventarioPlus.Vistas {
                 }
             }
         }
+        
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PdfViewer.Dispose(); 
+            }
+            catch { }
+        }
+
 
         private void BtnDescargar_Click(object sender, RoutedEventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog {
                 Filter = "Documento PDF (*.pdf)|*.pdf",
-                FileName = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf",
+                FileName = $"{nombreDoc}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf",
                 Title = "Guardar Reporte Como"
             };
 
@@ -56,6 +69,7 @@ namespace ClienteInventarioPlus.Vistas {
         private void BtnCancelar_Click(object sender, RoutedEventArgs e) {
             // Regresa a la pantalla anterior (el menú de reportes)
             if (_mainFrame.NavigationService.CanGoBack) {
+                PdfViewer.Dispose();
                 _mainFrame.NavigationService.GoBack();
             }
         }

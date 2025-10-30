@@ -68,21 +68,21 @@ namespace ClienteInventarioPlus.Utilidades
             return null;
         }
 
-        public static string ValidarFechaNacimiento(DatePicker datePicker)
+        public static string ValidarFecha(DatePicker datePicker)
         {
             DateTime? fecha = datePicker.SelectedDate;
 
             if (fecha == null) {
                 Animaciones.SacudirDatePicker(datePicker);
-                return "Debe seleccionar una fecha de nacimiento.";
+                return "Debe seleccionar una fecha.";
             }
             if (fecha.Value > DateTime.Now) {
                 Animaciones.SacudirDatePicker(datePicker);
-                return "La fecha de nacimiento no puede estar en el futuro.";
+                return "La fecha no puede estar en el futuro.";
             }
             if (fecha.Value.Year < 1900) {
                 Animaciones.SacudirDatePicker(datePicker);
-                return "Mensaje_Validacion_FechaInvalida";
+                return "Fecha invalida";
             }
             return null;
         }
@@ -209,7 +209,7 @@ namespace ClienteInventarioPlus.Utilidades
                 return "La dirección no puede estar vacía.";
             }
 
-            return null; // ✅ válido
+            return null; // válido
         }
 
         

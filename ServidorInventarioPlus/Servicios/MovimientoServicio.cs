@@ -277,5 +277,60 @@ namespace ServidorInventarioPlus.Servicios
             }
         }
         
+        public List<MovimientoDTO> ObtenerMovimientosPorRangoFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    var movimientos = context.Movientos
+                        .Include(m => m.Usuario)
+                        .Include(m => m.Producto)
+                        .Where(m => m.FechaHora >= fechaInicio && m.FechaHora <= fechaFin)
+                        .OrderBy(m => m.FechaHora)
+                        .Select(m => new MovimientoDTO
+                        {
+                            MovimientoID = m.MovimientoID,
+                            FechaHora = m.FechaHora,
+                            UsuarioID = m.UsuarioID,
+                            ProductoID = m.ProductoID,
+                            TipoMovimiento = m.TipoMovimiento,
+                            Cantidad = m.Cantidad,
+
+                            Usuario = m.Usuario == null
+                                ? null
+                                : new UsuarioDTO
+                                {
+                                    UsuarioID = m.Usuario.UsuarioID,
+                                    NombreUsuario = m.Usuario.NombreUsuario
+                                },
+
+                            Producto = m.Producto == null
+                                ? null
+                                : new ProductoDTO
+                                {
+                                    ProductoID = m.Producto.ProductoID,
+                                    Nombre = m.Producto.Nombre
+                                }
+                        })
+                        .OrderByDescending(m => m.FechaHora)
+                        .ToList();
+
+                    return movimientos;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al consultar movimientos entre fechas: {ex.Message}");
+                    if (ex.InnerException != null)
+                        Console.WriteLine($"Detalle interno: {ex.InnerException.Message}");
+
+                    return new List<MovimientoDTO>();
+                }
+            }
+        }
+
+        
+        
+        
     }
 }

@@ -9,45 +9,42 @@
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Módulo de Reportes" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,20"/>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Margin="0,0,15,0" 
-                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+        <!-- Fila 1: Registrar Entrada / Registrar Salida -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <!-- Botón Registrar Entrada -->
+            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black" Margin="0,0,40,0"
                     Click="BtnReporteInventario_Click">
-                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
-                    <Grid>
-                        <TextBlock Text="Generar Reporte de Inventario" FontSize="26" FontWeight="SemiBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        <Image Source="/Imagenes/InventarioReporteIcon.png" Width="80" Height="80"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
-                    </Grid>
-                </Border>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <TextBlock Text="Generar reporte de inventario" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
+                </StackPanel>
             </Button>
 
-            <Button Grid.Column="1" Margin="15,0,0,0"
-                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+            <!-- Botón Registrar Salida -->
+            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
                     Click="BtnReporteMovimientos_Click">
-                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
-                    <Grid>
-                        <TextBlock Text="Generar Reporte de Movimientos" FontSize="26" FontWeight="SemiBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        <Image Source="/Imagenes/MovimientosReporteIcon.png" Width="80" Height="80"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
-                    </Grid>
-                </Border>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <TextBlock Text="Generar reporte de movimientos" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
+                </StackPanel>
             </Button>
-        </Grid>
+
+        </StackPanel>
+
+        <!-- Fila 2: Historial -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
+                    Click="BtnListaProductosCriticos_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <TextBlock Text="Generar lista de productos críticos" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

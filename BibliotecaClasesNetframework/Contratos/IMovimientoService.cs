@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using BibliotecaClasesNetframework.ModelosODT;
 
@@ -24,5 +25,8 @@ namespace BibliotecaClasesNetframework.Contratos
 
         [OperationContract]
         List<ProductoDTO> BuscarProductosParaMovimiento(string valorBusqueda);
+
+        [OperationContract]
+        List<MovimientoDTO> ObtenerMovimientosPorRangoFecha(DateTime fechaInicio, DateTime fechaFin);
     }
 }

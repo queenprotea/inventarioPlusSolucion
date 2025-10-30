@@ -33,5 +33,8 @@ namespace BibliotecaClasesNetframework.Contratos
         
         [OperationContract]
         List<CategoriasDTO> ObtenerCategorias();
+
+        [OperationContract]
+        List<ProductoDTO> ObtenerProductosConStockBajo();
     }
 }

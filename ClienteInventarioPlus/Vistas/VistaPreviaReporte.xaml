@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1170"
              Background="WhiteSmoke"
-             Loaded="UserControl_Loaded">
+             Loaded="UserControl_Loaded"
+             Unloaded="UserControl_Unloaded">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -20,7 +21,7 @@
                    Foreground="#333" Margin="0,0,0,15"/>
 
         <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="1" Background="White">
-            <WebBrowser x:Name="PdfViewer"/>
+            <WebBrowser x:Name="PdfViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
