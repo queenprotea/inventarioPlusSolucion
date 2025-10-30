@@ -57,7 +57,7 @@ namespace ClienteInventarioPlus.Vistas {
                 if (resultado) {
                     MessageBox.Show("Reserva creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     // Regresar a la pantalla anterior de forma segura
-                    _mainFrame.Content = new ReservarProductoVista(_proxyReserva, _proxyProducto, _mainFrame);
+                    _mainFrame.Content = new ReservaPrincipal(_mainFrame ,_proxyReserva, _proxyProducto);
                 }
                 else {
                     MessageBox.Show("No se pudo crear la reserva.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

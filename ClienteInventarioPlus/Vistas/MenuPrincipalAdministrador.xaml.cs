@@ -40,6 +40,9 @@ namespace ClienteInventarioPlus.Vistas
                 var factoryProveeedor = new ChannelFactory<IProveedorService>("ProveedorServiceEndpoint");
                 proxyProveedor = factoryProveeedor.CreateChannel();
                 
+                var factoryMovimiento = new ChannelFactory<IMovimientoService>("MovimientoServiceEndpoint");
+                proxyMovimiento = factoryMovimiento.CreateChannel();
+                
             }
             catch (Exception ex)
             {
@@ -58,8 +61,6 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
         {
-            var factory = new ChannelFactory<IMovimientoService>("MovimientoServiceEndpoint");
-            proxyMovimiento = factory.CreateChannel();
             CambiarSeleccion(BtnMovimientos); 
             MainFrame.Content = new MovimientoPrincipal(MainFrame ,usuarioSesion, proxyMovimiento);
         }
@@ -75,7 +76,7 @@ namespace ClienteInventarioPlus.Vistas
         private void BtnReportes_Click(object sender, RoutedEventArgs e)
         {
             CambiarSeleccion(BtnReportes);
-            //_mainWindow.CambiarVista(new ConsultarHistorialPartidasUserControl(_mainWindow, jugadorSesion, proxy));
+            MainFrame.Content = new ReportesPrincipal(MainFrame, proxyProducto, proxyMovimiento, usuarioSesion);
         }
 
         private void BtnProveedores_Click(object sender, RoutedEventArgs e)

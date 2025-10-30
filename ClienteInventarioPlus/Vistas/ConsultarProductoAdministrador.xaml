@@ -68,13 +68,17 @@
             x:Name="DgProductos">
             <DataGrid.Columns>
                 <DataGridTextColumn
+                    Binding="{Binding Codigo}"
+                    Header="Codigo"
+                    Width="0.5*" />
+                <DataGridTextColumn
                     Binding="{Binding Nombre}"
                     Header="Nombre"
                     Width="2*" />
                 <DataGridTextColumn
                     Binding="{Binding NombreCategoria}"
                     Header="Categoría"
-                    Width="1*" />
+                    Width="*" />
                 <DataGridTextColumn
                     Binding="{Binding PrecioCompra, StringFormat={}{0:C}}"
                     Header="Precio Compra"
@@ -86,6 +90,10 @@
                 <DataGridTextColumn
                     Binding="{Binding Stock}"
                     Header="Stock"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Binding="{Binding StockMinimo}"
+                    Header="Stock minimo"
                     Width="Auto" />
                 <DataGridTextColumn
                     Binding="{Binding Descripcion}"

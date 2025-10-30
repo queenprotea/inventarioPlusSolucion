@@ -81,8 +81,22 @@ namespace ClienteInventarioPlus.Vistas {
             try
             {
                 nuevoProducto.Nombre = TxtNombreProducto.Text;
-                nuevoProducto.PrecioCompra = Convert.ToInt32(TxtPrecioCompra.Text);// Ajustado al DTO real
-                nuevoProducto.PrecioVenta = Convert.ToInt32(TxtPrecioVenta.Text);
+                
+                if (!decimal.TryParse(TxtPrecioCompra.Text, out decimal precioCompra))
+                {
+                    MessageBox.Show("El precio de compra no es un número válido.", "Error de Formato", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (!decimal.TryParse(TxtPrecioVenta.Text, out decimal precioVenta))
+                {
+                    MessageBox.Show("El precio de venta no es un número válido.", "Error de Formato", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                nuevoProducto.PrecioCompra = precioCompra;
+                nuevoProducto.PrecioVenta = precioVenta;
+                
                 nuevoProducto.Codigo = TxtCodigo.Text;
                 nuevoProducto.Descripcion = TxtDescripcion.Text;
                 

@@ -24,6 +24,8 @@ namespace ServidorInventarioPlus.Servicios
                             Nombre = p.Nombre,
                             Descripcion = p.Descripcion,
                             Stock = p.Stock,
+                            StockMinimo = p.StockMinimo,
+                            StockApartado = p.StockApartado,
                             IDCategoria = p.IDCategoria,
                             PrecioCompra = p.PrecioCompra,
                             PrecioVenta = p.PrecioVenta
@@ -234,6 +236,72 @@ namespace ServidorInventarioPlus.Servicios
                 }
             }
         }
+        
+        
+        public List<ProductoDTO> ObtenerProductosConStockBajo()
+        {
+            using (var context = new DBContext())
+            {
+                try
+                {
+                    // Filtrar los productos con stock menor o igual al stock mínimo
+                    var productos = context.Productos
+                        .Where(p => p.Stock <= p.StockMinimo)
+                        .Select(p => new ProductoDTO
+                        {
+                            ProductoID = p.ProductoID,
+                            Codigo = p.Codigo,
+                            Nombre = p.Nombre,
+                            Descripcion = p.Descripcion,
+                            Stock = p.Stock,
+                            StockMinimo = p.StockMinimo,
+                            StockApartado = p.StockApartado,
+                            IDCategoria = p.IDCategoria,
+                            PrecioCompra = p.PrecioCompra,
+                            PrecioVenta = p.PrecioVenta
+                        })
+                        .ToList();
+
+                    // Completar información adicional: categoría y proveedores
+                    foreach (var prod in productos)
+                    {
+                        prod.NombreCategoria = context.Categorias
+                            .Where(c => c.IDCategoria == prod.IDCategoria)
+                            .Select(c => c.Nombre)
+                            .FirstOrDefault();
+
+                        prod.proveedores = context.ProductoProveedores
+                            .Where(pp => pp.ProductoID == prod.ProductoID)
+                            .Select(pp => new ProveedorDTO
+                            {
+                                ProveedorID = pp.Proveedor.ProveedorID,
+                                Nombre = pp.Proveedor.Nombre,
+                                Direccion = pp.Proveedor.Direccion,
+                                Telefono = pp.Proveedor.Telefono,
+                                Correo = pp.Proveedor.Correo
+                            })
+                            .ToList();
+
+                        var primerProveedor = prod.proveedores.FirstOrDefault();
+                        prod.FirstProveedor = primerProveedor != null ? primerProveedor.Nombre : "Sin proveedor";
+                    }
+
+                    return productos;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al consultar productos: {ex.Message}");
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.InnerException);
+                    Console.WriteLine(ex.Source);
+                    return new List<ProductoDTO>();
+                }
+            }
+        }
+
+        
+        
+        
         
     }
 }

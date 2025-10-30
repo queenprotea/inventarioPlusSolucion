@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
-            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.props" Condition="Exists('..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.props')" />
+    <Import Project="..\packages\FastReport.OpenSource.2026.1.2\build\FastReport.OpenSource.props" Condition="Exists('..\packages\FastReport.OpenSource.2026.1.2\build\FastReport.OpenSource.props')" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -35,18 +36,38 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
+        <Reference Include="Accessibility" />
+        <Reference Include="FastReport, Version=2026.1.2.0, Culture=neutral, PublicKeyToken=5ceb240df42bf6e8, processorArchitecture=MSIL">
+          <HintPath>..\packages\FastReport.OpenSource.2026.1.2\lib\net462\FastReport.dll</HintPath>
+        </Reference>
+        <Reference Include="FastReport.Compat, Version=2026.1.2.0, Culture=neutral, PublicKeyToken=5ceb240df42bf6e8, processorArchitecture=MSIL">
+          <HintPath>..\packages\FastReport.Compat.2026.1.2\lib\net462\FastReport.Compat.dll</HintPath>
+        </Reference>
+        <Reference Include="FastReport.OpenSource.Export.PdfSimple, Version=2026.1.2.0, Culture=neutral, PublicKeyToken=b33a9a06fcc00c4c, processorArchitecture=MSIL">
+          <HintPath>..\packages\FastReport.OpenSource.Export.PdfSimple.2026.1.2\lib\net462\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
+        <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
+          <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Data.SqlClient.4.8.6\lib\net461\System.Data.SqlClient.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Drawing" />
         <Reference Include="System.Management" />
+        <Reference Include="System.Security" />
         <Reference Include="System.ServiceModel" />
-        <Reference Include="System.Xml"/>
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Xml" />
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
-        <Reference Include="WindowsBase"/>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
         <Reference Include="WPFLocalizeExtension, Version=3.10.0.0, Culture=neutral, PublicKeyToken=c726e0262981a1eb, processorArchitecture=MSIL">
           <HintPath>..\packages\WPFLocalizeExtension.3.10.0\lib\net452\WPFLocalizeExtension.dll</HintPath>
         </Reference>
@@ -108,7 +129,7 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
+        <None Include="App.config" />
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
@@ -159,5 +180,17 @@
       <Resource Include="Imagenes\ReservasBlancoLogo.jpg" />
       <Resource Include="Imagenes\UsuarioBlancoLogo.jpg" />
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <ItemGroup>
+      <Folder Include="Utilidades\ReportesGenerados\" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+      <PropertyGroup>
+        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+      </PropertyGroup>
+      <Error Condition="!Exists('..\packages\FastReport.OpenSource.2026.1.2\build\FastReport.OpenSource.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FastReport.OpenSource.2026.1.2\build\FastReport.OpenSource.props'))" />
+      <Error Condition="!Exists('..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.props'))" />
+      <Error Condition="!Exists('..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.targets'))" />
+    </Target>
+    <Import Project="..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.targets" Condition="Exists('..\packages\FastReport.Data.MsSql.2026.1.2\build\net462\FastReport.Data.MsSql.targets')" />
 </Project>
