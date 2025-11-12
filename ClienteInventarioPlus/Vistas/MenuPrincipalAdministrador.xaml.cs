@@ -49,7 +49,7 @@ namespace ClienteInventarioPlus.Vistas
                 MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
-            
+            MainFrame.Content = new ConsultarProductoAdmin(proxyProducto, proxyProveedor, MainFrame);
         }
 
         //menu lateral
