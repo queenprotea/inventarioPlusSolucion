@@ -5,73 +5,113 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid Margin="20">
-        <!-- Definimos 3 filas -->
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Titulo -->
-            <RowDefinition Height="Auto"/> <!-- Buscador + combo -->
-            <RowDefinition Height="*"/>    <!-- DataGrid -->
-            <RowDefinition Height="Auto"/> <!-- Botón regresar -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0" Margin="0,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-            <TextBlock Text="Registrar Salida" 
-                       FontSize="30" 
-                       FontWeight="Bold" 
-                       Foreground="#23272F" 
-                       TextAlignment="Left" />
-        </StackPanel>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Registrar Salida" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,24"/>
 
-        <!-- Fila 1: Buscador y ComboBox -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="0,0,0,10">
-            <Button Width="40" Height="40" FontSize="16" Click="btnBuscar_Click" BorderThickness="0">
-                <Image Source="/Imagenes/busquedaLogo.jpg" Stretch="Uniform"/>
-            </Button>
-            <TextBox x:Name="txtBuscar" Width="300" Height="40" FontSize="23" Foreground="Gray" Margin="0,0,10,0" />
-            <TextBlock Text="Ordenar por:" FontWeight="SemiBold" FontSize="18" Margin="150,0,0,0"/>
-            <ComboBox x:Name="cmbOrdenar" Width="200" Height="40" FontSize="16" Margin="10,0,0,0"  SelectionChanged="cmbOrdenar_SelectionChanged">
-                <ComboBoxItem Content="ID"/>
-                <ComboBoxItem Content="Codigo"/>
-                <ComboBoxItem Content="Nombre"/>
-                <ComboBoxItem Content="Stock"/>
-                <ComboBoxItem Content="Stock apartado"/>
-                <ComboBoxItem Content="Stock minimo"/>
-            </ComboBox>
-        </StackPanel>
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Fila 2: DataGrid -->
-        <DataGrid x:Name="dgProductos" AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  Margin="20,30"
-                  ItemsSource="{Binding Productos}"
-                  Grid.Row="2" BorderBrush="White" GridLinesVisibility="Horizontal"
-                  HorizontalGridLinesBrush="LightGray"
-                  RowBackground="White"
-                  AlternatingRowBackground="White"
-                  HeadersVisibility="Column"
-                  FontSize="15">
+            <TextBox x:Name="txtBuscar" 
+                     Grid.Column="0"
+                     Style="{StaticResource ModernTextBox}"
+                     FontSize="14"
+                     Height="40"
+                     Margin="0,0,16,0"
+                     ToolTip="Buscar producto..."/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="Ordenar por:" 
+                           Style="{StaticResource BodyText}"
+                           VerticalAlignment="Center"
+                           Margin="0,0,12,0"/>
+                <ComboBox x:Name="cmbOrdenar" 
+                          Style="{StaticResource ModernComboBox}"
+                          FontSize="14"
+                          Height="40"
+                          MinWidth="180"
+                          SelectionChanged="cmbOrdenar_SelectionChanged">
+                    <ComboBoxItem Content="ID"/>
+                    <ComboBoxItem Content="Codigo"/>
+                    <ComboBoxItem Content="Nombre"/>
+                    <ComboBoxItem Content="Stock"/>
+                    <ComboBoxItem Content="Stock apartado"/>
+                    <ComboBoxItem Content="Stock minimo"/>
+                </ComboBox>
+                <Button Style="{StaticResource PrimaryButton}"
+                        Click="btnBuscar_Click"
+                        Content="Buscar"
+                        Height="40"
+                        Margin="16,0,0,0"
+                        Padding="24,10"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="2"
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid x:Name="dgProductos" 
+                      Style="{StaticResource ModernDataGrid}"
+                      ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                      RowStyle="{StaticResource ModernDataGridRow}"
+                      CellStyle="{StaticResource ModernDataGridCell}"
+                      ItemsSource="{Binding Productos}">
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ProductoID}" Width="0.25*" />
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="0.75*"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                    <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Stock apartado" Binding="{Binding StockApartado}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Stock mínimo" Binding="{Binding StockMinimo}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Botones de acción -->
+        <Grid Grid.Row="3" Margin="0,24,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="Cantidad del producto:"
+                       Style="{StaticResource FormLabel}"
+                       VerticalAlignment="Center"
+                       Margin="0,0,12,0"/>
+                <TextBox x:Name="txtCantidad" 
+                         Style="{StaticResource ModernTextBox}"
+                         Width="200"
+                         Height="40"
+                         Margin="0,0,12,0"/>
+                <TextBlock x:Name="tblockErrorCantidad" 
+                           Style="{StaticResource ErrorText}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
             
-            <DataGrid.Columns>
-                <!-- Columnas de texto -->
-                <DataGridTextColumn Header="ID" Binding="{Binding ProductoID}" Width="0.25*" />
-                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="0.75*"/>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
-                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="0.5*"/>
-                <DataGridTextColumn Header="Stock apartado" Binding="{Binding StockApartado}" Width="0.5*"/>
-                <DataGridTextColumn Header="Stock minimo" Binding="{Binding StockMinimo}" Width="0.5*"/>
-                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <!-- Fila 3: Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="3">
-            <TextBlock Text="Cantidad Del producto:" FontWeight="SemiBold" FontSize="18" Margin="0,0,5,0"/>
-            <TextBox x:Name="txtCantidad" Width="400" Height="40" FontSize="23" Foreground="Gray" Margin="0,0,10,0" />
-            <TextBlock x:Name="tblockErrorCantidad" Text="" FontWeight="SemiBold" FontSize="10" Foreground="Red"/>
-            <Button Content="Aceptar" Width="150" Height="50" FontSize="20" Click="btnAceptar_Click" Margin="10,0,10,0" Background="Black" Foreground="White"/>
-            <Button Content="Cancelar" Width="150" Height="50" FontSize="20" Click="btnRegresar_Click"/>
-        </StackPanel>
-        
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Cancelar"
+                        Style="{StaticResource SecondaryButton}"
+                        Margin="0,0,12,0"
+                        Click="btnRegresar_Click"/>
+                <Button Content="Aceptar"
+                        Style="{StaticResource PrimaryButton}"
+                        Click="btnAceptar_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

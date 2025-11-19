@@ -7,126 +7,92 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid Background="White">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource BackgroundColor}">
 
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--  Encabezado  -->
-        <StackPanel
-            Grid.ColumnSpan="2"
-            Grid.Row="0"
-            HorizontalAlignment="Center"
-            Margin="0,50,0,10">
-            <TextBlock
-                FontSize="34"
-                FontWeight="Bold"
-                Foreground="Black"
-                Text="Modificar Usuario"
-                TextAlignment="Center" />
-        </StackPanel>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Modificar Proveedor"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
-        <!--  Columna de campos  -->
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="80,0,80,30">
-            <TextBlock
-                FontSize="18"
-                FontWeight="SemiBold"
-                HorizontalAlignment="Center"
-                Margin="0,20,0,5"
-                Text="Nombre" />
-            <TextBox
-                FontSize="20"
-                Padding="10,20,10,10"
-                x:Name="tbNombre" />
-            <TextBlock
-                FontSize="12"
-                FontWeight="SemiBold"
-                Foreground="Red"
-                Margin="0,0,0,10"
-                Text=""
-                x:Name="tblockErrorNombre" />
+        <!-- Formulario en Card con ScrollViewer -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Border Style="{StaticResource Card}"
+                    MaxWidth="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,24">
+                <StackPanel>
+                    <!-- Campo Nombre -->
+                    <Label Content="Nombre"
+                           Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="tbNombre"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorNombre"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-            <TextBlock
-                FontSize="18"
-                FontWeight="SemiBold"
-                HorizontalAlignment="Center"
-                Text="Telefono" />
-            <TextBox
-                FontSize="20"
-                Padding="10,20,10,10"
-                x:Name="tbTelefono" />
-            <TextBlock
-                FontSize="12"
-                FontWeight="SemiBold"
-                Foreground="Red"
-                Text=""
-                x:Name="tblockErrorUserName" />
+                    <!-- Campo Teléfono -->
+                    <Label Content="Teléfono"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="tbTelefono"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorUserName"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-            <TextBlock
-                FontSize="18"
-                FontWeight="SemiBold"
-                HorizontalAlignment="Center"
-                Text="Correo" />
-            <TextBox
-                FontSize="20"
-                Padding="10,20,10,10"
-                x:Name="tbCorreo" />
-            <TextBlock
-                FontSize="12"
-                FontWeight="SemiBold"
-                Foreground="Red"
-                Text=""
-                x:Name="tblockErrorCorreo" />
+                    <!-- Campo Correo -->
+                    <Label Content="Correo electrónico"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="tbCorreo"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorCorreo"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-            <TextBlock
-                FontSize="18"
-                FontWeight="SemiBold"
-                HorizontalAlignment="Center"
-                Text="Direccion" />
-            <TextBox
-                FontSize="20"
-                Padding="10,20,10,10"
-                x:Name="tbDireccion" />
-            <TextBlock
-                FontSize="12"
-                FontWeight="SemiBold"
-                Foreground="Red"
-                Text=""
-                x:Name="tblockErrorDireccion" />
+                    <!-- Campo Dirección -->
+                    <Label Content="Dirección"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="tbDireccion"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorDireccion"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,24"/>
 
-
-        </StackPanel>
-        <!--  Botones  -->
-        <StackPanel
-            Grid.ColumnSpan="2"
-            Grid.Row="2"
-            HorizontalAlignment="Right"
-            Margin="0,0,20,20"
-            Orientation="Horizontal">
-            <Button
-                Background="#FFC3C3C3"
-                Click="btnCancelar_Click"
-                Content="Cancelar"
-                FontSize="30"
-                Height="70"
-                Margin="10,0"
-                Width="250" />
-            <Button
-                Background="Black"
-                BorderBrush="Black"
-                Click="btnModificarUsuario_Click"
-                Content="Modificar"
-                FontSize="30"
-                Foreground="White"
-                Margin="10,0"
-                Width="250" />
-        </StackPanel>
+                    <!-- Botones -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,16,0,0">
+                        <Button Content="Regresar"
+                                Style="{StaticResource SecondaryButton}"
+                                Margin="0,0,12,0"
+                                Click="btnCancelar_Click"/>
+                        <Button Content="Modificar"
+                                Style="{StaticResource PrimaryButton}"
+                                Click="btnModificarUsuario_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </UserControl>

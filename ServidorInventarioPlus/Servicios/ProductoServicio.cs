@@ -5,6 +5,7 @@ using BibliotecaClasesNetframework.ModelosODT;
 using ServidorInventarioPlus.Context;
 using ServidorInventarioPlus.Modelos;
 using System.Linq;
+using System.Data.Entity;
 
 namespace ServidorInventarioPlus.Servicios
 {
@@ -16,8 +17,15 @@ namespace ServidorInventarioPlus.Servicios
             {
                 try
                 {
-                    var productos = context.Productos
-                        .Select(p => new ProductoDTO
+                    // Cargar todos los productos
+                    var productos = context.Productos.ToList();
+                    
+                    // Proyectar a DTO y cargar relaciones manualmente
+                    var productosDTO = new List<ProductoDTO>();
+                    
+                    foreach (var p in productos)
+                    {
+                        var productoDTO = new ProductoDTO
                         {
                             ProductoID = p.ProductoID,
                             Codigo = p.Codigo,
@@ -29,39 +37,62 @@ namespace ServidorInventarioPlus.Servicios
                             IDCategoria = p.IDCategoria,
                             PrecioCompra = p.PrecioCompra,
                             PrecioVenta = p.PrecioVenta
-                        })
-                        .ToList();
-                    
-                    foreach (var prod in productos)
-                    {
-                        prod.NombreCategoria = context.Categorias
-                            .Where(c => c.IDCategoria == prod.IDCategoria)
-                            .Select(c => c.Nombre)
-                            .FirstOrDefault();
-
-                        prod.proveedores = context.ProductoProveedores
-                            .Where(pp => pp.ProductoID == prod.ProductoID)
-                            .Select(pp => new ProveedorDTO
-                            {
-                                ProveedorID = pp.Proveedor.ProveedorID,
-                                Nombre = pp.Proveedor.Nombre,
-                                Direccion = pp.Proveedor.Direccion,
-                                Telefono = pp.Proveedor.Telefono,
-                                Correo = pp.Proveedor.Correo,
-                                
-                            })
+                        };
+                        
+                        // Cargar categoría
+                        if (p.IDCategoria.HasValue)
+                        {
+                            var categoria = context.Categorias
+                                .FirstOrDefault(c => c.IDCategoria == p.IDCategoria.Value);
+                            productoDTO.NombreCategoria = categoria != null ? categoria.Nombre : "Sin categoría";
+                        }
+                        else
+                        {
+                            productoDTO.NombreCategoria = "Sin categoría";
+                        }
+                        
+                        // Cargar proveedores
+                        var proveedoresRelacion = context.ProductoProveedores
+                            .Where(pp => pp.ProductoID == p.ProductoID)
                             .ToList();
-                        var primerProveedor = prod.proveedores.FirstOrDefault();
-                        prod.FirstProveedor = primerProveedor != null ? primerProveedor.Nombre : "Sin proveedor";
+                        
+                        productoDTO.proveedores = new List<ProveedorDTO>();
+                        foreach (var pp in proveedoresRelacion)
+                        {
+                            var proveedor = context.Proveedores
+                                .FirstOrDefault(prov => prov.ProveedorID == pp.ProveedorID);
+                            
+                            if (proveedor != null)
+                            {
+                                productoDTO.proveedores.Add(new ProveedorDTO
+                                {
+                                    ProveedorID = proveedor.ProveedorID,
+                                    Nombre = proveedor.Nombre,
+                                    Direccion = proveedor.Direccion,
+                                    Telefono = proveedor.Telefono,
+                                    Correo = proveedor.Correo
+                                });
+                            }
+                        }
+                        
+                        // Asignar primer proveedor
+                        var primerProveedor = productoDTO.proveedores.FirstOrDefault();
+                        productoDTO.FirstProveedor = primerProveedor != null ? primerProveedor.Nombre : "Sin proveedor";
+                        
+                        productosDTO.Add(productoDTO);
                     }
 
-                    return productos;
+                    return productosDTO;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error al consultar productos: {ex.Message}");
                     Console.WriteLine(ex.StackTrace);
-                    Console.WriteLine(ex.InnerException);
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                        Console.WriteLine(ex.InnerException.StackTrace);
+                    }
                     Console.WriteLine(ex.Source);
                     return new List<ProductoDTO>();
                 }
@@ -104,11 +135,11 @@ namespace ServidorInventarioPlus.Servicios
                     var nuevoProducto = new Producto
                     {
                         Nombre = producto.Nombre,
-                        Descripcion = producto.Descripcion,
+                        Descripcion = producto.Descripcion ?? string.Empty,
                         Stock = producto.Stock,
-                        StockApartado = producto.StockApartado,
+                        StockApartado = 0, // Siempre inicializar en 0 para productos nuevos
                         StockMinimo = producto.StockMinimo,
-                        Codigo = producto.Codigo,
+                        Codigo = producto.Codigo ?? string.Empty,
                         IDCategoria = producto.IDCategoria,
                         PrecioCompra = producto.PrecioCompra,
                         PrecioVenta = producto.PrecioVenta
@@ -116,26 +147,36 @@ namespace ServidorInventarioPlus.Servicios
                     // Agregamos el producto y guardamos para obtener el ID generado
                     db.Productos.Add(nuevoProducto);
                     db.SaveChanges();
+                    
+                    Console.WriteLine($"Producto guardado con ID: {nuevoProducto.ProductoID}");
+                    
                     // Ahora usamos el ProductoID real generado
-                    foreach (var proveedor in producto.proveedores)
+                    if (producto.proveedores != null && producto.proveedores.Count > 0)
                     {
-                        var relacion = new ProductoProveedores
+                        foreach (var proveedor in producto.proveedores)
                         {
-                            ProductoID = nuevoProducto.ProductoID,
-                            ProveedorID = proveedor.ProveedorID,
-                        };
-                        db.ProductoProveedores.Add(relacion);
+                            var relacion = new ProductoProveedores
+                            {
+                                ProductoID = nuevoProducto.ProductoID,
+                                ProveedorID = proveedor.ProveedorID,
+                            };
+                            db.ProductoProveedores.Add(relacion);
+                        }
+                        db.SaveChanges();
+                        Console.WriteLine($"Proveedores agregados: {producto.proveedores.Count}");
                     }
 
-                    db.SaveChanges();
-//
                     return true;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error al registrar producto: {ex.Message}");
-                    Console.WriteLine(ex.StackTrace);
-                    Console.WriteLine(ex.InnerException);
+                    Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine($"InnerException: {ex.InnerException.Message}");
+                        Console.WriteLine($"InnerException StackTrace: {ex.InnerException.StackTrace}");
+                    }
                     return false;
                 }
             }

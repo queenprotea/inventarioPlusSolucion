@@ -5,70 +5,96 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke"
+             Background="{StaticResource BackgroundColor}"
              Loaded="UserControl_Loaded">
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Reserva Consultada" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,20"/>
+        <!-- Título -->
+        <TextBlock Grid.Row="0" 
+                   Text="Reserva Consultada" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
-        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="25"
-                BorderBrush="LightGray" BorderThickness="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <!-- Card con información de la reserva -->
+        <Border Grid.Row="1"
+                Style="{StaticResource Card}"
+                MaxWidth="800"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Detalles de la Reserva"
+                           Style="{StaticResource SubtitleText}"
+                           Margin="0,0,0,24"/>
 
-                <Grid Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0">
-                        <Label Content="Producto:" FontWeight="SemiBold" FontSize="16"/>
-                        <TextBlock x:Name="TbProducto" Margin="5" FontSize="18" Foreground="#333"/>
+                    <!-- Producto -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,16,24">
+                        <Label Content="Producto" Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbProducto" 
+                                   Style="{StaticResource BodyText}"
+                                   FontSize="16"
+                                   Margin="0,4,0,0"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <Label Content="Número de Reserva:" FontWeight="SemiBold" FontSize="16"/>
-                        <TextBlock x:Name="TbReservaId" Margin="5" FontSize="18" Foreground="DodgerBlue"/>
+                    <!-- Número de Reserva -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="16,0,0,24">
+                        <Label Content="Número de Reserva" Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbReservaId" 
+                                   Style="{StaticResource BodyText}"
+                                   FontSize="16"
+                                   Foreground="{StaticResource PrimaryColor}"
+                                   FontWeight="SemiBold"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+
+                    <!-- Cantidad Reservada -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,16,0">
+                        <Label Content="Cantidad Reservada" Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbCantidad" 
+                                   Style="{StaticResource BodyText}"
+                                   FontSize="16"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+
+                    <!-- Fecha y Hora -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="16,0,0,0">
+                        <Label Content="Fecha y Hora" Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbFecha" 
+                                   Style="{StaticResource BodyText}"
+                                   FontSize="16"
+                                   Margin="0,4,0,0"/>
                     </StackPanel>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="0,40,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0">
-                        <Label Content="Cantidad Reservada:" FontWeight="SemiBold" FontSize="16"/>
-                        <TextBlock x:Name="TbCantidad" Margin="5" FontSize="18" Foreground="#333"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1">
-                        <Label Content="Fecha y Hora:" FontWeight="SemiBold" FontSize="16"/>
-                        <TextBlock x:Name="TbFecha" Margin="5" FontSize="18" Foreground="#333"/>
-                    </StackPanel>
-                </Grid>
-            </Grid>
+                <!-- Botones -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            Margin="0,32,0,0">
+                    <Button x:Name="BtnCancelar" 
+                            Content="Cancelar"
+                            Style="{StaticResource SecondaryButton}"
+                            Margin="0,0,12,0"
+                            Click="BtnCancelar_Click"/>
+                    <Button x:Name="BtnLiberar" 
+                            Content="Liberar Reserva" 
+                            Style="{StaticResource DangerButton}"
+                            Click="BtnLiberar_Click"/>
+                </StackPanel>
+            </StackPanel>
         </Border>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button x:Name="BtnLiberar" Content="Liberar Reserva" Padding="20,10" 
-                    Background="#D32F2F" Foreground="White" FontWeight="Bold"
-                    Click="BtnLiberar_Click"/>
-            <Button x:Name="BtnCancelar" Content="Cancelar" Margin="10,0,0,0" Padding="20,10" Click="BtnCancelar_Click"/>
-        </StackPanel>
     </Grid>
 </UserControl>

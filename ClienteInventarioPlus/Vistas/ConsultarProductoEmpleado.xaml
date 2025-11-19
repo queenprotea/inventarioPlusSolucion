@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke"
+             Background="{StaticResource BackgroundColor}"
              Loaded="UserControl_Loaded">
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -17,47 +17,100 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Consultar Productos" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,15"/>
+        <!-- Título -->
+        <TextBlock Grid.Row="0" 
+                   Text="Consultar Productos" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,24"/>
 
-        <Grid Grid.Row="1" Margin="0,0,0,15">
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="TxtBusqueda" Grid.Column="0" Padding="5" FontSize="14" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="TxtBusqueda" 
+                     Grid.Column="0" 
+                     Style="{StaticResource ModernTextBox}"
+                     FontSize="14" 
+                     Height="40"
+                     ToolTip="Escriba aquí para buscar..."/>
 
-            <ComboBox x:Name="CmbFiltro" Grid.Column="1" Margin="10,0" Padding="5" VerticalContentAlignment="Center" MinWidth="150">
+            <ComboBox x:Name="CmbFiltro" 
+                      Grid.Column="1" 
+                      Style="{StaticResource ModernComboBox}"
+                      Margin="16,0" 
+                      MinWidth="180"
+                      Height="40">
                 <ComboBoxItem Content="Buscar por Nombre"/>
                 <ComboBoxItem Content="Buscar por Código"/>
                 <ComboBoxItem Content="Buscar por Categoría"/>
             </ComboBox>
 
-            <Button x:Name="BtnBuscar" Grid.Column="2" Content="Buscar" Padding="20,5" Click="BtnBuscar_Click"/>
+            <Button x:Name="BtnBuscar" 
+                    Grid.Column="2" 
+                    Content="Buscar" 
+                    Style="{StaticResource PrimaryButton}"
+                    Height="40"
+                    Click="BtnBuscar_Click"/>
         </Grid>
 
-        <DataGrid Grid.Row="2" x:Name="DgProductos" AutoGenerateColumns="False" 
-                  CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
-                <DataGridTextColumn Header="Categoría" Binding="{Binding Categoria.Nombre}" Width="1*"/>
-                <DataGridTextColumn Header="Precio Venta" Binding="{Binding PrecioVenta, StringFormat={}{0:C}}" Width="Auto"/>
-                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="Auto"/>
-                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="3*"/>
-                <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor.Nombre}" Width="1*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DataGrid -->
+        <Border Grid.Row="2" 
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid x:Name="DgProductos" 
+                      Style="{StaticResource ModernDataGrid}"
+                      ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                      RowStyle="{StaticResource ModernDataGridRow}"
+                      CellStyle="{StaticResource ModernDataGridCell}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
+                    <DataGridTextColumn Header="Categoría" Binding="{Binding Categoria.Nombre}" Width="1*"/>
+                    <DataGridTextColumn Header="Precio Venta" Binding="{Binding PrecioVenta, StringFormat={}{0:C}}" Width="Auto"/>
+                    <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="Auto"/>
+                    <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="3*"/>
+                    <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor.Nombre}" Width="1*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button Content="&lt;&lt;" Margin="2"/>
-            <Button Content="1" Margin="2" FontWeight="Bold"/>
-            <Button Content="2" Margin="2"/>
-            <Button Content="3" Margin="2"/>
-            <TextBlock Text="..." Margin="5,0" VerticalAlignment="Center"/>
-            <Button Content="&gt;&gt;" Margin="2"/>
+        <!-- Paginación -->
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,24,0,0">
+            <Button Content="&lt;&lt;" 
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="4,0"
+                    Width="40"
+                    Height="40"/>
+            <Button Content="1" 
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="4,0"
+                    Width="40"
+                    Height="40"/>
+            <Button Content="2" 
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="4,0"
+                    Width="40"
+                    Height="40"/>
+            <Button Content="3" 
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="4,0"
+                    Width="40"
+                    Height="40"/>
+            <TextBlock Text="..." 
+                       Margin="8,0" 
+                       VerticalAlignment="Center"
+                       Style="{StaticResource BodyText}"/>
+            <Button Content="&gt;&gt;" 
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="4,0"
+                    Width="40"
+                    Height="40"/>
         </StackPanel>
 
     </Grid>

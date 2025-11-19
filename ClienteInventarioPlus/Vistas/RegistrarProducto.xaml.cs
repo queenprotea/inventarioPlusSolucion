@@ -66,12 +66,33 @@ namespace ClienteInventarioPlus.Vistas {
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e) {
             // --- 1. Validar Entradas ---
-            if (string.IsNullOrWhiteSpace(TxtNombreProducto.Text) ||
-                string.IsNullOrWhiteSpace(TxtPrecioCompra.Text) ||
-                string.IsNullOrWhiteSpace(TxtPrecioVenta.Text) ||
-                string.IsNullOrWhiteSpace(TxtStockInicial.Text)||
-                string.IsNullOrWhiteSpace(TxtStockMinimo.Text)) {
-                MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Campos Vacíos", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if (string.IsNullOrWhiteSpace(TxtNombreProducto.Text)) {
+                MessageBox.Show("El nombre del producto es obligatorio.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(TxtPrecioCompra.Text)) {
+                MessageBox.Show("El precio de compra es obligatorio.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(TxtPrecioVenta.Text)) {
+                MessageBox.Show("El precio de venta es obligatorio.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(TxtStockInicial.Text)) {
+                MessageBox.Show("El stock inicial es obligatorio.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(TxtStockMinimo.Text)) {
+                MessageBox.Show("El stock mínimo es obligatorio.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
+            if (CmbCategoria.SelectedIndex == -1) {
+                MessageBox.Show("Debe seleccionar una categoría.", "Campo Vacío", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -111,9 +132,38 @@ namespace ClienteInventarioPlus.Vistas {
                 // El stock mínimo es opcional, si está vacío se puede poner 0.
                 
                 nuevoProducto.StockMinimo = Convert.ToInt32(TxtStockMinimo.Text);
-                nuevoProducto.IDCategoria = Convert.ToInt32(CmbCategoria.SelectedValue.ToString());
+                
+                // Convertir IDCategoria correctamente desde string
+                if (CmbCategoria.SelectedValue != null)
+                {
+                    string idCategoriaStr = CmbCategoria.SelectedValue.ToString();
+                    if (int.TryParse(idCategoriaStr, out int idCategoria))
+                    {
+                        nuevoProducto.IDCategoria = idCategoria;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al procesar la categoría seleccionada.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una categoría.", "Campo Requerido", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 
                 var proveedoresids = DgProveedores.Items.OfType<ProveedorDTO>().ToList();
+                if (proveedoresids.Count == 0)
+                {
+                    var resultado = MessageBox.Show(
+                        "No ha agregado ningún proveedor. ¿Desea continuar sin proveedor?", 
+                        "Sin Proveedores", 
+                        MessageBoxButton.YesNo, 
+                        MessageBoxImage.Warning);
+                    if (resultado == MessageBoxResult.No)
+                        return;
+                }
                 nuevoProducto.proveedores = proveedoresids;
             }
             catch (Exception ex) {
@@ -194,6 +244,11 @@ namespace ClienteInventarioPlus.Vistas {
             {
                 proveedoresAgregados.Remove(proveedorSeleccionado);
             }
+        }
+
+        private void BtnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Content = new ProductoPrincipal(_mainFrame, _proxyProducto, _proxyProveedor);
         }
     }
 }

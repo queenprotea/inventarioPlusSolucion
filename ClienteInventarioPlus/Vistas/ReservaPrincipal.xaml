@@ -3,51 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke">
-
-    <Grid Margin="20">
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="48">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Gestión de Reservas" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,20"/>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Gestión de Reservas"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,48"/>
 
-        <Grid Grid.Row="1">
+        <!-- Cards de navegación -->
+        <Grid Grid.Row="1" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Margin="0,0,15,0" 
-                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                    Click="btnReservar_Click">
-                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
-                    <Grid>
-                        <TextBlock Text="Reservar Producto" FontSize="30" FontWeight="SemiBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        <Image Source="/Imagenes/CheckMarkIcon.png" Width="80" Height="80"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
-                    </Grid>
-                </Border>
-            </Button>
+            <!-- Card Reservar Producto -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnReservar_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="BookmarkPlusOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Reservar Producto" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Crear una nueva reserva de producto" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
 
-            <Button Grid.Column="1" Margin="15,0,0,0"
-                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                    Click="btnLiberar_Click">
-                <Border CornerRadius="8" Background="#FFF0F0F0" Padding="20">
-                    <Grid>
-                        <TextBlock Text="Liberar Reserva" FontSize="30" FontWeight="SemiBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        <Image Source="/Imagenes/EditIcon.png" Width="80" Height="80"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.7"/>
-                    </Grid>
-                </Border>
-            </Button>
+            <!-- Card Liberar Reserva -->
+            <Border Grid.Column="2"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnLiberar_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="BookmarkRemoveOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Liberar Reserva" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Cancelar y liberar una reserva existente" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

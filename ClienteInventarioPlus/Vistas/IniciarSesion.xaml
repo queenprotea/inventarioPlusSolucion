@@ -6,81 +6,97 @@
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1440">
-    <Grid>
-        <StackPanel Grid.Row="0" Margin="0,5,0,19" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+    <Grid Background="{StaticResource BackgroundColor}">
+        <!-- Logo y Título del Sistema -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,60,0,0">
             <TextBlock x:Name="tblockNombreSistema" 
-           Text="InventarioPlus" 
-           FontSize="80" 
-           FontWeight="Bold" 
-           Foreground="#23272F" 
-           TextAlignment="Center" />
-
+                       Text="InventarioPlus" 
+                       FontSize="72" 
+                       FontWeight="Bold" 
+                       Foreground="{StaticResource PrimaryColor}" 
+                       TextAlignment="Center" />
         </StackPanel>
 
-        <Border CornerRadius="18" Margin="446,116,446,100" Panel.ZIndex="1" Background="#CCFFFFFF" >
-            <Border.Effect>
-                <DropShadowEffect Color="Black"
-                          BlurRadius="10"
-                          ShadowDepth="4"
-                          Opacity="0.3"/>
-            </Border.Effect>
-            <Grid Margin="24">
+        <!-- Card de Login -->
+        <Border Style="{StaticResource Card}" 
+                Width="520"
+                Margin="0,180,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-
-
                 <!-- Encabezado -->
-                <StackPanel Grid.Row="0" Margin="0,0,0,28" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="0" Margin="0,0,0,32">
                     <TextBlock x:Name="tblockTitulo" 
-                           Text="Iniciar Sesion" 
-                           FontSize="60" 
-                           FontWeight="Bold" 
-                           Foreground="#23272F" 
-                           TextAlignment="Center" />
+                               Text="Iniciar Sesión" 
+                               Style="{StaticResource TitleText}"
+                               TextAlignment="Center"
+                               Margin="0,0,0,8" />
                     <TextBlock x:Name="tblockSubtitulo" 
-                           Text="Introduce tu nombre de usuario y contraseña" 
-                           FontSize="23" 
-                           Foreground="#23272F" 
-                           Margin="0,5,0,0"
-                           TextAlignment="Center"/>
+                               Text="Introduce tu nombre de usuario y contraseña" 
+                               FontSize="16" 
+                               Foreground="{StaticResource TextSecondaryColor}" 
+                               TextAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Contenido -->
-                <StackPanel Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="472" Height="Auto">
-                    <TextBlock x:Name="tblockNombreUsuario" Text="Nombre de Usuario" FontWeight="SemiBold" Margin="0,0,0,10" FontSize="20"/>
-                    <TextBox x:Name="tbUserName" Height="47" Padding="10,5" 
-                         BorderBrush="#cad1e1" BorderThickness="1"
-                         Background="#f6f8fa" 
-                         FontSize="23"/>
-                    <TextBlock x:Name="tblockErrorUserName" Text="" Foreground="Red" FontSize="12"/>
+                <!-- Formulario -->
+                <StackPanel Grid.Row="1">
+                    <!-- Campo Usuario -->
+                    <Label Content="Nombre de Usuario" 
+                           Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="tbUserName" 
+                             Height="44"
+                             Style="{StaticResource ModernTextBox}"
+                             FontSize="16"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorUserName" 
+                               Text="" 
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-                    <TextBlock x:Name="tblockContrasena" Text="Contraseña" FontWeight="SemiBold" Margin="0,10,0,6" FontSize="20"/>
-                    <Grid>
-                        <PasswordBox x:Name="pbPassword" Height="47" Padding="10" 
-                             BorderBrush="#cad1e1" BorderThickness="1" 
-                             Background="#f6f8fa" Margin="0,0,40,0"
-                             Visibility="Visible" FontSize="23"/>
-                        <TextBox x:Name="tbPasswordVisible" Height="47" Margin="0,0,40,0" Padding="10,5,10,10"
-                             BorderBrush="#cad1e1" BorderThickness="1" 
-                             Background="#f6f8fa" 
-                             VerticalAlignment="Center" Visibility="Collapsed"
-                             FontSize="23"/>
-                        <Button x:Name="btnVerPassword" Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                            
-                            Content="👁"
-                            Background="Black" Foreground="White" Margin="437,0,0,8" Click="btnVerPassword_Click"/>
+                    <!-- Campo Contraseña -->
+                    <Label Content="Contraseña" 
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <Grid Margin="0,0,0,4">
+                        <PasswordBox x:Name="pbPassword" 
+                                     Height="44"
+                                     Style="{StaticResource ModernPasswordBox}"
+                                     FontSize="16"
+                                     Visibility="Visible"/>
+                        <TextBox x:Name="tbPasswordVisible" 
+                                 Height="44"
+                                 Style="{StaticResource ModernTextBox}"
+                                 FontSize="16"
+                                 Visibility="Collapsed"/>
+                        <Button x:Name="btnVerPassword" 
+                                Width="40" 
+                                Height="40" 
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0,0,4,0"
+                                Content="👁"
+                                Style="{StaticResource SecondaryButton}"
+                                Padding="8"
+                                Click="btnVerPassword_Click"/>
                     </Grid>
-                    <TextBlock x:Name="tblockErrorPassword" Text="" Margin="0,0,0,8" Foreground="Red" FontSize="12" VerticalAlignment="Bottom"/>
-                    <Button x:Name="btnIniciarSesion" Content="Iniciar Sesión"
-                        Background="Black"
-                            Foreground="White"
-                        Height="42" Margin="0,0,0,18" FontWeight="Bold" FontSize="18" Click="btnIniciarSesion_Click"/>
+                    <TextBlock x:Name="tblockErrorPassword" 
+                               Text="" 
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,24"/>
 
+                    <!-- Botón de Login -->
+                    <Button x:Name="btnIniciarSesion" 
+                            Content="Iniciar Sesión"
+                            Style="{StaticResource PrimaryButton}"
+                            Height="48" 
+                            FontSize="16"
+                            Click="btnIniciarSesion_Click"/>
                 </StackPanel>
-
             </Grid>
         </Border>
     </Grid>

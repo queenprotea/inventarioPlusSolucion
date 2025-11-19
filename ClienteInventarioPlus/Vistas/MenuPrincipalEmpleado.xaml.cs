@@ -33,6 +33,10 @@ namespace ClienteInventarioPlus.Vistas
                 
                 var factoryProveeedor = new ChannelFactory<IProveedorService>("ProveedorServiceEndpoint");
                 proxyProveedor = factoryProveeedor.CreateChannel();
+                
+                // Cargar vista de productos por defecto
+                MainFrame.Content = new ProductoPrincipal(MainFrame, proxyProducto, proxyProveedor);
+                CambiarSeleccion(BtnProductos);
             }
             catch (Exception ex)
             {
@@ -71,38 +75,37 @@ namespace ClienteInventarioPlus.Vistas
         
         private void CambiarSeleccion(Button botonActivo)
         {
-            // Resetear todos
+            // Resetear todos los botones
             BtnProductos.Background = Brushes.Black;
             BtnProductos.Foreground = Brushes.White;
-            ImgProductos.Source = new BitmapImage(new Uri("/Imagenes/ProductoBlancoLogo.jpg", UriKind.Relative));
+            ImgProductos.Fill = Brushes.White;
 
             BtnMovimientos.Background = Brushes.Black;
             BtnMovimientos.Foreground = Brushes.White;
-            ImgMovimientos.Source = new BitmapImage(new Uri("/Imagenes/MovimientoBlancoLogo.jpg", UriKind.Relative));
+            ImgMovimientos.Fill = Brushes.White;
             
             BtnReservas.Background = Brushes.Black;
             BtnReservas.Foreground = Brushes.White;
-            ImgReservas.Source = new BitmapImage(new Uri("/Imagenes/ReservasBlancoLogo.jpg", UriKind.Relative));
+            ImgReservas.Fill = Brushes.White;
             
-            // Marcar activo
+            // Marcar botón activo
             botonActivo.Background = Brushes.White;
             botonActivo.Foreground = Brushes.Black;
 
+            // Cambiar color del icono activo a negro
             switch (botonActivo.Name)
             {
                 case nameof(BtnProductos):
-                    ImgProductos.Source = new BitmapImage(new Uri("/Imagenes/ProductoNegroLogo.jpg", UriKind.Relative));
+                    ImgProductos.Fill = Brushes.Black;
                     break;
 
                 case nameof(BtnMovimientos):
-                    ImgMovimientos.Source = new BitmapImage(new Uri("/Imagenes/MovimientoNegroLogo.jpg", UriKind.Relative));
+                    ImgMovimientos.Fill = Brushes.Black;
                     break;
 
                 case nameof(BtnReservas):
-                    ImgReservas.Source = new BitmapImage(new Uri("/Imagenes/ReservaNegroLogo.jpg", UriKind.Relative));
+                    ImgReservas.Fill = Brushes.Black;
                     break;
-                
-                
             }
         }
     }
