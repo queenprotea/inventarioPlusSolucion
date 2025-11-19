@@ -7,118 +7,123 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource BackgroundColor}">
 
-    <Grid Margin="20">
-        <!--  Definimos 3 filas  -->
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!--  Buscador + combo  -->
-            <RowDefinition Height="*" />
-            <!--  DataGrid  -->
             <RowDefinition Height="Auto" />
-            <!--  Botón regresar  -->
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--  Fila 0: Buscador y ComboBox  -->
-        <StackPanel
-            Grid.Row="0"
-            HorizontalAlignment="Left"
-            Margin="0,0,0,10"
-            Orientation="Horizontal"
-            VerticalAlignment="Center">
-            <Button
-                BorderThickness="0"
-                Click="btnBuscar_Click"
-                FontSize="16"
-                Height="40"
-                Width="40">
-                <Image Source="/Imagenes/busquedaLogo.jpg" Stretch="Uniform" />
-            </Button>
+        <!-- Título -->
+        <TextBlock Text="Consultar Proveedores"
+                   Style="{StaticResource TitleText}"
+                   Grid.Row="0"
+                   Margin="0,0,0,24"/>
+
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
             <TextBox
-                FontSize="23"
-                Foreground="Gray"
+                Style="{StaticResource ModernTextBox}"
+                FontSize="14"
                 Height="40"
-                Margin="0,0,10,0"
-                Width="300"
+                Grid.Column="0"
+                Margin="0,0,16,0"
+                ToolTip="Buscar proveedor..."
                 x:Name="txtBuscar" />
-            <TextBlock
-                FontSize="18"
-                FontWeight="SemiBold"
-                Margin="150,0,0,0"
-                Text="Ordenar por:" />
-            <ComboBox
-                FontSize="16"
-                Height="40"
-                Margin="10,0,0,0"
-                SelectionChanged="cmbOrdenar_SelectionChanged"
-                Width="200"
-                x:Name="cmbOrdenar">
-                <ComboBoxItem Content="Nombre" />
-                <ComboBoxItem Content="Correo" />
-                <ComboBoxItem Content="Telefono" />
-                <ComboBoxItem Content="Direccion" />
-            </ComboBox>
-        </StackPanel>
 
-        <!--  Fila 1: DataGrid  -->
-        <DataGrid
-            AlternatingRowBackground="White"
-            AutoGenerateColumns="False"
-            BorderBrush="White"
-            CanUserAddRows="False"
-            FontSize="15"
-            Grid.Row="1"
-            GridLinesVisibility="Horizontal"
-            HeadersVisibility="Column"
-            HorizontalGridLinesBrush="LightGray"
-            ItemsSource="{Binding Proveedores}"
-            Margin="20,40,20,0"
-            RowBackground="White"
-            x:Name="dgProveedores">
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock
+                    Text="Ordenar por:"
+                    Style="{StaticResource BodyText}"
+                    VerticalAlignment="Center"
+                    Margin="0,0,12,0"/>
+                <ComboBox
+                    Style="{StaticResource ModernComboBox}"
+                    FontSize="14"
+                    Height="40"
+                    MinWidth="180"
+                    SelectionChanged="cmbOrdenar_SelectionChanged"
+                    x:Name="cmbOrdenar">
+                    <ComboBoxItem Content="Nombre" />
+                    <ComboBoxItem Content="Correo" />
+                    <ComboBoxItem Content="Telefono" />
+                    <ComboBoxItem Content="Direccion" />
+                </ComboBox>
+                <Button
+                    Style="{StaticResource PrimaryButton}"
+                    Click="btnBuscar_Click"
+                    Content="Buscar"
+                    Height="40"
+                    Margin="16,0,0,0"
+                    Padding="24,10"/>
+            </StackPanel>
+        </Grid>
 
-            <DataGrid.Columns>
-                <!--  Columnas de texto  -->
+        <!-- DataGrid -->
+        <Border Grid.Row="2"
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid
+                Style="{StaticResource ModernDataGrid}"
+                ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                RowStyle="{StaticResource ModernDataGridRow}"
+                CellStyle="{StaticResource ModernDataGridCell}"
+                ItemsSource="{Binding Proveedores}"
+                x:Name="dgProveedores">
 
-                <DataGridTextColumn
-                    Binding="{Binding Nombre}"
-                    Header="Nombre"
-                    Width="3*" />
-                <DataGridTextColumn
-                    Binding="{Binding Telefono}"
-                    Header="Telefono"
-                    Width="1.5*" />
-                <DataGridTextColumn
-                    Binding="{Binding Correo}"
-                    Header="Correo"
-                    Width="1.5*" />
-                <DataGridTextColumn
-                    Binding="{Binding Direccion}"
-                    Header="Direccion"
-                    Width="1.5*" />
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding Nombre}"
+                        Header="Nombre"
+                        Width="3*" />
+                    <DataGridTextColumn
+                        Binding="{Binding Telefono}"
+                        Header="Teléfono"
+                        Width="1.5*" />
+                    <DataGridTextColumn
+                        Binding="{Binding Correo}"
+                        Header="Correo"
+                        Width="1.5*" />
+                    <DataGridTextColumn
+                        Binding="{Binding Direccion}"
+                        Header="Dirección"
+                        Width="1.5*" />
+                    <DataGridTemplateColumn Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
-                <!--  Columna de acciones  -->
-                <DataGridTemplateColumn Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <!--  Fila 2: Botón Regresar  -->
+        <!-- Botones de acción -->
         <StackPanel
-            Grid.Row="2"
+            Grid.Row="3"
             HorizontalAlignment="Right"
+            Margin="0,24,0,0"
             Orientation="Horizontal">
             <Button
+                Style="{StaticResource SecondaryButton}"
+                Click="btnRegresar_Click"
+                Content="Regresar"
+                Margin="0,0,12,0"
+                x:Name="btnRegresar" />
+            <Button
+                Style="{StaticResource PrimaryButton}"
                 Click="btnSeleccinar_Click"
                 Content="Seleccionar"
-                FontSize="20"
-                Height="50"
-                Width="150"
                 x:Name="btnSeleccionar" />
         </StackPanel>
 

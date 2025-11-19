@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke"
+             Background="{StaticResource BackgroundColor}"
              Loaded="UserControl_Loaded">
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,42 +16,78 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Reservas" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,15"/>
+        <!-- Título -->
+        <TextBlock Grid.Row="0" 
+                   Text="Consultar Reservas" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,24"/>
 
-        <Grid Grid.Row="1" Margin="0,0,0,15">
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TxtBusqueda" Grid.Column="0" Padding="5" FontSize="14" VerticalContentAlignment="Center"/>
-            <ComboBox x:Name="CmbFiltro" Grid.Column="1" Margin="10,0" Padding="5" VerticalContentAlignment="Center" MinWidth="180">
+            <TextBox x:Name="TxtBusqueda" 
+                     Grid.Column="0" 
+                     Style="{StaticResource ModernTextBox}"
+                     FontSize="14"
+                     Height="40"
+                     ToolTip="Buscar reserva..."/>
+            <ComboBox x:Name="CmbFiltro" 
+                      Grid.Column="1" 
+                      Style="{StaticResource ModernComboBox}"
+                      Margin="16,0" 
+                      Height="40"
+                      MinWidth="220">
                 <ComboBoxItem Content="Buscar por Nombre Cliente"/>
                 <ComboBoxItem Content="Buscar por Nombre Producto"/>
             </ComboBox>
-            <Button x:Name="BtnBuscar" Grid.Column="2" Content="Buscar" Padding="20,5" Click="BtnBuscar_Click"/>
+            <Button x:Name="BtnBuscar" 
+                    Grid.Column="2" 
+                    Content="Buscar" 
+                    Style="{StaticResource PrimaryButton}"
+                    Height="40"
+                    Click="BtnBuscar_Click"/>
         </Grid>
 
-        <DataGrid Grid.Row="2" x:Name="DgReservas" AutoGenerateColumns="False" 
-                  CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="LightGray"
-                  SelectionMode="Single"
-                  SelectionChanged="DgReservas_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Cliente" Binding="{Binding NombreCliente}" Width="2*"/>
-                <DataGridTextColumn Header="Producto" Binding="{Binding Producto.Nombre}" Width="3*"/>
-                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="*"/>
-                <DataGridTextColumn Header="Fecha y Hora" Binding="{Binding FechaReserva, StringFormat='dd/MM/yyyy HH:mm'}" Width="2*"/>
-                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DataGrid -->
+        <Border Grid.Row="2"
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid x:Name="DgReservas" 
+                      Style="{StaticResource ModernDataGrid}"
+                      ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                      RowStyle="{StaticResource ModernDataGridRow}"
+                      CellStyle="{StaticResource ModernDataGridCell}"
+                      SelectionChanged="DgReservas_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Cliente" Binding="{Binding NombreCliente}" Width="2*"/>
+                    <DataGridTextColumn Header="Producto" Binding="{Binding Producto.Nombre}" Width="3*"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="*"/>
+                    <DataGridTextColumn Header="Fecha y Hora" Binding="{Binding FechaReserva, StringFormat='dd/MM/yyyy HH:mm'}" Width="2*"/>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="BtnSeleccionar" Content="Seleccionar Reserva" Padding="20,8"
-                    IsEnabled="False" Click="BtnSeleccionar_Click"
+        <!-- Botones de acción -->
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,24,0,0">
+            <Button x:Name="BtnSeleccionar" 
+                    Content="Seleccionar Reserva" 
+                    Style="{StaticResource PrimaryButton}"
+                    IsEnabled="False" 
+                    Click="BtnSeleccionar_Click"
+                    Margin="0,0,12,0"
                     ToolTip="Seleccione una reserva para ver sus detalles"/>
-            <Button x:Name="BtnCancelar" Content="Regresar" Margin="10,0,0,0" Padding="20,8" Click="BtnCancelar_Click"/>
+            <Button x:Name="BtnCancelar" 
+                    Content="Regresar" 
+                    Style="{StaticResource SecondaryButton}"
+                    Click="BtnCancelar_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,5 +1,5 @@
 ﻿<UserControl
-    Background="WhiteSmoke"
+    Background="{StaticResource BackgroundColor}"
     Loaded="UserControl_Loaded"
     d:DesignHeight="700"
     d:DesignWidth="1170"
@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -18,92 +18,97 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Título -->
         <TextBlock
-            FontSize="28"
-            FontWeight="Bold"
-            Foreground="#333"
+            Style="{StaticResource TitleText}"
             Grid.Row="0"
-            Margin="0,0,0,15"
+            Margin="0,0,0,24"
             Text="Reserva de Producto" />
 
-        <Grid Grid.Row="1" Margin="0,0,0,15">
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox
+                Style="{StaticResource ModernTextBox}"
                 FontSize="14"
                 Grid.Column="0"
-                Padding="5"
+                Height="40"
                 ToolTip="Escriba aquí para buscar..."
-                VerticalContentAlignment="Center"
                 x:Name="TxtBusqueda" />
             <ComboBox
+                Style="{StaticResource ModernComboBox}"
                 Grid.Column="1"
-                Margin="10,0"
-                MinWidth="150"
-                Padding="5"
-                VerticalContentAlignment="Center"
+                Margin="16,0"
+                MinWidth="180"
+                Height="40"
                 x:Name="CmbFiltro">
                 <ComboBoxItem Content="Buscar por Nombre" />
                 <ComboBoxItem Content="Buscar por Categoría" />
             </ComboBox>
             <Button
+                Style="{StaticResource PrimaryButton}"
                 Click="BtnBuscar_Click"
                 Content="Buscar"
                 Grid.Column="2"
-                Padding="20,5"
+                Height="40"
                 x:Name="BtnBuscar" />
         </Grid>
 
-        <DataGrid
-            AlternatingRowBackground="LightGray"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            Grid.Row="2"
-            IsReadOnly="True"
-            SelectionChanged="DgProductos_SelectionChanged"
-            SelectionMode="Single"
-            x:Name="DgProductos">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Binding="{Binding Nombre}"
-                    Header="Nombre"
-                    Width="3*" />
-                <DataGridTextColumn
-                    Binding="{Binding NombreCategoria}"
-                    Header="Categoría"
-                    Width="2*" />
-                <DataGridTextColumn
-                    Binding="{Binding PrecioVenta, StringFormat={}{0:C}}"
-                    Header="Precio Venta"
-                    Width="1*" />
-                <DataGridTextColumn
-                    Binding="{Binding Stock}"
-                    Header="Stock Actual"
-                    Width="1*" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DataGrid -->
+        <Border Grid.Row="2" 
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid
+                Style="{StaticResource ModernDataGrid}"
+                ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                RowStyle="{StaticResource ModernDataGridRow}"
+                CellStyle="{StaticResource ModernDataGridCell}"
+                SelectionChanged="DgProductos_SelectionChanged"
+                x:Name="DgProductos">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding Nombre}"
+                        Header="Nombre"
+                        Width="3*" />
+                    <DataGridTextColumn
+                        Binding="{Binding NombreCategoria}"
+                        Header="Categoría"
+                        Width="2*" />
+                    <DataGridTextColumn
+                        Binding="{Binding PrecioVenta, StringFormat={}{0:C}}"
+                        Header="Precio Venta"
+                        Width="1*" />
+                    <DataGridTextColumn
+                        Binding="{Binding Stock}"
+                        Header="Stock Actual"
+                        Width="1*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
+        <!-- Botones de acción -->
         <StackPanel
             Grid.Row="3"
             HorizontalAlignment="Right"
-            Margin="0,15,0,0"
+            Margin="0,24,0,0"
             Orientation="Horizontal">
             <Button
+                Style="{StaticResource SecondaryButton}"
+                Click="BtnCancelar_Click"
+                Content="Cancelar"
+                Margin="0,0,12,0"
+                x:Name="BtnCancelar" />
+            <Button
+                Style="{StaticResource PrimaryButton}"
                 Click="BtnSeleccionar_Click"
                 Content="Seleccionar Producto"
                 IsEnabled="False"
-                Padding="20,8"
                 ToolTip="Seleccione un producto de la lista para continuar"
                 x:Name="BtnSeleccionar" />
-            <Button
-                Click="BtnCancelar_Click"
-                Content="Cancelar"
-                Margin="10,0,0,0"
-                Padding="20,8"
-                x:Name="BtnCancelar" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32; // Necesario para el SaveFileDialog
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
-using PdfiumViewer;
 
 namespace ClienteInventarioPlus.Vistas {
     public partial class ReportePreviaVista : UserControl {
@@ -26,20 +25,10 @@ namespace ClienteInventarioPlus.Vistas {
             }
             else {
                 MessageBox.Show("No se encontró el archivo del reporte para previsualizar.", "Error de Archivo", MessageBoxButton.OK, MessageBoxImage.Error);
-                // Si hay un error, regresa a la pantalla anterior
                 if (_mainFrame.NavigationService.CanGoBack) {
                     _mainFrame.NavigationService.GoBack();
                 }
             }
-        }
-        
-        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                PdfViewer.Dispose(); 
-            }
-            catch { }
         }
 
 
@@ -69,7 +58,6 @@ namespace ClienteInventarioPlus.Vistas {
         private void BtnCancelar_Click(object sender, RoutedEventArgs e) {
             // Regresa a la pantalla anterior (el menú de reportes)
             if (_mainFrame.NavigationService.CanGoBack) {
-                PdfViewer.Dispose();
                 _mainFrame.NavigationService.GoBack();
             }
         }

@@ -1,49 +1,100 @@
 ﻿<UserControl x:Class="ClienteInventarioPlus.Vistas.MovimientoPrincipal"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
-             mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid Margin="20">
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="32,24,32,24" ClipToBounds="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Fila 1: Registrar Entrada / Registrar Salida -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-            <!-- Botón Registrar Entrada -->
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black" Margin="0,0,40,0"
-                    Click="btnRegistrarEntrada_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Registrar Entrada" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Gestión de Movimientos"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
-            <!-- Botón Registrar Salida -->
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
-                    Click="btnRegistrarSalida_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Registrar Salida" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
+        <!-- Cards de navegación -->
+        <Grid Grid.Row="1" VerticalAlignment="Center" ClipToBounds="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        </StackPanel>
+            <!-- Card Registrar Entrada -->
+            <Border Grid.Row="0" Grid.Column="0"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnRegistrarEntrada_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="TrayArrowDown" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Registrar Entrada" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Registrar ingreso de productos" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="220"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
 
-        <!-- Fila 2: Historial -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
-                    Click="btnConsultarHistorialMovimientos_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Historial de Movimientos" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+            <!-- Card Registrar Salida -->
+            <Border Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnRegistrarSalida_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="TrayArrowUp" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Registrar Salida" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Registrar egreso de productos" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="220"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <!-- Card Historial -->
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnConsultarHistorialMovimientos_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="ClipboardTextClockOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Historial de Movimientos" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Consultar registro completo de entradas y salidas" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="400"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

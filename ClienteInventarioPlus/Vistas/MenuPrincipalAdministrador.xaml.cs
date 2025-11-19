@@ -43,6 +43,9 @@ namespace ClienteInventarioPlus.Vistas
                 var factoryMovimiento = new ChannelFactory<IMovimientoService>("MovimientoServiceEndpoint");
                 proxyMovimiento = factoryMovimiento.CreateChannel();
                 
+                // Cargar vista de productos por defecto
+                MainFrame.Content = new ProductoPrincipal(MainFrame, proxyProducto, proxyProveedor);
+                CambiarSeleccion(BtnProductos);
             }
             catch (Exception ex)
             {
@@ -102,59 +105,60 @@ namespace ClienteInventarioPlus.Vistas
 
         private void CambiarSeleccion(Button botonActivo)
         {
-            // Resetear todos
+            // Resetear todos los botones
             BtnProductos.Background = Brushes.Black;
             BtnProductos.Foreground = Brushes.White;
-            ImgProductos.Source = new BitmapImage(new Uri("/Imagenes/ProductoBlancoLogo.jpg", UriKind.Relative));
+            ImgProductos.Fill = Brushes.White;
 
             BtnMovimientos.Background = Brushes.Black;
             BtnMovimientos.Foreground = Brushes.White;
-            ImgMovimientos.Source = new BitmapImage(new Uri("/Imagenes/MovimientoBlancoLogo.jpg", UriKind.Relative));
+            ImgMovimientos.Fill = Brushes.White;
             
             BtnReservas.Background = Brushes.Black;
             BtnReservas.Foreground = Brushes.White;
-            ImgReservas.Source = new BitmapImage(new Uri("/Imagenes/ReservasBlancoLogo.jpg", UriKind.Relative));
+            ImgReservas.Fill = Brushes.White;
             
             BtnReportes.Background = Brushes.Black;
             BtnReportes.Foreground = Brushes.White;
-            ImgReportes.Source = new BitmapImage(new Uri("/Imagenes/ReporteBlancoLogo.jpg", UriKind.Relative));
+            ImgReportes.Fill = Brushes.White;
             
             BtnProveedores.Background = Brushes.Black;
             BtnProveedores.Foreground = Brushes.White;
-            ImgProveedores.Source = new BitmapImage(new Uri("/Imagenes/ProveedorBlancoLogo.jpg", UriKind.Relative));
+            ImgProveedores.Fill = Brushes.White;
             
             BtnUsuarios.Background = Brushes.Black;
             BtnUsuarios.Foreground = Brushes.White;
-            ImgUsuarios.Source = new BitmapImage(new Uri("/Imagenes/UsuarioBlancoLogo.jpg", UriKind.Relative));
+            ImgUsuarios.Fill = Brushes.White;
 
-            // Marcar activo
+            // Marcar botón activo
             botonActivo.Background = Brushes.White;
             botonActivo.Foreground = Brushes.Black;
 
+            // Cambiar color del icono activo a negro
             switch (botonActivo.Name)
             {
                 case nameof(BtnProductos):
-                    ImgProductos.Source = new BitmapImage(new Uri("/Imagenes/ProductoNegroLogo.jpg", UriKind.Relative));
+                    ImgProductos.Fill = Brushes.Black;
                     break;
 
                 case nameof(BtnMovimientos):
-                    ImgMovimientos.Source = new BitmapImage(new Uri("/Imagenes/MovimientoNegroLogo.jpg", UriKind.Relative));
+                    ImgMovimientos.Fill = Brushes.Black;
                     break;
 
                 case nameof(BtnReservas):
-                    ImgReservas.Source = new BitmapImage(new Uri("/Imagenes/ReservaNegroLogo.jpg", UriKind.Relative));
+                    ImgReservas.Fill = Brushes.Black;
                     break;
                 
                 case nameof(BtnReportes):
-                    ImgReportes.Source = new BitmapImage(new Uri("/Imagenes/ReporteNegroLogo.jpg", UriKind.Relative));
+                    ImgReportes.Fill = Brushes.Black;
                     break;
                 
                 case nameof(BtnProveedores):
-                    ImgProveedores.Source = new BitmapImage(new Uri("/Imagenes/ProveedorNegroLogo.jpg", UriKind.Relative));
+                    ImgProveedores.Fill = Brushes.Black;
                     break;
                 
                 case nameof(BtnUsuarios):
-                    ImgUsuarios.Source = new BitmapImage(new Uri("/Imagenes/UsuarioNegroLogo.jpg", UriKind.Relative));
+                    ImgUsuarios.Fill = Brushes.Black;
                     break;
             }
         }

@@ -7,149 +7,94 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource BackgroundColor}">
 
-    <Grid Background="White" Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <!--  Título  -->
-            <RowDefinition Height="Auto" />
-            <!--  Nombre  -->
-            <RowDefinition Height="Auto" />
-            <!--  Dirección  -->
-            <RowDefinition Height="Auto" />
-            <!--  Teléfono  -->
-            <RowDefinition Height="Auto" MinHeight="65.96" />
-            <!--  Correo  -->
-            <RowDefinition Height="Auto" MinHeight="85" />
-            <!--  Botones  -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <!--  Etiquetas  -->
-            <ColumnDefinition Width="*" />
-            <!--  Cajas de texto  -->
-        </Grid.ColumnDefinitions>
 
-        <!--  Título  -->
-        <Label
-            Content="Registrar Proveedor"
-            FontSize="30"
-            FontWeight="Bold"
-            Grid.Column="1"
-            HorizontalAlignment="Left"
-            Margin="134,10,0,10"
-            Width="292" />
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Registrar Proveedor"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
-        <!--  Nombre  -->
-        <Label
-            Content="Nombre del proveedor:"
-            Grid.Row="1"
-            Height="26"
-            VerticalAlignment="Center" />
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="0,5,0,15">
-            <TextBox
-                Height="30"
-                Width="350"
-                x:Name="nombre" />
-            <TextBlock
-                FontSize="12"
-                Foreground="Red"
-                Height="30"
-                Width="350"
-                x:Name="tblockErrorNombre" />
-        </StackPanel>
+        <!-- Formulario en Card con ScrollViewer -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Border Style="{StaticResource Card}"
+                    MaxWidth="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,24">
+                <StackPanel>
+                    <!-- Campo Nombre -->
+                    <Label Content="Nombre del proveedor"
+                           Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="nombre"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorNombre"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-        <!--  Dirección  -->
-        <Label
-            Content="Dirección:"
-            Grid.Row="2"
-            Height="26"
-            VerticalAlignment="Center" />
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="2"
-            Margin="0,5,0,15">
-            <TextBox
-                Height="30"
-                Width="350"
-                x:Name="direccion" />
-            <TextBlock
-                FontSize="12"
-                Foreground="Red"
-                Height="30"
-                Width="350"
-                x:Name="tblockErrorDireccion" />
-        </StackPanel>
+                    <!-- Campo Dirección -->
+                    <Label Content="Dirección"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="direccion"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorDireccion"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-        <!--  Teléfono  -->
-        <Label
-            Content="Teléfono:"
-            Grid.Row="3"
-            Height="26"
-            VerticalAlignment="Center" />
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="3"
-            Margin="0,5,0,15">
-            <TextBox
-                Height="30"
-                Width="350"
-                x:Name="telefono" />
-            <TextBlock
-                FontSize="12"
-                Foreground="Red"
-                Height="30"
-                Width="350"
-                x:Name="tblockErrorTelefono" />
-        </StackPanel>
+                    <!-- Campo Teléfono -->
+                    <Label Content="Teléfono"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="telefono"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorTelefono"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,16"/>
 
-        <!--  Correo  -->
-        <Label
-            Content="Correo:"
-            Grid.Row="4"
-            Height="26"
-            VerticalAlignment="Center" />
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="4"
-            Margin="0,5,0,15">
-            <TextBox
-                Height="30"
-                Width="350"
-                x:Name="correo" />
-            <TextBlock
-                FontSize="12"
-                Foreground="Red"
-                Height="30"
-                Width="350"
-                x:Name="tblockErrorCorreo" />
-        </StackPanel>
+                    <!-- Campo Correo -->
+                    <Label Content="Correo electrónico"
+                           Style="{StaticResource FormLabel}"
+                           Margin="0,8,0,0"/>
+                    <TextBox x:Name="correo"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,4"/>
+                    <TextBlock x:Name="tblockErrorCorreo"
+                               Style="{StaticResource ErrorText}"
+                               Margin="0,0,0,24"/>
 
-        <!--  Botones  -->
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="5"
-            HorizontalAlignment="Left"
-            Margin="452,124,0,-94"
-            Orientation="Horizontal"
-            Width="260">
-            <Button
-                Click="clickbtnCancelar"
-                Content="Cancelar"
-                Height="35"
-                Margin="10"
-                Width="120"
-                x:Name="btnCancelar" />
-            <Button
-                Click="BtnGuardar_OnClickbtnGuardar"
-                Content="Guardar"
-                Height="35"
-                Width="120"
-                x:Name="btnGuardar" />
-        </StackPanel>
+                    <!-- Botones -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,16,0,0">
+                        <Button x:Name="btnCancelar"
+                                Content="Cancelar"
+                                Style="{StaticResource SecondaryButton}"
+                                Margin="0,0,12,0"
+                                Click="clickbtnCancelar"/>
+                        <Button x:Name="btnGuardar"
+                                Content="Guardar"
+                                Style="{StaticResource PrimaryButton}"
+                                Click="BtnGuardar_OnClickbtnGuardar"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </UserControl>

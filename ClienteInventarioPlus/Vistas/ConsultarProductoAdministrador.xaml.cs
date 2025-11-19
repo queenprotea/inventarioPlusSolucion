@@ -108,7 +108,7 @@ namespace ClienteInventarioPlus.Vistas
             if (productoSeleccionado == null) return;
 
             // Navega a la nueva vista de modificación, pasándole el producto y el proxy de forma segura
-            _mainFrame.Content = new ModificarProductoVista(productoSeleccionado, _proxyProducto, _proxyProveedor, "modificar");
+            _mainFrame.Content = new ModificarProductoVista(productoSeleccionado, _proxyProducto, _proxyProveedor, "modificar", _mainFrame);
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e) {
@@ -143,7 +143,12 @@ namespace ClienteInventarioPlus.Vistas
 
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Content = new ModificarProductoVista(DgProductos.SelectedItem as ProductoDTO, _proxyProducto, _proxyProveedor, "consultar");
+            _mainFrame.Content = new ModificarProductoVista(DgProductos.SelectedItem as ProductoDTO, _proxyProducto, _proxyProveedor, "consultar", _mainFrame);
+        }
+
+        private void BtnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Content = new ProductoPrincipal(_mainFrame, _proxyProducto, _proxyProveedor);
         }
     }
 }

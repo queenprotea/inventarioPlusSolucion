@@ -5,52 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid Margin="20">
-        <!-- Definimos 3 filas -->
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Buscador + combo -->
-            <RowDefinition Height="*"/>    <!-- DataGrid -->
-            <RowDefinition Height="Auto"/> <!-- Botón regresar -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Fila 0-->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Liberar Reserva" 
-                       FontSize="30" 
-                       FontWeight="Bold" 
-                       Foreground="#23272F" 
-                       TextAlignment="Left" />
-        </StackPanel>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Liberar Reserva" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,24"/>
 
-        <!-- Fila 1: DataGrid -->
-        <DataGrid x:Name="dgReservas" AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  Margin="20"
-                  ItemsSource="{Binding reservas}"
-                  Grid.Row="1" BorderBrush="White" GridLinesVisibility="Horizontal"
-                  HorizontalGridLinesBrush="LightGray"
-                  RowBackground="White"
-                  AlternatingRowBackground="White"
-                  HeadersVisibility="Column"
-                  FontSize="15">
-            
-            <DataGrid.Columns>
-                <!-- Columnas de texto -->
-                <DataGridTextColumn Header="ID" Binding="{Binding ReservaID}" Width="0.25*" />
-                <DataGridTextColumn Header="Numero de Reserva" Binding="{Binding NumeroReserva}" Width="*"/>
-                <DataGridTextColumn Header="ProductoID" Binding="{Binding ProductoID}" Width="*"/>
-                <DataGridTextColumn Header="Cantidad Reservada" Binding="{Binding CantidadReservada}" Width="*"/>
-                <DataGridTextColumn Header="FechaHora" Binding="{Binding FechaHora}" Width="*"/>
-                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DataGrid -->
+        <Border Grid.Row="1"
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid x:Name="dgReservas" 
+                      Style="{StaticResource ModernDataGrid}"
+                      ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                      RowStyle="{StaticResource ModernDataGridRow}"
+                      CellStyle="{StaticResource ModernDataGridCell}"
+                      ItemsSource="{Binding reservas}">
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ReservaID}" Width="0.25*" />
+                    <DataGridTextColumn Header="Número de Reserva" Binding="{Binding NumeroReserva}" Width="*"/>
+                    <DataGridTextColumn Header="ProductoID" Binding="{Binding ProductoID}" Width="*"/>
+                    <DataGridTextColumn Header="Cantidad Reservada" Binding="{Binding CantidadReservada}" Width="*"/>
+                    <DataGridTextColumn Header="Fecha y Hora" Binding="{Binding FechaHora}" Width="*"/>
+                    <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
-        <!-- Fila 2: Botón Regresar -->
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button Content="Seleccionar reserva" Width="200" Height="50" FontSize="20" Click="btnLiberarReserva_Click" HorizontalAlignment="Left" Margin="20,0,770,0" Background="IndianRed" Foreground="White"/>
-            <Button Content="Cancelar" Width="150" Height="50" FontSize="20" Click="btnRegresar_Click" HorizontalAlignment="Right"/>
-        </StackPanel>
-        
+        <!-- Botones de acción -->
+        <Grid Grid.Row="2" Margin="0,24,0,0">
+            <Button Style="{StaticResource DangerButton}"
+                    Content="Seleccionar reserva" 
+                    Click="btnLiberarReserva_Click" 
+                    HorizontalAlignment="Left"/>
+            <Button Style="{StaticResource SecondaryButton}"
+                    Content="Cancelar" 
+                    Click="btnRegresar_Click" 
+                    HorizontalAlignment="Right"/>
+        </Grid>
     </Grid>
 </UserControl>

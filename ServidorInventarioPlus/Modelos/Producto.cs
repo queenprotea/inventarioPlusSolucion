@@ -16,9 +16,10 @@ namespace ServidorInventarioPlus.Modelos
         public int? IDCategoria { get; set; }
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
+        
         public ICollection<ProductoAtributo> Atributos { get; set; }
         public ICollection<Moviento> Movimientos { get; set; }
         public ICollection<Reserva> Reservas { get; set; }
-      public virtual ICollection<Proveedor> Proveedores { get; set; }
+        public virtual ICollection<Proveedor> Proveedores { get; set; }
     }
 }

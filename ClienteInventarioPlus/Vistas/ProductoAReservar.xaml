@@ -5,29 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke"
+             Background="{StaticResource BackgroundColor}"
              Loaded="UserControl_Loaded">
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Detalles del Producto a Reservar" 
-                   FontSize="28" FontWeight="Bold" 
-                   Foreground="#333" Margin="0,0,0,15"/>
+        <!-- Título -->
+        <TextBlock Grid.Row="0" 
+                   Text="Detalles del Producto a Reservar" 
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
+        <!-- Contenido -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                <GroupBox Header="Información del Producto" FontWeight="SemiBold" FontSize="16">
-                    <Grid Margin="10">
+            <!-- Card de Información del Producto -->
+            <Border Grid.Column="0" 
+                    Style="{StaticResource Card}"
+                    Margin="0,0,16,0">
+                <StackPanel>
+                    <TextBlock Text="Información del Producto" 
+                               Style="{StaticResource SubtitleText}"
+                               Margin="0,0,0,16"/>
+                    
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -39,54 +48,100 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="Nombre:" FontWeight="Bold"/>
-                        <TextBlock x:Name="TbNombre" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontSize="14"/>
+                        <Label Grid.Row="0" Grid.Column="0" 
+                               Content="Nombre:" 
+                               Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbNombre" 
+                                   Grid.Row="0" Grid.Column="1" 
+                                   VerticalAlignment="Center" 
+                                   Style="{StaticResource BodyText}"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="Código:" FontWeight="Bold"/>
-                        <TextBlock x:Name="TbCodigo" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="14"/>
+                        <Label Grid.Row="1" Grid.Column="0" 
+                               Content="Código:" 
+                               Style="{StaticResource FormLabel}"/>
+                        <TextBlock x:Name="TbCodigo" 
+                                   Grid.Row="1" Grid.Column="1" 
+                                   VerticalAlignment="Center" 
+                                   Style="{StaticResource BodyText}"/>
 
-                        <Label Grid.Row="2" Grid.Column="0" Content="Descripción:" FontWeight="Bold" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="TbDescripcion" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Margin="0,5,0,0" FontSize="14"/>
+                        <Label Grid.Row="2" Grid.Column="0" 
+                               Content="Descripción:" 
+                               Style="{StaticResource FormLabel}" 
+                               Margin="0,8,0,0"
+                               VerticalAlignment="Top"/>
+                        <TextBlock x:Name="TbDescripcion" 
+                                   Grid.Row="2" Grid.Column="1" 
+                                   TextWrapping="Wrap" 
+                                   Margin="0,8,0,0" 
+                                   Style="{StaticResource BodyText}"/>
 
-                        <Label Grid.Row="3" Grid.Column="0" Content="Categoría:" FontWeight="Bold" Margin="0,10,0,0"/>
-                        <TextBlock x:Name="TbCategoria" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="14"/>
+                        <Label Grid.Row="3" Grid.Column="0" 
+                               Content="Categoría:" 
+                               Style="{StaticResource FormLabel}" 
+                               Margin="0,8,0,0"/>
+                        <TextBlock x:Name="TbCategoria" 
+                                   Grid.Row="3" Grid.Column="1" 
+                                   VerticalAlignment="Center" 
+                                   Margin="0,8,0,0" 
+                                   Style="{StaticResource BodyText}"/>
                     </Grid>
-                </GroupBox>
-            </StackPanel>
+                </StackPanel>
+            </Border>
 
-            <StackPanel Grid.Column="1">
-                <GroupBox Header="Datos de la Reserva" FontWeight="SemiBold" FontSize="16">
-                    <StackPanel Margin="10">
-                        <Grid Margin="0,0,0,20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                                <Label Content="Stock Disponible:" FontWeight="Bold"/>
-                                <TextBlock x:Name="TbStock" FontSize="18" Foreground="Green"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1">
-                                <Label Content="Precio Unitario:" FontWeight="Bold"/>
-                                <TextBlock x:Name="TbPrecio" FontSize="18"/>
-                            </StackPanel>
-                        </Grid>
+            <!-- Card de Datos de la Reserva -->
+            <Border Grid.Column="1"
+                    Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Datos de la Reserva" 
+                               Style="{StaticResource SubtitleText}"
+                               Margin="0,0,0,16"/>
+                    
+                    <Grid Margin="0,0,0,24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Content="Stock Disponible" Style="{StaticResource FormLabel}"/>
+                            <TextBlock x:Name="TbStock" 
+                                       FontSize="18" 
+                                       Foreground="Green"
+                                       FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="Precio Unitario" Style="{StaticResource FormLabel}"/>
+                            <TextBlock x:Name="TbPrecio" 
+                                       FontSize="18"
+                                       FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Grid>
 
-                        <Label Content="Nombre del Cliente:" FontWeight="Bold"/>
-                        <TextBox x:Name="TxtNombreCliente" Padding="5" Margin="0,0,0,15"/>
+                    <Label Content="Nombre del Cliente" Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="TxtNombreCliente" 
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,16"/>
 
-                        <Label Content="Cantidad a Reservar:" FontWeight="Bold"/>
-                        <TextBox x:Name="TxtCantidad" Padding="5"/>
+                    <Label Content="Cantidad a Reservar" Style="{StaticResource FormLabel}"/>
+                    <TextBox x:Name="TxtCantidad" 
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             Margin="0,0,0,24"/>
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Right">
+                        <Button x:Name="BtnCancelar" 
+                                Content="Cancelar" 
+                                Style="{StaticResource SecondaryButton}"
+                                Margin="0,0,12,0"
+                                Click="BtnCancelar_Click"/>
+                        <Button x:Name="BtnReservar" 
+                                Content="Confirmar Reserva" 
+                                Style="{StaticResource PrimaryButton}"
+                                Click="BtnReservar_Click"/>
                     </StackPanel>
-                </GroupBox>
-            </StackPanel>
+                </StackPanel>
+            </Border>
         </Grid>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button x:Name="BtnReservar" Content="Confirmar Reserva" Padding="20,10" 
-                    Background="DodgerBlue" Foreground="White" FontWeight="Bold"
-                    Click="BtnReservar_Click"/>
-            <Button x:Name="BtnCancelar" Content="Cancelar" Margin="10,0,0,0" Padding="20,10" Click="BtnCancelar_Click"/>
-        </StackPanel>
     </Grid>
 </UserControl>

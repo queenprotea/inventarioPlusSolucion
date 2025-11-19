@@ -3,48 +3,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1170"
-             Background="WhiteSmoke">
-
-    <Grid Margin="20">
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="32,24,32,24" ClipToBounds="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Fila 1: Registrar Entrada / Registrar Salida -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-            <!-- Botón Registrar Entrada -->
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black" Margin="0,0,40,0"
-                    Click="BtnReporteInventario_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Generar reporte de inventario" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Reportes"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
 
-            <!-- Botón Registrar Salida -->
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
-                    Click="BtnReporteMovimientos_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Generar reporte de movimientos" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
+        <!-- Cards de navegación -->
+        <Grid Grid.Row="1" VerticalAlignment="Center" ClipToBounds="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        </StackPanel>
+            <!-- Card Reporte de Inventario -->
+            <Border Grid.Row="0" Grid.Column="0"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="BtnReporteInventario_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="FileChartOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Reporte de Inventario" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Generar reporte completo del inventario" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="220"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
 
-        <!-- Fila 2: Historial -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
-            <Button Width="500" Height="250" Background="#FFF0F0F0" Foreground="Black"
-                    Click="BtnListaProductosCriticos_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <TextBlock Text="Generar lista de productos críticos" VerticalAlignment="Center" FontSize="26" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+            <!-- Card Reporte de Movimientos -->
+            <Border Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="BtnReporteMovimientos_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="FileDocumentMultipleOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Reporte de Movimientos" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Generar reporte de entradas y salidas" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="220"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <!-- Card Lista de Productos Críticos -->
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="BtnListaProductosCriticos_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="AlertCircleOutline" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,12"/>
+                        <TextBlock Text="Lista de Productos Críticos" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Consultar productos con stock bajo o en estado crítico" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="450"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

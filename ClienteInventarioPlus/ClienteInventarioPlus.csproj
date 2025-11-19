@@ -46,6 +46,12 @@
         <Reference Include="FastReport.OpenSource.Export.PdfSimple, Version=2026.1.2.0, Culture=neutral, PublicKeyToken=b33a9a06fcc00c4c, processorArchitecture=MSIL">
           <HintPath>..\packages\FastReport.OpenSource.Export.PdfSimple.2026.1.2\lib\net462\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
         </Reference>
+        <Reference Include="MahApps.Metro.IconPacks.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+          <HintPath>..\packages\MahApps.Metro.IconPacks.Core.5.0.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="MahApps.Metro.IconPacks.Material, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+          <HintPath>..\packages\MahApps.Metro.IconPacks.Material.5.0.0\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
+        </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
           <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
@@ -101,6 +107,10 @@
           <DependentUpon>%(Filename).xaml</DependentUpon>
         </Compile>
         <Page Include="MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="ResourceDictionary.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </Page>

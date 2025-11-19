@@ -4,21 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid Background="White">
-        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left" Margin="39,37,650,365" Click="btnRegistrarProducto_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
-                <TextBlock Text="Registrar Producto" VerticalAlignment="Top" Margin="15,0,110,0" FontSize="30"/>
-                <Image Source="/Imagenes/RegistrarProductoLogo.jpg" Width="80" Height="80" Margin="10,50,90,0"/>
-            </StackPanel>
-        </Button>
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="32,24,32,24" ClipToBounds="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left" Margin="650,37,39,365" Click="btnConsultarProductos_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
-                <TextBlock Text="Consultar Productos" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="30"/>
-                <Image Source="/Imagenes/ConsultarProductoLogo.jpg" Width="80" Height="80" Margin="90,50,10,0"/>
-            </StackPanel>
-        </Button>
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Gestión de Productos"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,32"/>
+
+        <!-- Cards de navegación -->
+        <Grid Grid.Row="1" VerticalAlignment="Center" ClipToBounds="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Card Registrar Producto -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnRegistrarProducto_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="PackageVariantPlus" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Registrar Producto" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Agregar nuevos productos al inventario" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <!-- Card Consultar Productos -->
+            <Border Grid.Column="2"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnConsultarProductos_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="PackageVariant" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Consultar Productos" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Ver y administrar todos los productos" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

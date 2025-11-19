@@ -14,14 +14,16 @@ namespace ClienteInventarioPlus.Vistas {
         private ObservableCollection<ProveedorDTO> _proveedoresProducto;
         private readonly IProveedorService _proxyProveedor;
         private readonly string _modo;
+        private Frame _mainFrame;
 
-        public ModificarProductoVista(ProductoDTO producto, IProductoService proxyProducto, IProveedorService proxyProveedor, string modo) {
+        public ModificarProductoVista(ProductoDTO producto, IProductoService proxyProducto, IProveedorService proxyProveedor, string modo, Frame mainFrame = null) {
             InitializeComponent();
             _productoAModificar = producto;
             _proxyProducto = proxyProducto;
             _proxyProveedor = proxyProveedor;
             _proveedoresProducto = new ObservableCollection<ProveedorDTO>(producto.proveedores);
             _modo = modo;
+            _mainFrame = mainFrame;
             if (_modo == "consultar")
                 ConfigurarModoConsulta();
         }
@@ -116,9 +118,16 @@ namespace ClienteInventarioPlus.Vistas {
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e) {
-            // Regresar a la pantalla anterior (la lista de productos)
-            var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
-            nav?.GoBack();
+            if (_mainFrame != null)
+            {
+                _mainFrame.Content = new ConsultarProductoAdmin(_proxyProducto, _proxyProveedor, _mainFrame);
+            }
+            else
+            {
+                // Regresar a la pantalla anterior (la lista de productos)
+                var nav = System.Windows.Navigation.NavigationService.GetNavigationService(this);
+                nav?.GoBack();
+            }
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)

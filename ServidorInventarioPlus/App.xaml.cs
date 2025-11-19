@@ -21,12 +21,12 @@ namespace ServidorInventarioPlus
                 _host.Open();
                 Console.WriteLine("UsuarioServicio levantado y escuchando...");
 
-                // Puedes mostrar una ventana de control si quieres
-                var main = new MainWindow();
-                main.Show();
+                // No mostrar ventana, ejecutar solo servicios
+                // var main = new MainWindow();
+                // main.Show();
 
-                // Ahora sí la app se cierra solo al cerrar la MainWindow
-                Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                // La app no se cierra automáticamente
+                Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             }
             catch (Exception ex)
             {

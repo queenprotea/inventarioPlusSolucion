@@ -163,6 +163,14 @@ namespace ClienteInventarioPlus.Vistas
                     break;
             }
         }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            if (_mainFrame.CanGoBack)
+            {
+                _mainFrame.GoBack();
+            }
+        }
         
     }
 }

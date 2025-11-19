@@ -4,71 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200">
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
 
-    <Grid Margin="20">
-        <!-- Definimos 3 filas -->
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Buscador + combo -->
-            <RowDefinition Height="*"/>    <!-- DataGrid -->
-            <RowDefinition Height="Auto"/> <!-- Botón regresar -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Fila 0: Buscador y ComboBox -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Margin="0,0,0,10">
-            <Button Width="40" Height="40" FontSize="16" Click="btnBuscar_Click" BorderThickness="0">
-                <Image Source="/Imagenes/busquedaLogo.jpg" Stretch="Uniform"/>
-            </Button>
-            <TextBox x:Name="txtBuscar" Width="300" Height="40" FontSize="23" Foreground="Gray" Margin="0,0,10,0" />
-            <TextBlock Text="Ordenar por:" FontWeight="SemiBold" FontSize="18" Margin="150,0,0,0"/>
-            <ComboBox x:Name="cmbOrdenar" Width="200" Height="40" FontSize="16" Margin="10,0,0,0"  SelectionChanged="cmbOrdenar_SelectionChanged">
-                <ComboBoxItem Content="ID"/>
-                <ComboBoxItem Content="Nombre"/>
-                <ComboBoxItem Content="Usuario"/>
-                <ComboBoxItem Content="Rol"/>
-            </ComboBox>
-        </StackPanel>
+        <!-- Título -->
+        <TextBlock Text="Gestión de Usuarios"
+                   Style="{StaticResource TitleText}"
+                   Grid.Row="0"
+                   Margin="0,0,0,24"/>
 
-        <!-- Fila 1: DataGrid -->
-        <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  Margin="20"
-                  ItemsSource="{Binding Usuarios}"
-                  Grid.Row="1" BorderBrush="White" GridLinesVisibility="Horizontal"
-                  HorizontalGridLinesBrush="LightGray"
-                  RowBackground="White"
-                  AlternatingRowBackground="White"
-                  HeadersVisibility="Column"
-                  FontSize="15">
-            
-            <DataGrid.Columns>
-                <!-- Columnas de texto -->
-                <DataGridTextColumn Header="ID" Binding="{Binding UsuarioID}" Width="0.25*" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
-                <DataGridTextColumn Header="Usuario" Binding="{Binding NombreUsuario}" Width="*"/>
-                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*"/>
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="txtBuscar" 
+                     Style="{StaticResource ModernTextBox}"
+                     FontSize="14"
+                     Height="40"
+                     Grid.Column="0"
+                     Margin="0,0,16,0"
+                     ToolTip="Buscar usuario..."/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="Ordenar por:" 
+                           Style="{StaticResource BodyText}"
+                           VerticalAlignment="Center"
+                           Margin="0,0,12,0"/>
+                <ComboBox x:Name="cmbOrdenar" 
+                          Style="{StaticResource ModernComboBox}"
+                          FontSize="14"
+                          Height="40"
+                          MinWidth="180"
+                          SelectionChanged="cmbOrdenar_SelectionChanged">
+                    <ComboBoxItem Content="ID"/>
+                    <ComboBoxItem Content="Nombre"/>
+                    <ComboBoxItem Content="Usuario"/>
+                    <ComboBoxItem Content="Rol"/>
+                </ComboBox>
+                <Button Style="{StaticResource PrimaryButton}"
+                        Click="btnBuscar_Click"
+                        Content="Buscar"
+                        Height="40"
+                        Margin="16,0,0,0"
+                        Padding="24,10"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="2"
+                Style="{StaticResource Card}"
+                Padding="0">
+            <DataGrid x:Name="dgUsuarios" 
+                      Style="{StaticResource ModernDataGrid}"
+                      ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
+                      RowStyle="{StaticResource ModernDataGridRow}"
+                      CellStyle="{StaticResource ModernDataGridCell}"
+                      ItemsSource="{Binding Usuarios}">
                 
-                <!-- Columna de acciones -->
-                <DataGridTemplateColumn Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button  Margin="5,0" Padding="0" Click="BtnModificar_Click" BorderThickness="0">
-                                    <Image Source="/Imagenes/modificarLogo.jpg" Stretch="Uniform"/>
-                                </Button>
-                                <Button  Margin="5,0" Padding="0" Click="BtnEliminar_Click" BorderThickness="0">
-                                    <Image Source="/Imagenes/eliminarLogo.jpg" Stretch="Uniform"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding UsuarioID}" Width="0.25*" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
+                    <DataGridTextColumn Header="Usuario" Binding="{Binding NombreUsuario}" Width="*"/>
+                    <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*"/>
+                    
+                    <DataGridTemplateColumn Width="220" Header="Acciones">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{StaticResource SecondaryButton}"
+                                            Content="Modificar"
+                                            FontSize="13"
+                                            Margin="4" 
+                                            Padding="14,9"
+                                            Click="BtnModificar_Click"/>
+                                    <Button Style="{StaticResource DangerButton}"
+                                            Content="Eliminar"
+                                            FontSize="13"
+                                            Margin="4" 
+                                            Padding="14,9"
+                                            Click="BtnEliminar_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
-        <!-- Fila 2: Botón Regresar -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Content="Regresar" Width="150" Height="50" FontSize="20" Click="btnRegresar_Click"/>
+        <!-- Botones de acción -->
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Grid.Row="3"
+                    Margin="0,24,0,0">
+            <Button x:Name="BtnRegresar"
+                    Style="{StaticResource SecondaryButton}"
+                    Content="Regresar" 
+                    Click="btnRegresar_Click"/>
         </StackPanel>
         
     </Grid>

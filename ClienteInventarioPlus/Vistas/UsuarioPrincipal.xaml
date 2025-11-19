@@ -1,26 +1,72 @@
 ﻿<UserControl x:Class="ClienteInventarioPlus.Vistas.UsuarioPrincipal"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteInventarioPlus.Vistas"
-             mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid Background="White">
-        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left"  Margin="39,37,650,365" Click="btnRegistrarUsuario_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
-                <TextBlock Text="Registrar Usuario" VerticalAlignment="Top" Margin="15,0,110,0" FontSize="30"/>
-                <Image Source="/Imagenes/RegistrarUsuarioLogo.jpg" Width="80" Height="80" Margin="10,50,90,0"/>
-            </StackPanel>
-        </Button>
-        <Button Background="#FFF0F0F0" Foreground="Black" FontSize="20" HorizontalContentAlignment="Left"  Margin="650,37,39,365" Click="btnConsultarUsuarios_Click">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="425">
-                <TextBlock Text="Consultar Usuarios" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="30"/>
-                <Image Source="/Imagenes/ConsultarUsuariosLogo.jpg" Width="80" Height="80" Margin="90,50,10,0"/>
-            </StackPanel>
-        </Button>
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="{StaticResource BackgroundColor}">
+    <Grid Margin="48">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Gestión de Usuarios"
+                   Style="{StaticResource TitleText}"
+                   Margin="0,0,0,48"/>
+
+        <!-- Cards de navegación -->
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Card Registrar Usuario -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnRegistrarUsuario_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="AccountMultiplePlus" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Registrar Usuario" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Crear una nueva cuenta de usuario" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <!-- Card Consultar Usuarios -->
+            <Border Grid.Column="2"
+                    Style="{StaticResource Card}">
+                <Button Style="{StaticResource DashboardButton}"
+                        Click="btnConsultarUsuarios_Click">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <iconPacks:PackIconMaterial Kind="AccountMultiple" 
+                                                   Style="{StaticResource PrimaryIcon}"
+                                                   Margin="0,0,0,20"/>
+                        <TextBlock Text="Consultar Usuarios" 
+                                   Style="{StaticResource CardTitleText}"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Ver y gestionar todos los usuarios del sistema" 
+                                   Style="{StaticResource CardDescriptionText}"
+                                   MaxWidth="250"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </Grid>
     </Grid>
-
-
-
 </UserControl>
