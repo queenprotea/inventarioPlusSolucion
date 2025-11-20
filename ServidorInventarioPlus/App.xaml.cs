@@ -5,115 +5,57 @@ using ServidorInventarioPlus.Servicios;
 
 namespace ServidorInventarioPlus
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App
+    public partial class App : Application
     {
-        private ServiceHost _host;
+        private ServiceHost[] _hosts;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            _hosts = new[]
+            {
+                new ServiceHost(typeof(UsuarioServicio)),
+                new ServiceHost(typeof(ProveedorServicio)),
+                new ServiceHost(typeof(ProductoServicio)),
+                new ServiceHost(typeof(MovimientoServicio)),
+                new ServiceHost(typeof(ReservaServicio))
+            };
+
             try
             {
-                
-                _host = new ServiceHost(typeof(Servicios.UsuarioServicio));
-                _host.Open();
-                Console.WriteLine("UsuarioServicio levantado y escuchando...");
+                foreach (var host in _hosts)
+                {
+                    host.Open();
+                }
 
-                // No mostrar ventana, ejecutar solo servicios
-                // var main = new MainWindow();
-                // main.Show();
+                MessageBox.Show("SERVIDOR INVENTARIO PLUS LEVANTADO CORRECTAMENTE");
 
-                // La app no se cierra automáticamente
-                Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                // Mostrar ventana principal
+                MainWindow window = new MainWindow();
+                window.Show();
+
+                Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al levantar servicio este: {ex.Message}");
+                MessageBox.Show("ERROR al iniciar servicios:\n\n" + ex.ToString());
                 Shutdown();
             }
-            
-            
-            try
-            {
-                // Crear ServiceHost solo con el tipo del servicio
-                _host = new ServiceHost(typeof(ProveedorServicio));
-
-                // Abrir el servicio, tomará la configuración del App.config
-                _host.Open();
-
-                Console.WriteLine("Servicio pveedorService levantado en:");
-                foreach (var endpoint in _host.Description.Endpoints)
-                    Console.WriteLine(endpoint.Address);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
-            }
-            
-            try
-            {
-                // Crear ServiceHost solo con el tipo del servicio
-                _host = new ServiceHost(typeof(ProductoServicio));
-
-                // Abrir el servicio, tomará la configuración del App.config
-                _host.Open();
-
-                Console.WriteLine("Servicio ProductoService levantado en:");
-                foreach (var endpoint in _host.Description.Endpoints)
-                    Console.WriteLine(endpoint.Address);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
-            }
-            
-            try
-            {
-                // Crear ServiceHost solo con el tipo del servicio
-                _host = new ServiceHost(typeof(MovimientoServicio));
-
-                // Abrir el servicio, tomará la configuración del App.config
-                _host.Open();
-
-                Console.WriteLine("Servicio MovimientoService levantado en:");
-                foreach (var endpoint in _host.Description.Endpoints)
-                    Console.WriteLine(endpoint.Address);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
-            }
-            
-            try
-            {
-                // Crear ServiceHost solo con el tipo del servicio
-                _host = new ServiceHost(typeof(ReservaServicio));
-
-                // Abrir el servicio, tomará la configuración del App.config
-                _host.Open();
-
-                Console.WriteLine("Servicio ReservaService levantado en:");
-                foreach (var endpoint in _host.Description.Endpoints)
-                    Console.WriteLine(endpoint.Address);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show($"Error al levantar el servicio: {ex.Message}");
-            }
-
         }
-        
 
         protected override void OnExit(ExitEventArgs e)
         {
-            // ✅ Cierra el servicio cuando se apaga la app
-            _host?.Close();
+            if (_hosts != null)
+            {
+                foreach (var host in _hosts)
+                {
+                    try
+                    {
+                        host?.Close();
+                    }
+                    catch { /* Ignore */ }
+                }
+            }
+
             base.OnExit(e);
         }
     }
