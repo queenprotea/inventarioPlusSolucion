@@ -70,6 +70,7 @@
                       ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeader}"
                       RowStyle="{StaticResource ModernDataGridRow}"
                       CellStyle="{StaticResource ModernDataGridCell}"
+                      RowHeight="54"
                       ItemsSource="{Binding Usuarios}">
                 
                 <DataGrid.Columns>
@@ -78,22 +79,74 @@
                     <DataGridTextColumn Header="Usuario" Binding="{Binding NombreUsuario}" Width="*"/>
                     <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*"/>
                     
-                    <DataGridTemplateColumn Width="220" Header="Acciones">
+                    <DataGridTemplateColumn Width="240" Header="Acciones">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Style="{StaticResource SecondaryButton}"
-                                            Content="Modificar"
+                                    <Button Content="Modificar"
+                                            Background="White"
+                                            Foreground="Black"
+                                            BorderBrush="#E0E0E0"
+                                            BorderThickness="1"
                                             FontSize="13"
-                                            Margin="4" 
-                                            Padding="14,9"
-                                            Click="BtnModificar_Click"/>
-                                    <Button Style="{StaticResource DangerButton}"
-                                            Content="Eliminar"
+                                            FontWeight="Medium"
+                                            Width="95"
+                                            Height="28"
+                                            Margin="4"
+                                            Cursor="Hand"
+                                            Click="BtnModificar_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                                    CornerRadius="4">
+                                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                                  VerticalAlignment="Center"
+                                                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                                                  TextElement.FontWeight="{TemplateBinding FontWeight}"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button Content="Eliminar"
+                                            Background="#D32F2F"
+                                            Foreground="White"
+                                            BorderThickness="0"
                                             FontSize="13"
-                                            Margin="4" 
-                                            Padding="14,9"
-                                            Click="BtnEliminar_Click"/>
+                                            FontWeight="Medium"
+                                            Width="90"
+                                            Height="28"
+                                            Margin="4"
+                                            Cursor="Hand"
+                                            Click="BtnEliminar_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                                    CornerRadius="4">
+                                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                                  VerticalAlignment="Center"
+                                                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                                                  TextElement.FontWeight="{TemplateBinding FontWeight}"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

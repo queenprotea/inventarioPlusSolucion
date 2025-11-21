@@ -51,8 +51,6 @@ namespace ClienteInventarioPlus.Vistas
             {
                 MessageBox.Show($"Error al conectar con el servicio: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-            
         }
 
         //menu lateral
